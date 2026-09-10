@@ -1,960 +1,983 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>JieHaw2 | Video Editor</title>
+  <title>JieHaw2 — Video Editor</title>
+  <meta name="description" content="JieHaw2 — Video Editor. YouTube, short-form, social media videos, captions and effects.">
 
-<style>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-html {
-    scroll-behavior: smooth;
-}
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #080808;
+      color: #ffffff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #080808;
-    color: #fff;
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-/* ================= NAVIGATION ================= */
-
-nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    padding: 20px 7%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(8,8,8,.88);
-    backdrop-filter: blur(15px);
-    z-index: 1000;
-    border-bottom: 1px solid rgba(255,255,255,.05);
-}
-
-.logo {
-    font-size: 22px;
-    font-weight: 800;
-    letter-spacing: -1px;
-}
-
-nav a {
-    color: #888;
-    text-decoration: none;
-    margin-left: 25px;
-    font-size: 14px;
-    transition: .3s;
-}
-
-nav a:hover {
-    color: #fff;
-}
-
-/* ================= HERO ================= */
-
-.hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 120px 7%;
-    background:
-        radial-gradient(circle at 80% 20%, #292929 0%, transparent 35%),
-        radial-gradient(circle at 20% 80%, #151515 0%, transparent 30%),
-        #080808;
-}
-
-.hero-content {
-    max-width: 850px;
-}
-
-.label {
-    color: #777;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    font-size: 13px;
-    margin-bottom: 25px;
-}
-
-h1 {
-    font-size: clamp(55px, 9vw, 110px);
-    line-height: .9;
-    letter-spacing: -6px;
-    margin-bottom: 30px;
-}
-
-.gray {
-    color: #777;
-}
-
-.hero p {
-    max-width: 600px;
-    color: #999;
-    font-size: 19px;
-    line-height: 1.7;
-    margin-bottom: 35px;
-}
-
-.button {
-    display: inline-block;
-    padding: 16px 30px;
-    background: #fff;
-    color: #000;
-    text-decoration: none;
-    border-radius: 50px;
-    font-weight: bold;
-    transition: .3s;
-}
-
-.button:hover {
-    transform: translateY(-4px);
-}
-
-/* ================= SECTIONS ================= */
-
-section {
-    padding: 100px 7%;
-}
-
-.title {
-    font-size: 48px;
-    margin-bottom: 12px;
-    letter-spacing: -2px;
-}
-
-.description {
-    color: #666;
-    margin-bottom: 50px;
-}
-
-/* ================= PORTFOLIO ================= */
-
-.work-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-}
-
-.project {
-    background: #111;
-    border: 1px solid #222;
-    border-radius: 18px;
-    overflow: hidden;
-    transition: .35s;
-}
-
-.project:hover {
-    transform: translateY(-8px);
-    border-color: #555;
-}
-
-.thumbnail {
-    position: relative;
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
-    background: #222;
-}
-
-.thumbnail img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: .4s;
-}
-
-.project:hover .thumbnail img {
-    transform: scale(1.05);
-}
-
-.play {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: rgba(255,255,255,.95);
-    color: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-}
-
-.project-info {
-    padding: 22px;
-}
-
-.project-number {
-    color: #555;
-    font-size: 12px;
-    letter-spacing: 2px;
-}
-
-.project h3 {
-    margin-top: 8px;
-    font-size: 21px;
-}
-
-.project-info p {
-    color: #666;
-    font-size: 14px;
-    margin-top: 5px;
-}
-
-/* ================= SERVICES ================= */
-
-.services {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-}
-
-.service {
-    padding: 30px;
-    background: #111;
-    border: 1px solid #222;
-    border-radius: 16px;
-    transition: .3s;
-}
-
-.service:hover {
-    transform: translateY(-6px);
-    border-color: #555;
-}
-
-.service h3 {
-    margin-bottom: 12px;
-}
-
-.service p {
-    color: #777;
-    font-size: 14px;
-    line-height: 1.6;
-}
-
-/* ================= TOOLS ================= */
-
-.tools-section {
-    background: #0c0c0c;
-}
-
-.tools-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-    gap: 20px;
-}
-
-.tool {
-    background: #111;
-    border: 1px solid #222;
-    border-radius: 20px;
-    padding: 35px 20px;
-    text-align: center;
-    transition: .35s;
-}
-
-.tool:hover {
-    transform: translateY(-8px);
-    border-color: #555;
-    background: #151515;
-}
-
-.tool-logo {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto 22px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.tool-logo img {
-    width: 85px;
-    height: 85px;
-    object-fit: contain;
-    filter: drop-shadow(0 8px 15px rgba(0,0,0,.4));
-}
-
-.tool h3 {
-    font-size: 16px;
-    margin-bottom: 8px;
-}
-
-.tool p {
-    color: #666;
-    font-size: 13px;
-}
-
-/* ================= ABOUT ================= */
-
-.about {
-    max-width: 750px;
-}
-
-.about p {
-    color: #aaa;
-    font-size: 18px;
-    line-height: 1.8;
-}
-
-/* ================= CONTACT ================= */
-
-.contact {
-    text-align: center;
-    background: #111;
-}
-
-.contact h2 {
-    font-size: clamp(45px, 7vw, 80px);
-    line-height: 1;
-    margin-bottom: 25px;
-    letter-spacing: -3px;
-}
-
-.contact p {
-    color: #777;
-    margin-bottom: 35px;
-}
-
-/* ================= FOOTER ================= */
-
-footer {
-    padding: 30px;
-    text-align: center;
-    color: #444;
-    font-size: 13px;
-}
-
-/* ================= MOBILE ================= */
-
-@media(max-width:600px) {
+    /* =========================
+       NAVIGATION
+    ========================= */
 
     nav {
-        padding: 18px 5%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 20px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      background: rgba(8, 8, 8, 0.75);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: #888;
     }
 
     .nav-links {
-        display: none;
+      display: flex;
+      gap: 30px;
+      list-style: none;
     }
+
+    .nav-links a {
+      color: #aaa;
+      font-size: 14px;
+      transition: 0.3s ease;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 1px;
+      background: white;
+      left: 0;
+      bottom: -5px;
+      transition: 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 140px 7% 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(
+        circle,
+        rgba(255,255,255,0.08),
+        transparent 70%
+      );
+      top: -200px;
+      right: -200px;
+      animation: floatingGlow 7s ease-in-out infinite;
+    }
+
+    .hero-content {
+      max-width: 850px;
+      position: relative;
+      z-index: 2;
+      animation: heroEnter 1s ease forwards;
+    }
+
+    .eyebrow {
+      color: #888;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 4px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(55px, 9vw, 120px);
+      line-height: 0.95;
+      letter-spacing: -6px;
+      margin-bottom: 30px;
+    }
+
+    .hero h1 span {
+      color: #777;
+    }
+
+    .hero p {
+      max-width: 650px;
+      color: #aaa;
+      font-size: 18px;
+      margin-bottom: 40px;
+    }
+
+    .hero-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 15px 24px;
+      border: 1px solid #444;
+      border-radius: 100px;
+      transition: 0.35s ease;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .hero-button:hover {
+      background: white;
+      color: black;
+      transform: translateY(-4px);
+      box-shadow: 0 15px 40px rgba(255,255,255,0.12);
+    }
+
+    /* =========================
+       SECTIONS
+    ========================= */
 
     section {
-        padding: 80px 5%;
+      padding: 120px 7%;
+      border-top: 1px solid rgba(255,255,255,0.06);
     }
 
-    h1 {
-        letter-spacing: -3px;
+    .section-title {
+      font-size: clamp(35px, 5vw, 65px);
+      letter-spacing: -3px;
+      margin-bottom: 60px;
     }
 
-    .title {
-        font-size: 38px;
+    .section-title span {
+      color: #555;
     }
 
-    .tools-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
+    /* =========================
+       PROJECTS
+    ========================= */
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+    }
+
+    .project {
+      position: relative;
+      overflow: hidden;
+      border-radius: 18px;
+      background: #111;
+      aspect-ratio: 16 / 9;
+      border: 1px solid rgba(255,255,255,0.07);
+      transition: 0.5s ease;
+    }
+
+    .project:hover {
+      transform: translateY(-10px);
+      border-color: rgba(255,255,255,0.25);
+      box-shadow: 0 25px 70px rgba(0,0,0,0.5);
+    }
+
+    .project img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: 0.7s ease;
+    }
+
+    .project:hover img {
+      transform: scale(1.07);
+    }
+
+    .project-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 30px;
+
+      background: linear-gradient(
+        transparent 35%,
+        rgba(0,0,0,0.9)
+      );
+
+      opacity: 0;
+      transition: 0.4s ease;
+    }
+
+    .project:hover .project-overlay {
+      opacity: 1;
+    }
+
+    .project-overlay h3 {
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+
+    .project-overlay p {
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    /* =========================
+       SERVICES
+    ========================= */
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .service {
+      padding: 35px 25px;
+      min-height: 220px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      background: #0d0d0d;
+      transition: 0.4s ease;
+    }
+
+    .service:hover {
+      transform: translateY(-8px);
+      background: #121212;
+      border-color: #444;
+    }
+
+    .service-number {
+      color: #555;
+      font-size: 13px;
+      margin-bottom: 40px;
+    }
+
+    .service h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .service p {
+      color: #777;
+      font-size: 14px;
+    }
+
+    /* =========================
+       TOOLS
+    ========================= */
+
+    .tools {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
     }
 
     .tool {
-        padding: 25px 12px;
+      min-height: 190px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      background: #0d0d0d;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      transition: 0.4s ease;
+    }
+
+    .tool:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: #444;
+      background: #111;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
     }
 
     .tool-logo {
-        width: 75px;
-        height: 75px;
+      width: 65px;
+      height: 65px;
+      object-fit: contain;
+      filter: grayscale(1);
+      transition: 0.4s ease;
     }
 
-    .tool-logo img {
-        width: 65px;
-        height: 65px;
+    .tool:hover .tool-logo {
+      filter: grayscale(0);
+      transform: scale(1.12);
     }
 
-    .tool h3 {
-        font-size: 14px;
+    .tool-name {
+      font-weight: 600;
+      font-size: 15px;
     }
 
-    .tool p {
-        font-size: 11px;
+    /* =========================
+       ABOUT
+    ========================= */
+
+    .about {
+      max-width: 900px;
     }
 
-}
+    .about p {
+      font-size: clamp(22px, 3vw, 36px);
+      line-height: 1.35;
+      color: #aaa;
+    }
 
-</style>
+    .about strong {
+      color: white;
+    }
+
+    /* =========================
+       CONTACT
+    ========================= */
+
+    .contact {
+      text-align: center;
+      max-width: 850px;
+      margin: auto;
+    }
+
+    .contact h2 {
+      font-size: clamp(45px, 7vw, 90px);
+      letter-spacing: -4px;
+      margin-bottom: 20px;
+    }
+
+    .contact p {
+      color: #777;
+      margin-bottom: 40px;
+      font-size: 17px;
+    }
+
+    .contact-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .contact-button {
+      padding: 15px 25px;
+      border: 1px solid #444;
+      border-radius: 100px;
+      transition: 0.35s ease;
+      background: #0d0d0d;
+    }
+
+    .contact-button:hover {
+      background: white;
+      color: black;
+      transform: translateY(-5px);
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      padding: 35px 7%;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      justify-content: space-between;
+      color: #555;
+      font-size: 13px;
+    }
+
+    /* =========================
+       SCROLL REVEAL
+    ========================= */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =========================
+       ANIMATIONS
+    ========================= */
+
+    @keyframes heroEnter {
+      from {
+        opacity: 0;
+        transform: translateY(35px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes floatingGlow {
+      0%, 100% {
+        transform: translate(0, 0);
+      }
+
+      50% {
+        transform: translate(-30px, 30px);
+      }
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 800px) {
+
+      nav {
+        padding: 18px 5%;
+      }
+
+      .nav-links {
+        gap: 15px;
+      }
+
+      .nav-links a {
+        font-size: 12px;
+      }
+
+      .hero {
+        padding: 130px 5% 80px;
+      }
+
+      .hero h1 {
+        letter-spacing: -4px;
+      }
+
+      section {
+        padding: 85px 5%;
+      }
+
+      .projects {
+        grid-template-columns: 1fr;
+      }
+
+      .services {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .tools {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .tool {
+        min-height: 160px;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+
+    @media (max-width: 500px) {
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 58px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .services {
+        grid-template-columns: 1fr;
+      }
+
+      .tools {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .tool-logo {
+        width: 55px;
+        height: 55px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
+  <!-- =========================
+       NAVIGATION
+  ========================== -->
 
-<!-- ================= NAVIGATION ================= -->
+  <nav>
+    <a href="#home" class="logo">JieHaw<span>2</span></a>
 
-<nav>
-
-    <div class="logo">
-        JieHaw2
-    </div>
-
-    <div class="nav-links">
-
-        <a href="#work">Work</a>
-
-        <a href="#services">Services</a>
-
-        <a href="#tools">Tools</a>
-
-        <a href="#about">About</a>
-
-        <a href="#contact">Contact</a>
-
-    </div>
-
-</nav>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#tools">Tools</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
 
-<!-- ================= HERO ================= -->
+  <!-- =========================
+       HERO
+  ========================== -->
 
-<section class="hero">
+  <header class="hero" id="home">
 
     <div class="hero-content">
 
-        <div class="label">
-            Video Editor
+      <div class="eyebrow">
+        Video Editor
+      </div>
+
+      <h1>
+        I make videos<br>
+        <span>worth watching.</span>
+      </h1>
+
+      <p>
+        I help creators and brands turn raw footage into engaging videos
+        with clean cuts, strong pacing, captions, music and storytelling.
+      </p>
+
+      <a href="#work" class="hero-button">
+        See My Work
+        <span>→</span>
+      </a>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================
+       WORK
+  ========================== -->
+
+  <section id="work">
+
+    <h2 class="section-title reveal">
+      Selected <span>Work.</span>
+    </h2>
+
+    <div class="projects">
+
+      <a
+        class="project reveal"
+        href="https://youtu.be/q5lP2DyGKbo?si=pjqFMdO0-IL886xq"
+        target="_blank"
+      >
+
+        <img
+          src="https://img.youtube.com/vi/q5lP2DyGKbo/maxresdefault.jpg"
+          alt="Video project"
+        >
+
+        <div class="project-overlay">
+          <h3>YouTube Project</h3>
+          <p>Watch project →</p>
         </div>
 
-        <h1>
-            I make videos<br>
-            <span class="gray">worth watching.</span>
-        </h1>
+      </a>
 
-        <p>
-            I help creators and brands turn raw footage into
-            engaging videos with clean cuts, strong pacing,
-            captions, music and storytelling.
-        </p>
 
-        <a href="#work" class="button">
-            See My Work →
-        </a>
+      <a
+        class="project reveal"
+        href="https://youtu.be/ki6M1b5R8ys?si=evXCpGZbkscWydU1"
+        target="_blank"
+      >
+
+        <img
+          src="https://img.youtube.com/vi/ki6M1b5R8ys/maxresdefault.jpg"
+          alt="Video project"
+        >
+
+        <div class="project-overlay">
+          <h3>YouTube Project</h3>
+          <p>Watch project →</p>
+        </div>
+
+      </a>
+
+
+      <a
+        class="project reveal"
+        href="https://www.facebook.com/share/v/19YVSMk3F3/"
+        target="_blank"
+      >
+
+        <div style="
+          width:100%;
+          height:100%;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          background:linear-gradient(135deg,#151515,#080808);
+          font-size:45px;
+          color:#555;
+        ">
+          ▶
+        </div>
+
+        <div class="project-overlay">
+          <h3>Facebook Project</h3>
+          <p>Watch project →</p>
+        </div>
+
+      </a>
+
+
+      <a
+        class="project reveal"
+        href="https://youtu.be/PAApdWAYwlY?si=hpbBImz6ZTmf0sS4"
+        target="_blank"
+      >
+
+        <img
+          src="https://img.youtube.com/vi/PAApdWAYwlY/maxresdefault.jpg"
+          alt="Video project"
+        >
+
+        <div class="project-overlay">
+          <h3>YouTube Project</h3>
+          <p>Watch project →</p>
+        </div>
+
+      </a>
+
+
+      <a
+        class="project reveal"
+        href="https://youtu.be/SYHTNp8abIY?si=HPRVbBOo1nhiEAXP"
+        target="_blank"
+      >
+
+        <img
+          src="https://img.youtube.com/vi/SYHTNp8abIY/maxresdefault.jpg"
+          alt="Video project"
+        >
+
+        <div class="project-overlay">
+          <h3>YouTube Project</h3>
+          <p>Watch project →</p>
+        </div>
+
+      </a>
 
     </div>
 
-</section>
+  </section>
 
 
-<!-- ================= PORTFOLIO ================= -->
+  <!-- =========================
+       SERVICES
+  ========================== -->
 
-<section id="work">
+  <section id="services">
 
-    <h2 class="title">
-        Selected Work
+    <h2 class="section-title reveal">
+      What I <span>Do.</span>
     </h2>
-
-    <p class="description">
-        Some of my recent video editing projects.
-    </p>
-
-    <div class="work-grid">
-
-
-        <!-- PROJECT 01 -->
-
-        <a class="project"
-           href="https://youtu.be/q5lP2DyGKbo"
-           target="_blank"
-           style="text-decoration:none;color:white;">
-
-            <div class="thumbnail">
-
-                <img
-                    src="https://img.youtube.com/vi/q5lP2DyGKbo/maxresdefault.jpg"
-                    alt="YouTube video editing project">
-
-                <div class="play">
-                    ▶
-                </div>
-
-            </div>
-
-            <div class="project-info">
-
-                <div class="project-number">
-                    PROJECT 01
-                </div>
-
-                <h3>
-                    YouTube Video
-                </h3>
-
-                <p>
-                    Video Editing • YouTube
-                </p>
-
-            </div>
-
-        </a>
-
-
-        <!-- PROJECT 02 -->
-
-        <a class="project"
-           href="https://youtu.be/ki6M1b5R8ys"
-           target="_blank"
-           style="text-decoration:none;color:white;">
-
-            <div class="thumbnail">
-
-                <img
-                    src="https://img.youtube.com/vi/ki6M1b5R8ys/maxresdefault.jpg"
-                    alt="YouTube video editing project">
-
-                <div class="play">
-                    ▶
-                </div>
-
-            </div>
-
-            <div class="project-info">
-
-                <div class="project-number">
-                    PROJECT 02
-                </div>
-
-                <h3>
-                    YouTube Video
-                </h3>
-
-                <p>
-                    Video Editing • YouTube
-                </p>
-
-            </div>
-
-        </a>
-
-
-        <!-- PROJECT 03 -->
-
-        <a class="project"
-           href="https://www.facebook.com/share/v/19YVSMk3F3/"
-           target="_blank"
-           style="text-decoration:none;color:white;">
-
-            <div class="thumbnail">
-
-                <div style="
-                    width:100%;
-                    height:100%;
-                    display:flex;
-                    align-items:center;
-                    justify-content:center;
-                    font-size:60px;
-                    background:#181818;
-                ">
-                    ▶
-                </div>
-
-            </div>
-
-            <div class="project-info">
-
-                <div class="project-number">
-                    PROJECT 03
-                </div>
-
-                <h3>
-                    Social Media Video
-                </h3>
-
-                <p>
-                    Video Editing • Facebook
-                </p>
-
-            </div>
-
-        </a>
-
-
-        <!-- PROJECT 04 -->
-
-        <a class="project"
-           href="https://youtu.be/PAApdWAYwlY"
-           target="_blank"
-           style="text-decoration:none;color:white;">
-
-            <div class="thumbnail">
-
-                <img
-                    src="https://img.youtube.com/vi/PAApdWAYwlY/maxresdefault.jpg"
-                    alt="YouTube video editing project">
-
-                <div class="play">
-                    ▶
-                </div>
-
-            </div>
-
-            <div class="project-info">
-
-                <div class="project-number">
-                    PROJECT 04
-                </div>
-
-                <h3>
-                    YouTube Video
-                </h3>
-
-                <p>
-                    Video Editing • YouTube
-                </p>
-
-            </div>
-
-        </a>
-
-
-        <!-- PROJECT 05 -->
-
-        <a class="project"
-           href="https://youtu.be/SYHTNp8abIY"
-           target="_blank"
-           style="text-decoration:none;color:white;">
-
-            <div class="thumbnail">
-
-                <img
-                    src="https://img.youtube.com/vi/SYHTNp8abIY/maxresdefault.jpg"
-                    alt="YouTube video editing project">
-
-                <div class="play">
-                    ▶
-                </div>
-
-            </div>
-
-            <div class="project-info">
-
-                <div class="project-number">
-                    PROJECT 05
-                </div>
-
-                <h3>
-                    YouTube Video
-                </h3>
-
-                <p>
-                    Video Editing • YouTube
-                </p>
-
-            </div>
-
-        </a>
-
-
-    </div>
-
-</section>
-
-
-<!-- ================= SERVICES ================= -->
-
-<section id="services">
-
-    <h2 class="title">
-        What I Edit
-    </h2>
-
-    <p class="description">
-        Content made for today's platforms.
-    </p>
 
     <div class="services">
 
-
-        <div class="service">
-
-            <h3>
-                YouTube
-            </h3>
-
-            <p>
-                Long-form videos, vlogs, storytelling
-                and creator content.
-            </p>
-
-        </div>
-
-
-        <div class="service">
-
-            <h3>
-                Short Form
-            </h3>
-
-            <p>
-                TikTok, Reels and YouTube Shorts
-                designed to capture attention.
-            </p>
-
-        </div>
-
-
-        <div class="service">
-
-            <h3>
-                Social Media
-            </h3>
-
-            <p>
-                Engaging content for Facebook,
-                Instagram and other platforms.
-            </p>
-
-        </div>
-
-
-        <div class="service">
-
-            <h3>
-                Captions & Effects
-            </h3>
-
-            <p>
-                Subtitles, transitions, music,
-                sound effects and visual polish.
-            </p>
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-<!-- ================= TOOLS ================= -->
-
-<section id="tools" class="tools-section">
-
-    <h2 class="title">
-        Tools I Use
-    </h2>
-
-    <p class="description">
-        The software I use to edit, enhance and
-        bring ideas to life.
-    </p>
-
-
-    <div class="tools-grid">
-
-
-        <!-- PREMIERE PRO -->
-
-        <div class="tool">
-
-            <div class="tool-logo">
-
-                <img
-                    src="https://cdn.simpleicons.org/adobepremierepro"
-                    alt="Adobe Premiere Pro">
-
-            </div>
-
-            <h3>
-                Adobe Premiere Pro
-            </h3>
-
-            <p>
-                Video Editing
-            </p>
-
-        </div>
-
-
-        <!-- AFTER EFFECTS -->
-
-        <div class="tool">
-
-            <div class="tool-logo">
-
-                <img
-                    src="https://cdn.simpleicons.org/aftereffects"
-                    alt="Adobe After Effects">
-
-            </div>
-
-            <h3>
-                Adobe After Effects
-            </h3>
-
-            <p>
-                Motion Graphics
-            </p>
-
-        </div>
-
-
-        <!-- CAPCUT -->
-
-        <div class="tool">
-
-            <div class="tool-logo">
-
-                <img
-                    src="https://cdn.simpleicons.org/capcut"
-                    alt="CapCut">
-
-            </div>
-
-            <h3>
-                CapCut
-            </h3>
-
-            <p>
-                Short Form Editing
-            </p>
-
-        </div>
-
-
-        <!-- DAVINCI RESOLVE -->
-
-        <div class="tool">
-
-            <div class="tool-logo">
-
-                <img
-                    src="https://cdn.simpleicons.org/davinciresolve"
-                    alt="DaVinci Resolve">
-
-            </div>
-
-            <h3>
-                DaVinci Resolve
-            </h3>
-
-            <p>
-                Color & Editing
-            </p>
-
-        </div>
-
-
-        <!-- PHOTOSHOP -->
-
-        <div class="tool">
-
-            <div class="tool-logo">
-
-                <img
-                    src="https://cdn.simpleicons.org/adobephotoshop"
-                    alt="Adobe Photoshop">
-
-            </div>
-
-            <h3>
-                Adobe Photoshop
-            </h3>
-
-            <p>
-                Graphics & Thumbnails
-            </p>
-
-        </div>
-
-
-        <!-- CANVA -->
-
-        <div class="tool">
-
-            <div class="tool-logo">
-
-                <img
-                    src="https://cdn.simpleicons.org/canva"
-                    alt="Canva">
-
-            </div>
-
-            <h3>
-                Canva
-            </h3>
-
-            <p>
-                Design & Graphics
-            </p>
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-<!-- ================= ABOUT ================= -->
-
-<section id="about">
-
-    <div class="about">
-
-        <h2 class="title">
-            About JieHaw2
-        </h2>
-
+      <div class="service reveal">
+        <div class="service-number">01</div>
+        <h3>YouTube</h3>
         <p>
-            I'm JieHaw2, a video editor focused on creating
-            clean, engaging and enjoyable content. I enjoy
-            turning raw footage into videos that feel natural,
-            keep viewers interested and communicate the story
-            clearly.
+          Engaging long-form videos with clean cuts,
+          pacing and storytelling.
         </p>
+      </div>
+
+      <div class="service reveal">
+        <div class="service-number">02</div>
+        <h3>Short Form</h3>
+        <p>
+          TikTok, Reels and Shorts designed to keep
+          viewers watching.
+        </p>
+      </div>
+
+      <div class="service reveal">
+        <div class="service-number">03</div>
+        <h3>Social Media</h3>
+        <p>
+          Content optimized for different social
+          media platforms.
+        </p>
+      </div>
+
+      <div class="service reveal">
+        <div class="service-number">04</div>
+        <h3>Captions & Effects</h3>
+        <p>
+          Captions, transitions, sound effects and
+          visual enhancements.
+        </p>
+      </div>
 
     </div>
 
-</section>
+  </section>
 
 
-<!-- ================= CONTACT ================= -->
+  <!-- =========================
+       TOOLS
+  ========================== -->
 
-<section id="contact" class="contact">
+  <section id="tools">
 
-    <h2>
-        Let's work<br>
-        together.
+    <h2 class="section-title reveal">
+      Tools I <span>Use.</span>
     </h2>
 
-    <p>
-        Have footage that needs editing?
-        Let's talk about your project.
-    </p>
+    <div class="tools">
 
-    <a
-        href="mailto:jiehawtu@gmail.com"
-        class="button">
-
-        Hire Me →
-
-    </a>
-
-</section>
+      <div class="tool reveal">
+        <img
+          class="tool-logo"
+          src="https://cdn.simpleicons.org/adobepremierepro"
+          alt="Adobe Premiere Pro"
+        >
+        <div class="tool-name">
+          Adobe Premiere Pro
+        </div>
+      </div>
 
 
-<!-- ================= FOOTER ================= -->
+      <div class="tool reveal">
+        <img
+          class="tool-logo"
+          src="https://cdn.simpleicons.org/aftereffects"
+          alt="Adobe After Effects"
+        >
+        <div class="tool-name">
+          Adobe After Effects
+        </div>
+      </div>
 
-<footer>
 
-    © 2026 JieHaw2 — Video Editor
+      <div class="tool reveal">
+        <img
+          class="tool-logo"
+          src="https://cdn.simpleicons.org/capcut"
+          alt="CapCut"
+        >
+        <div class="tool-name">
+          CapCut
+        </div>
+      </div>
 
-</footer>
 
+      <div class="tool reveal">
+        <img
+          class="tool-logo"
+          src="https://cdn.simpleicons.org/davinciresolve"
+          alt="DaVinci Resolve"
+        >
+        <div class="tool-name">
+          DaVinci Resolve
+        </div>
+      </div>
+
+
+      <div class="tool reveal">
+        <img
+          class="tool-logo"
+          src="https://cdn.simpleicons.org/adobephotoshop"
+          alt="Adobe Photoshop"
+        >
+        <div class="tool-name">
+          Adobe Photoshop
+        </div>
+      </div>
+
+
+      <div class="tool reveal">
+        <img
+          class="tool-logo"
+          src="https://cdn.simpleicons.org/canva"
+          alt="Canva"
+        >
+        <div class="tool-name">
+          Canva
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       ABOUT
+  ========================== -->
+
+  <section id="about">
+
+    <div class="about reveal">
+
+      <h2 class="section-title">
+        About <span>JieHaw2.</span>
+      </h2>
+
+      <p>
+        I'm a <strong>video editor</strong> who enjoys turning
+        ordinary footage into content people actually want to watch.
+        I focus on <strong>clean editing, good pacing, captions,
+        music and storytelling.</strong>
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       CONTACT
+  ========================== -->
+
+  <section id="contact">
+
+    <div class="contact reveal">
+
+      <h2>
+        Let's work<br>
+        <span>together.</span>
+      </h2>
+
+      <p>
+        Have a project in mind?
+        Tell me what you need edited and let's talk.
+      </p>
+
+      <div class="contact-buttons">
+
+        <a
+          class="contact-button"
+          href="mailto:jiehawtu@gmail.com"
+        >
+          📧 Email Me
+        </a>
+
+        <a
+          class="contact-button"
+          href="https://www.facebook.com/jiehawtu13"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          💬 Message on Facebook
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer>
+
+    <div>
+      © 2026 JieHaw2
+    </div>
+
+    <div>
+      Video Editor
+    </div>
+
+  </footer>
+
+
+  <!-- =========================
+       SCROLL ANIMATION SCRIPT
+  ========================== -->
+
+  <script>
+
+    const revealElements =
+      document.querySelectorAll(".reveal");
+
+    const observer =
+      new IntersectionObserver(
+        (entries) => {
+
+          entries.forEach((entry) => {
+
+            if (entry.isIntersecting) {
+
+              entry.target.classList.add("active");
+
+            }
+
+          });
+
+        },
+        {
+          threshold: 0.12
+        }
+      );
+
+
+    revealElements.forEach((element) => {
+
+      observer.observe(element);
+
+    });
+
+  </script>
 
 </body>
 </html>
