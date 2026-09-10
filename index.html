@@ -7,6 +7,7 @@
 <title>JieHaw2 | Video Editor</title>
 
 <style>
+
 * {
     margin: 0;
     padding: 0;
@@ -23,6 +24,8 @@ body {
     color: #fff;
 }
 
+/* ================= NAVIGATION ================= */
+
 nav {
     position: fixed;
     top: 0;
@@ -31,26 +34,31 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(8,8,8,.85);
-    backdrop-filter: blur(12px);
+    background: rgba(8,8,8,.88);
+    backdrop-filter: blur(15px);
     z-index: 1000;
+    border-bottom: 1px solid rgba(255,255,255,.05);
 }
 
 .logo {
     font-size: 22px;
     font-weight: 800;
+    letter-spacing: -1px;
 }
 
 nav a {
-    color: #aaa;
+    color: #888;
     text-decoration: none;
     margin-left: 25px;
     font-size: 14px;
+    transition: .3s;
 }
 
 nav a:hover {
     color: #fff;
 }
+
+/* ================= HERO ================= */
 
 .hero {
     min-height: 100vh;
@@ -59,6 +67,7 @@ nav a:hover {
     padding: 120px 7%;
     background:
         radial-gradient(circle at 80% 20%, #292929 0%, transparent 35%),
+        radial-gradient(circle at 20% 80%, #151515 0%, transparent 30%),
         #080808;
 }
 
@@ -108,6 +117,8 @@ h1 {
     transform: translateY(-4px);
 }
 
+/* ================= SECTIONS ================= */
+
 section {
     padding: 100px 7%;
 }
@@ -115,12 +126,15 @@ section {
 .title {
     font-size: 48px;
     margin-bottom: 12px;
+    letter-spacing: -2px;
 }
 
 .description {
     color: #666;
     margin-bottom: 50px;
 }
+
+/* ================= PORTFOLIO ================= */
 
 .work-grid {
     display: grid;
@@ -197,6 +211,8 @@ section {
     margin-top: 5px;
 }
 
+/* ================= SERVICES ================= */
+
 .services {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -212,8 +228,8 @@ section {
 }
 
 .service:hover {
-    transform: translateY(-5px);
-    border-color: #444;
+    transform: translateY(-6px);
+    border-color: #555;
 }
 
 .service h3 {
@@ -223,9 +239,10 @@ section {
 .service p {
     color: #777;
     font-size: 14px;
+    line-height: 1.6;
 }
 
-/* TOOLS */
+/* ================= TOOLS ================= */
 
 .tools-section {
     background: #0c0c0c;
@@ -233,53 +250,52 @@ section {
 
 .tools-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 18px;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 20px;
 }
 
 .tool {
     background: #111;
     border: 1px solid #222;
-    border-radius: 18px;
-    padding: 25px;
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    transition: .3s;
+    border-radius: 20px;
+    padding: 35px 20px;
+    text-align: center;
+    transition: .35s;
 }
 
 .tool:hover {
-    transform: translateY(-6px);
+    transform: translateY(-8px);
     border-color: #555;
     background: #151515;
 }
 
-.tool-icon {
-    width: 52px;
-    height: 52px;
-    border-radius: 12px;
-    background: #1c1c1c;
+.tool-logo {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 22px;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
 }
 
-.tool-icon img {
-    width: 32px;
-    height: 32px;
+.tool-logo img {
+    width: 85px;
+    height: 85px;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 15px rgba(0,0,0,.4));
 }
 
-.tool-name {
-    font-weight: bold;
-    font-size: 15px;
+.tool h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
 }
 
-.tool-type {
+.tool p {
     color: #666;
-    font-size: 12px;
-    margin-top: 5px;
+    font-size: 13px;
 }
+
+/* ================= ABOUT ================= */
 
 .about {
     max-width: 750px;
@@ -291,6 +307,8 @@ section {
     line-height: 1.8;
 }
 
+/* ================= CONTACT ================= */
+
 .contact {
     text-align: center;
     background: #111;
@@ -300,6 +318,7 @@ section {
     font-size: clamp(45px, 7vw, 80px);
     line-height: 1;
     margin-bottom: 25px;
+    letter-spacing: -3px;
 }
 
 .contact p {
@@ -307,12 +326,16 @@ section {
     margin-bottom: 35px;
 }
 
+/* ================= FOOTER ================= */
+
 footer {
     padding: 30px;
     text-align: center;
     color: #444;
     font-size: 13px;
 }
+
+/* ================= MOBILE ================= */
 
 @media(max-width:600px) {
 
@@ -332,24 +355,46 @@ footer {
         letter-spacing: -3px;
     }
 
+    .title {
+        font-size: 38px;
+    }
+
     .tools-grid {
         grid-template-columns: 1fr 1fr;
+        gap: 12px;
     }
 
     .tool {
-        padding: 18px;
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
+        padding: 25px 12px;
+    }
+
+    .tool-logo {
+        width: 75px;
+        height: 75px;
+    }
+
+    .tool-logo img {
+        width: 65px;
+        height: 65px;
+    }
+
+    .tool h3 {
+        font-size: 14px;
+    }
+
+    .tool p {
+        font-size: 11px;
     }
 
 }
+
 </style>
 </head>
 
 <body>
 
-<!-- NAVIGATION -->
+
+<!-- ================= NAVIGATION ================= -->
 
 <nav>
 
@@ -358,17 +403,23 @@ footer {
     </div>
 
     <div class="nav-links">
+
         <a href="#work">Work</a>
+
         <a href="#services">Services</a>
+
         <a href="#tools">Tools</a>
+
         <a href="#about">About</a>
+
         <a href="#contact">Contact</a>
+
     </div>
 
 </nav>
 
 
-<!-- HERO -->
+<!-- ================= HERO ================= -->
 
 <section class="hero">
 
@@ -398,7 +449,7 @@ footer {
 </section>
 
 
-<!-- PORTFOLIO -->
+<!-- ================= PORTFOLIO ================= -->
 
 <section id="work">
 
@@ -412,7 +463,8 @@ footer {
 
     <div class="work-grid">
 
-        <!-- VIDEO 1 -->
+
+        <!-- PROJECT 01 -->
 
         <a class="project"
            href="https://youtu.be/q5lP2DyGKbo"
@@ -423,7 +475,7 @@ footer {
 
                 <img
                     src="https://img.youtube.com/vi/q5lP2DyGKbo/maxresdefault.jpg"
-                    alt="Video editing project">
+                    alt="YouTube video editing project">
 
                 <div class="play">
                     ▶
@@ -450,7 +502,7 @@ footer {
         </a>
 
 
-        <!-- VIDEO 2 -->
+        <!-- PROJECT 02 -->
 
         <a class="project"
            href="https://youtu.be/ki6M1b5R8ys"
@@ -461,7 +513,7 @@ footer {
 
                 <img
                     src="https://img.youtube.com/vi/ki6M1b5R8ys/maxresdefault.jpg"
-                    alt="Video editing project">
+                    alt="YouTube video editing project">
 
                 <div class="play">
                     ▶
@@ -488,7 +540,7 @@ footer {
         </a>
 
 
-        <!-- VIDEO 3 -->
+        <!-- PROJECT 03 -->
 
         <a class="project"
            href="https://www.facebook.com/share/v/19YVSMk3F3/"
@@ -530,7 +582,7 @@ footer {
         </a>
 
 
-        <!-- VIDEO 4 -->
+        <!-- PROJECT 04 -->
 
         <a class="project"
            href="https://youtu.be/PAApdWAYwlY"
@@ -541,7 +593,7 @@ footer {
 
                 <img
                     src="https://img.youtube.com/vi/PAApdWAYwlY/maxresdefault.jpg"
-                    alt="Video editing project">
+                    alt="YouTube video editing project">
 
                 <div class="play">
                     ▶
@@ -568,7 +620,7 @@ footer {
         </a>
 
 
-        <!-- VIDEO 5 -->
+        <!-- PROJECT 05 -->
 
         <a class="project"
            href="https://youtu.be/SYHTNp8abIY"
@@ -579,7 +631,7 @@ footer {
 
                 <img
                     src="https://img.youtube.com/vi/SYHTNp8abIY/maxresdefault.jpg"
-                    alt="Video editing project">
+                    alt="YouTube video editing project">
 
                 <div class="play">
                     ▶
@@ -605,12 +657,13 @@ footer {
 
         </a>
 
+
     </div>
 
 </section>
 
 
-<!-- SERVICES -->
+<!-- ================= SERVICES ================= -->
 
 <section id="services">
 
@@ -624,44 +677,69 @@ footer {
 
     <div class="services">
 
+
         <div class="service">
-            <h3>YouTube</h3>
+
+            <h3>
+                YouTube
+            </h3>
+
             <p>
                 Long-form videos, vlogs, storytelling
                 and creator content.
             </p>
+
         </div>
 
+
         <div class="service">
-            <h3>Short Form</h3>
+
+            <h3>
+                Short Form
+            </h3>
+
             <p>
                 TikTok, Reels and YouTube Shorts
                 designed to capture attention.
             </p>
+
         </div>
 
+
         <div class="service">
-            <h3>Social Media</h3>
+
+            <h3>
+                Social Media
+            </h3>
+
             <p>
                 Engaging content for Facebook,
                 Instagram and other platforms.
             </p>
+
         </div>
 
+
         <div class="service">
-            <h3>Captions & Effects</h3>
+
+            <h3>
+                Captions & Effects
+            </h3>
+
             <p>
                 Subtitles, transitions, music,
                 sound effects and visual polish.
             </p>
+
         </div>
+
 
     </div>
 
 </section>
 
 
-<!-- TOOLS -->
+<!-- ================= TOOLS ================= -->
 
 <section id="tools" class="tools-section">
 
@@ -670,9 +748,10 @@ footer {
     </h2>
 
     <p class="description">
-        Professional tools I use to edit, enhance and
-        deliver engaging video content.
+        The software I use to edit, enhance and
+        bring ideas to life.
     </p>
+
 
     <div class="tools-grid">
 
@@ -681,21 +760,21 @@ footer {
 
         <div class="tool">
 
-            <div class="tool-icon">
+            <div class="tool-logo">
+
                 <img
-                    src="https://cdn.simpleicons.org/adobepremierepro/9999FF"
+                    src="https://cdn.simpleicons.org/adobepremierepro"
                     alt="Adobe Premiere Pro">
+
             </div>
 
-            <div>
-                <div class="tool-name">
-                    Premiere Pro
-                </div>
+            <h3>
+                Adobe Premiere Pro
+            </h3>
 
-                <div class="tool-type">
-                    Video Editing
-                </div>
-            </div>
+            <p>
+                Video Editing
+            </p>
 
         </div>
 
@@ -704,21 +783,21 @@ footer {
 
         <div class="tool">
 
-            <div class="tool-icon">
+            <div class="tool-logo">
+
                 <img
-                    src="https://cdn.simpleicons.org/aftereffects/9999FF"
+                    src="https://cdn.simpleicons.org/aftereffects"
                     alt="Adobe After Effects">
+
             </div>
 
-            <div>
-                <div class="tool-name">
-                    After Effects
-                </div>
+            <h3>
+                Adobe After Effects
+            </h3>
 
-                <div class="tool-type">
-                    Motion Graphics
-                </div>
-            </div>
+            <p>
+                Motion Graphics
+            </p>
 
         </div>
 
@@ -727,44 +806,44 @@ footer {
 
         <div class="tool">
 
-            <div class="tool-icon">
+            <div class="tool-logo">
+
                 <img
-                    src="https://cdn.simpleicons.org/capcut/FFFFFF"
+                    src="https://cdn.simpleicons.org/capcut"
                     alt="CapCut">
+
             </div>
 
-            <div>
-                <div class="tool-name">
-                    CapCut
-                </div>
+            <h3>
+                CapCut
+            </h3>
 
-                <div class="tool-type">
-                    Short Form
-                </div>
-            </div>
+            <p>
+                Short Form Editing
+            </p>
 
         </div>
 
 
-        <!-- DAVINCI -->
+        <!-- DAVINCI RESOLVE -->
 
         <div class="tool">
 
-            <div class="tool-icon">
+            <div class="tool-logo">
+
                 <img
-                    src="https://cdn.simpleicons.org/davinciresolve/FFFFFF"
+                    src="https://cdn.simpleicons.org/davinciresolve"
                     alt="DaVinci Resolve">
+
             </div>
 
-            <div>
-                <div class="tool-name">
-                    DaVinci Resolve
-                </div>
+            <h3>
+                DaVinci Resolve
+            </h3>
 
-                <div class="tool-type">
-                    Color & Editing
-                </div>
-            </div>
+            <p>
+                Color & Editing
+            </p>
 
         </div>
 
@@ -773,21 +852,21 @@ footer {
 
         <div class="tool">
 
-            <div class="tool-icon">
+            <div class="tool-logo">
+
                 <img
-                    src="https://cdn.simpleicons.org/adobephotoshop/31A8FF"
+                    src="https://cdn.simpleicons.org/adobephotoshop"
                     alt="Adobe Photoshop">
+
             </div>
 
-            <div>
-                <div class="tool-name">
-                    Photoshop
-                </div>
+            <h3>
+                Adobe Photoshop
+            </h3>
 
-                <div class="tool-type">
-                    Graphics & Thumbnails
-                </div>
-            </div>
+            <p>
+                Graphics & Thumbnails
+            </p>
 
         </div>
 
@@ -796,21 +875,21 @@ footer {
 
         <div class="tool">
 
-            <div class="tool-icon">
+            <div class="tool-logo">
+
                 <img
-                    src="https://cdn.simpleicons.org/canva/00C4CC"
+                    src="https://cdn.simpleicons.org/canva"
                     alt="Canva">
+
             </div>
 
-            <div>
-                <div class="tool-name">
-                    Canva
-                </div>
+            <h3>
+                Canva
+            </h3>
 
-                <div class="tool-type">
-                    Design & Graphics
-                </div>
-            </div>
+            <p>
+                Design & Graphics
+            </p>
 
         </div>
 
@@ -820,7 +899,7 @@ footer {
 </section>
 
 
-<!-- ABOUT -->
+<!-- ================= ABOUT ================= -->
 
 <section id="about">
 
@@ -843,7 +922,7 @@ footer {
 </section>
 
 
-<!-- CONTACT -->
+<!-- ================= CONTACT ================= -->
 
 <section id="contact" class="contact">
 
@@ -860,11 +939,15 @@ footer {
     <a
         href="mailto:jiehawtu@gmail.com"
         class="button">
+
         Hire Me →
+
     </a>
 
 </section>
 
+
+<!-- ================= FOOTER ================= -->
 
 <footer>
 
