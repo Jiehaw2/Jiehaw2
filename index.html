@@ -20,11 +20,10 @@ html {
 body {
     font-family: Arial, Helvetica, sans-serif;
     background: #080808;
-    color: white;
-    line-height: 1.6;
+    color: #fff;
 }
 
-/* NAVIGATION */
+/* NAV */
 
 nav {
     position: fixed;
@@ -34,15 +33,14 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(8,8,8,0.85);
-    backdrop-filter: blur(10px);
+    background: rgba(8,8,8,.85);
+    backdrop-filter: blur(12px);
     z-index: 1000;
 }
 
 .logo {
     font-size: 22px;
-    font-weight: bold;
-    letter-spacing: 1px;
+    font-weight: 800;
 }
 
 nav a {
@@ -53,7 +51,7 @@ nav a {
 }
 
 nav a:hover {
-    color: white;
+    color: #fff;
 }
 
 /* HERO */
@@ -62,285 +60,4 @@ nav a:hover {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding: 120px 7% 80px;
-    background:
-        radial-gradient(circle at 80% 20%, #252525 0%, transparent 35%),
-        #080808;
-}
-
-.hero-content {
-    max-width: 850px;
-}
-
-.small-title {
-    color: #888;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    font-size: 13px;
-    margin-bottom: 20px;
-}
-
-h1 {
-    font-size: clamp(55px, 9vw, 110px);
-    line-height: 0.95;
-    letter-spacing: -5px;
-    margin-bottom: 30px;
-}
-
-.highlight {
-    color: #888;
-}
-
-.hero p {
-    max-width: 600px;
-    color: #aaa;
-    font-size: 19px;
-    margin-bottom: 35px;
-}
-
-.button {
-    display: inline-block;
-    padding: 15px 28px;
-    background: white;
-    color: black;
-    text-decoration: none;
-    border-radius: 50px;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.button:hover {
-    transform: translateY(-4px);
-}
-
-/* SECTIONS */
-
-section {
-    padding: 100px 7%;
-}
-
-.section-title {
-    font-size: 45px;
-    margin-bottom: 15px;
-}
-
-.section-description {
-    color: #777;
-    margin-bottom: 50px;
-}
-
-/* WORK */
-
-.work-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-}
-
-.project {
-    background: #111;
-    border: 1px solid #222;
-    border-radius: 18px;
-    padding: 28px;
-    min-height: 220px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    transition: 0.3s;
-}
-
-.project:hover {
-    transform: translateY(-7px);
-    border-color: #555;
-}
-
-.project-number {
-    color: #555;
-    font-size: 14px;
-    margin-bottom: auto;
-}
-
-.project h3 {
-    font-size: 25px;
-    margin-bottom: 8px;
-}
-
-.project p {
-    color: #777;
-    font-size: 14px;
-}
-
-.project a {
-    margin-top: 20px;
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
-}
-
-/* SERVICES */
-
-.services {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-}
-
-.service {
-    background: #111;
-    padding: 30px;
-    border-radius: 16px;
-    border: 1px solid #222;
-}
-
-.service h3 {
-    margin-bottom: 10px;
-}
-
-.service p {
-    color: #777;
-    font-size: 14px;
-}
-
-/* ABOUT */
-
-.about {
-    max-width: 750px;
-}
-
-.about p {
-    color: #aaa;
-    font-size: 18px;
-}
-
-/* CONTACT */
-
-.contact {
-    text-align: center;
-    background: #111;
-}
-
-.contact h2 {
-    font-size: clamp(40px, 7vw, 75px);
-    line-height: 1;
-    margin-bottom: 25px;
-}
-
-.contact p {
-    color: #777;
-    margin-bottom: 35px;
-}
-
-/* FOOTER */
-
-footer {
-    padding: 30px 7%;
-    color: #555;
-    font-size: 13px;
-    text-align: center;
-}
-
-/* MOBILE */
-
-@media (max-width: 600px) {
-
-    nav {
-        padding: 18px 5%;
-    }
-
-    nav .nav-links {
-        display: none;
-    }
-
-    section {
-        padding: 80px 5%;
-    }
-
-    h1 {
-        letter-spacing: -3px;
-    }
-
-}
-</style>
-</head>
-
-<body>
-
-<nav>
-    <div class="logo">JieHaw2</div>
-
-    <div class="nav-links">
-        <a href="#work">Work</a>
-        <a href="#services">Services</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-    </div>
-</nav>
-
-
-<!-- HERO -->
-
-<section class="hero">
-
-    <div class="hero-content">
-
-        <div class="small-title">
-            Video Editor
-        </div>
-
-        <h1>
-            I turn raw footage<br>
-            into <span class="highlight">stories.</span>
-        </h1>
-
-        <p>
-            Video editing for creators, brands, and social media.
-            Clean cuts, engaging pacing, and content made to keep
-            people watching.
-        </p>
-
-        <a href="#work" class="button">
-            View My Work →
-        </a>
-
-    </div>
-
-</section>
-
-
-<!-- WORK -->
-
-<section id="work">
-
-    <h2 class="section-title">Selected Work</h2>
-
-    <p class="section-description">
-        A selection of my video editing projects.
-    </p>
-
-    <div class="work-grid">
-
-        <div class="project">
-            <div class="project-number">01</div>
-
-            <h3>Video Project</h3>
-
-            <p>
-                YouTube / Social Media Edit
-            </p>
-
-            <a href="https://youtu.be/q5lP2DyGKbo" target="_blank">
-                Watch Project →
-            </a>
-        </div>
-
-
-        <div class="project">
-            <div class="project-number">02</div>
-
-            <h3>Video Project</h3>
-
-            <p>
-                YouTube / Social Media Edit
-            </p>
-
-            <a href="https://youtu.be/ki
+    padding: 120px 7
