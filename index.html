@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JieHaw2 | Video Editor & Videographer</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #080808;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 25px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(8,8,8,0.85);
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 3px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 14px;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 7% 60px;
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .small {
+            color: #aaa;
+            letter-spacing: 4px;
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: clamp(60px, 10vw, 140px);
+            line-height: 0.9;
+            letter-spacing: -6px;
+            margin-bottom: 35px;
+        }
+
+        .highlight {
+            color: #c9a86a;
+        }
+
+        .hero p {
+            color: #aaa;
+            font-size: 18px;
+            line-height: 1.7;
+            max-width: 600px;
+            margin-bottom: 35px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 15px 28px;
+            border: 1px solid #555;
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            background: #ffffff;
+            color: #000000;
+        }
+
+        section {
+            padding: 100px 7%;
+        }
+
+        .section-title {
+            font-size: 50px;
+            margin-bottom: 50px;
+        }
+
+        .work {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .project {
+            height: 300px;
+            background: #151515;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            font-size: 20px;
+            transition: 0.3s;
+        }
+
+        .project:hover {
+            transform: scale(1.02);
+            background: #202020;
+        }
+
+        .about {
+            max-width: 800px;
+            color: #aaa;
+            font-size: 20px;
+            line-height: 1.8;
+        }
+
+        footer {
+            padding: 50px 7%;
+            border-top: 1px solid #222;
+            color: #777;
+        }
+
+        @media (max-width: 700px) {
+            nav a {
+                display: none;
+            }
+
+            h1 {
+                letter-spacing: -3px;
+            }
+
+            .work {
+                grid-template-columns: 1fr;
+            }
+
+            .project {
+                height: 220px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">JIEHAW2</div>
+
+    <div>
+        <a href="#work">WORK</a>
+        <a href="#about">ABOUT</a>
+        <a href="#contact">CONTACT</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="hero-content">
+
+        <div class="small">VIDEO EDITOR · VIDEOGRAPHER</div>
+
+        <h1>
+            STORIES<br>
+            <span class="highlight">IN MOTION.</span>
+        </h1>
+
+        <p>
+            I create videos that turn ordinary moments into stories
+            worth watching.
+        </p>
+
+        <a class="button" href="#work">VIEW MY WORK →</a>
+
+    </div>
+</section>
+
+<section id="work">
+
+    <div class="section-title">
+        SELECTED WORK
+    </div>
+
+    <div class="work">
+
+        <div class="project">
+            PROJECT 01
+        </div>
+
+        <div class="project">
+            PROJECT 02
+        </div>
+
+        <div class="project">
+            PROJECT 03
+        </div>
+
+        <div class="project">
+            PROJECT 04
+        </div>
+
+    </div>
+
+</section>
+
+<section id="about">
+
+    <div class="section-title">
+        ABOUT ME
+    </div>
+
+    <div class="about">
+
+        I'm JieHaw2, a video editor and videographer
+        passionate about creating visual stories.
+
+        <br><br>
+
+        From editing content for social media to capturing
+        real moments through a camera, I focus on making
+        every frame meaningful.
+
+    </div>
+
+</section>
+
+<section id="contact">
+
+    <div class="section-title">
+        LET'S WORK<br>
+        <span class="highlight">TOGETHER.</span>
+    </div>
+
+    <p class="about">
+        You can find me on YouTube, Facebook and TikTok.
+    </p>
+
+</section>
+
+<footer>
+    © 2026 JieHaw2. All rights reserved.
+</footer>
+
+</body>
+</html>
