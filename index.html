@@ -23,8 +23,6 @@ body {
     color: #fff;
 }
 
-/* NAV */
-
 nav {
     position: fixed;
     top: 0;
@@ -53,8 +51,6 @@ nav a {
 nav a:hover {
     color: #fff;
 }
-
-/* HERO */
 
 .hero {
     min-height: 100vh;
@@ -112,8 +108,6 @@ h1 {
     transform: translateY(-4px);
 }
 
-/* SECTIONS */
-
 section {
     padding: 100px 7%;
 }
@@ -127,8 +121,6 @@ section {
     color: #666;
     margin-bottom: 50px;
 }
-
-/* PORTFOLIO */
 
 .work-grid {
     display: grid;
@@ -205,8 +197,6 @@ section {
     margin-top: 5px;
 }
 
-/* SERVICES */
-
 .services {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -218,6 +208,12 @@ section {
     background: #111;
     border: 1px solid #222;
     border-radius: 16px;
+    transition: .3s;
+}
+
+.service:hover {
+    transform: translateY(-5px);
+    border-color: #444;
 }
 
 .service h3 {
@@ -229,7 +225,61 @@ section {
     font-size: 14px;
 }
 
-/* ABOUT */
+/* TOOLS */
+
+.tools-section {
+    background: #0c0c0c;
+}
+
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 18px;
+}
+
+.tool {
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 18px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    transition: .3s;
+}
+
+.tool:hover {
+    transform: translateY(-6px);
+    border-color: #555;
+    background: #151515;
+}
+
+.tool-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    background: #1c1c1c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.tool-icon img {
+    width: 32px;
+    height: 32px;
+}
+
+.tool-name {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.tool-type {
+    color: #666;
+    font-size: 12px;
+    margin-top: 5px;
+}
 
 .about {
     max-width: 750px;
@@ -240,8 +290,6 @@ section {
     font-size: 18px;
     line-height: 1.8;
 }
-
-/* CONTACT */
 
 .contact {
     text-align: center;
@@ -259,16 +307,12 @@ section {
     margin-bottom: 35px;
 }
 
-/* FOOTER */
-
 footer {
     padding: 30px;
     text-align: center;
     color: #444;
     font-size: 13px;
 }
-
-/* MOBILE */
 
 @media(max-width:600px) {
 
@@ -288,6 +332,17 @@ footer {
         letter-spacing: -3px;
     }
 
+    .tools-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .tool {
+        padding: 18px;
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
 }
 </style>
 </head>
@@ -305,6 +360,7 @@ footer {
     <div class="nav-links">
         <a href="#work">Work</a>
         <a href="#services">Services</a>
+        <a href="#tools">Tools</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
     </div>
@@ -354,9 +410,7 @@ footer {
         Some of my recent video editing projects.
     </p>
 
-
     <div class="work-grid">
-
 
         <!-- VIDEO 1 -->
 
@@ -551,7 +605,6 @@ footer {
 
         </a>
 
-
     </div>
 
 </section>
@@ -608,6 +661,165 @@ footer {
 </section>
 
 
+<!-- TOOLS -->
+
+<section id="tools" class="tools-section">
+
+    <h2 class="title">
+        Tools I Use
+    </h2>
+
+    <p class="description">
+        Professional tools I use to edit, enhance and
+        deliver engaging video content.
+    </p>
+
+    <div class="tools-grid">
+
+
+        <!-- PREMIERE PRO -->
+
+        <div class="tool">
+
+            <div class="tool-icon">
+                <img
+                    src="https://cdn.simpleicons.org/adobepremierepro/9999FF"
+                    alt="Adobe Premiere Pro">
+            </div>
+
+            <div>
+                <div class="tool-name">
+                    Premiere Pro
+                </div>
+
+                <div class="tool-type">
+                    Video Editing
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- AFTER EFFECTS -->
+
+        <div class="tool">
+
+            <div class="tool-icon">
+                <img
+                    src="https://cdn.simpleicons.org/aftereffects/9999FF"
+                    alt="Adobe After Effects">
+            </div>
+
+            <div>
+                <div class="tool-name">
+                    After Effects
+                </div>
+
+                <div class="tool-type">
+                    Motion Graphics
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- CAPCUT -->
+
+        <div class="tool">
+
+            <div class="tool-icon">
+                <img
+                    src="https://cdn.simpleicons.org/capcut/FFFFFF"
+                    alt="CapCut">
+            </div>
+
+            <div>
+                <div class="tool-name">
+                    CapCut
+                </div>
+
+                <div class="tool-type">
+                    Short Form
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- DAVINCI -->
+
+        <div class="tool">
+
+            <div class="tool-icon">
+                <img
+                    src="https://cdn.simpleicons.org/davinciresolve/FFFFFF"
+                    alt="DaVinci Resolve">
+            </div>
+
+            <div>
+                <div class="tool-name">
+                    DaVinci Resolve
+                </div>
+
+                <div class="tool-type">
+                    Color & Editing
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- PHOTOSHOP -->
+
+        <div class="tool">
+
+            <div class="tool-icon">
+                <img
+                    src="https://cdn.simpleicons.org/adobephotoshop/31A8FF"
+                    alt="Adobe Photoshop">
+            </div>
+
+            <div>
+                <div class="tool-name">
+                    Photoshop
+                </div>
+
+                <div class="tool-type">
+                    Graphics & Thumbnails
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- CANVA -->
+
+        <div class="tool">
+
+            <div class="tool-icon">
+                <img
+                    src="https://cdn.simpleicons.org/canva/00C4CC"
+                    alt="Canva">
+            </div>
+
+            <div>
+                <div class="tool-name">
+                    Canva
+                </div>
+
+                <div class="tool-type">
+                    Design & Graphics
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
 <!-- ABOUT -->
 
 <section id="about">
@@ -645,10 +857,8 @@ footer {
         Let's talk about your project.
     </p>
 
-    <!-- WE WILL REPLACE THIS EMAIL LATER -->
-
     <a
-        href="mailto:YOUR-EMAIL-HERE"
+        href="mailto:jiehawtu@gmail.com"
         class="button">
         Hire Me →
     </a>
