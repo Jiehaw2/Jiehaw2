@@ -37,6 +37,7 @@ a{
 section{
     position:relative;
     overflow:hidden;
+    z-index:1;
 }
 
 .container{
@@ -45,9 +46,333 @@ section{
     margin:auto;
 }
 
-/* =========================
+
+/* =========================================================
+   CINEMATIC ANIMATED BACKGROUND
+========================================================= */
+
+.ambient-bg{
+    position:fixed;
+    inset:0;
+    z-index:2;
+    pointer-events:none;
+    overflow:hidden;
+    opacity:1;
+}
+
+.ambient-glow{
+    position:absolute;
+    border-radius:50%;
+    pointer-events:none;
+    mix-blend-mode:screen;
+    filter:blur(35px);
+}
+
+.glow-1{
+    width:520px;
+    height:520px;
+    left:-180px;
+    top:5%;
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.075) 0%,
+            rgba(255,255,255,.035) 25%,
+            rgba(255,255,255,.012) 48%,
+            transparent 72%
+        );
+    animation:
+        glowMove1 20s ease-in-out infinite alternate;
+}
+
+.glow-2{
+    width:600px;
+    height:600px;
+    right:-220px;
+    top:28%;
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.065) 0%,
+            rgba(255,255,255,.025) 30%,
+            rgba(255,255,255,.008) 55%,
+            transparent 75%
+        );
+    animation:
+        glowMove2 24s ease-in-out infinite alternate;
+}
+
+.glow-3{
+    width:430px;
+    height:430px;
+    left:35%;
+    bottom:-180px;
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.055) 0%,
+            rgba(255,255,255,.018) 35%,
+            transparent 72%
+        );
+    animation:
+        glowMove3 18s ease-in-out infinite alternate;
+}
+
+.abstract{
+    position:absolute;
+    border:1px solid rgba(255,255,255,.08);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.035),
+            rgba(255,255,255,.005)
+        );
+    backdrop-filter:blur(2px);
+    -webkit-backdrop-filter:blur(2px);
+}
+
+.abstract-1{
+    width:320px;
+    height:320px;
+    left:8%;
+    top:18%;
+    border-radius:42% 58% 63% 37% / 40% 36% 64% 60%;
+    transform:rotate(25deg);
+    animation:
+        abstractMove1 25s ease-in-out infinite;
+}
+
+.abstract-2{
+    width:240px;
+    height:240px;
+    right:14%;
+    top:58%;
+    border-radius:61% 39% 45% 55% / 55% 62% 38% 45%;
+    transform:rotate(-35deg);
+    animation:
+        abstractMove2 21s ease-in-out infinite;
+}
+
+.abstract-3{
+    width:180px;
+    height:180px;
+    left:55%;
+    top:12%;
+    border-radius:50%;
+    transform:rotate(15deg);
+    animation:
+        abstractMove3 17s ease-in-out infinite;
+}
+
+.abstract-4{
+    width:420px;
+    height:140px;
+    left:45%;
+    bottom:15%;
+    border-radius:50%;
+    transform:rotate(-25deg);
+    animation:
+        abstractMove4 23s ease-in-out infinite;
+}
+
+.abstract-ring{
+    position:absolute;
+    border:1px solid rgba(255,255,255,.065);
+    border-radius:50%;
+}
+
+.ring-1{
+    width:430px;
+    height:430px;
+    left:-100px;
+    top:45%;
+    animation:
+        ringMove1 30s linear infinite;
+}
+
+.ring-2{
+    width:300px;
+    height:300px;
+    right:5%;
+    top:8%;
+    animation:
+        ringMove2 25s linear infinite;
+}
+
+.light-beam{
+    position:absolute;
+    width:900px;
+    height:2px;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.10),
+            rgba(255,255,255,.025),
+            transparent
+        );
+    filter:blur(1px);
+    transform:rotate(-28deg);
+    animation:
+        beamMove 18s ease-in-out infinite;
+}
+
+.particle{
+    position:absolute;
+    width:4px;
+    height:4px;
+    border-radius:50%;
+    background:rgba(255,255,255,.38);
+    box-shadow:
+        0 0 8px rgba(255,255,255,.20),
+        0 0 18px rgba(255,255,255,.08);
+    animation:
+        particleFloat 12s ease-in-out infinite;
+}
+
+.p1{left:5%;top:12%;animation-delay:-2s;}
+.p2{left:12%;top:72%;width:3px;height:3px;animation-delay:-7s;}
+.p3{left:19%;top:38%;width:5px;height:5px;animation-delay:-4s;}
+.p4{left:27%;top:84%;width:3px;height:3px;animation-delay:-9s;}
+.p5{left:34%;top:25%;width:4px;height:4px;animation-delay:-5s;}
+.p6{left:42%;top:68%;width:5px;height:5px;animation-delay:-1s;}
+.p7{left:49%;top:43%;width:3px;height:3px;animation-delay:-8s;}
+.p8{left:56%;top:88%;width:4px;height:4px;animation-delay:-3s;}
+.p9{left:63%;top:18%;width:5px;height:5px;animation-delay:-6s;}
+.p10{left:70%;top:55%;width:3px;height:3px;animation-delay:-10s;}
+.p11{left:77%;top:31%;width:4px;height:4px;animation-delay:-4s;}
+.p12{left:84%;top:76%;width:5px;height:5px;animation-delay:-7s;}
+.p13{left:91%;top:22%;width:3px;height:3px;animation-delay:-2s;}
+.p14{left:96%;top:63%;width:4px;height:4px;animation-delay:-9s;}
+
+@keyframes glowMove1{
+    0%{transform:translate(-80px,-20px) scale(.85);}
+    50%{transform:translate(280px,180px) scale(1.15);}
+    100%{transform:translate(80px,420px) scale(.95);}
+}
+
+@keyframes glowMove2{
+    0%{transform:translate(80px,40px) scale(.9);}
+    50%{transform:translate(-260px,-120px) scale(1.2);}
+    100%{transform:translate(-80px,300px) scale(.9);}
+}
+
+@keyframes glowMove3{
+    0%{transform:translate(-100px,50px) scale(.8);}
+    50%{transform:translate(180px,-180px) scale(1.2);}
+    100%{transform:translate(320px,20px) scale(.9);}
+}
+
+@keyframes abstractMove1{
+    0%{
+        transform:translate(0,0) rotate(25deg) scale(1);
+    }
+    50%{
+        transform:translate(170px,120px) rotate(75deg) scale(1.12);
+    }
+    100%{
+        transform:translate(-60px,260px) rotate(125deg) scale(.9);
+    }
+}
+
+@keyframes abstractMove2{
+    0%{
+        transform:translate(0,0) rotate(-35deg) scale(1);
+    }
+    50%{
+        transform:translate(-180px,-100px) rotate(30deg) scale(1.15);
+    }
+    100%{
+        transform:translate(80px,-250px) rotate(80deg) scale(.9);
+    }
+}
+
+@keyframes abstractMove3{
+    0%{
+        transform:translate(0,0) rotate(15deg) scale(1);
+    }
+    50%{
+        transform:translate(-140px,160px) rotate(100deg) scale(1.2);
+    }
+    100%{
+        transform:translate(180px,280px) rotate(180deg) scale(.8);
+    }
+}
+
+@keyframes abstractMove4{
+    0%{
+        transform:translate(0,0) rotate(-25deg) scale(1);
+    }
+    50%{
+        transform:translate(-220px,-100px) rotate(20deg) scale(1.15);
+    }
+    100%{
+        transform:translate(100px,-250px) rotate(-55deg) scale(.9);
+    }
+}
+
+@keyframes ringMove1{
+    0%{
+        transform:translate(0,0) rotate(0deg);
+    }
+    50%{
+        transform:translate(280px,-120px) rotate(180deg);
+    }
+    100%{
+        transform:translate(500px,180px) rotate(360deg);
+    }
+}
+
+@keyframes ringMove2{
+    0%{
+        transform:translate(0,0) rotate(0deg);
+    }
+    50%{
+        transform:translate(-180px,220px) rotate(180deg);
+    }
+    100%{
+        transform:translate(100px,420px) rotate(360deg);
+    }
+}
+
+@keyframes beamMove{
+    0%{
+        transform:translate(-500px,-200px) rotate(-28deg);
+        opacity:0;
+    }
+    25%{opacity:.8;}
+    50%{
+        transform:translate(300px,250px) rotate(-28deg);
+        opacity:.35;
+    }
+    75%{opacity:.7;}
+    100%{
+        transform:translate(1000px,600px) rotate(-28deg);
+        opacity:0;
+    }
+}
+
+@keyframes particleFloat{
+    0%{
+        transform:translate3d(0,0,0) scale(.7);
+        opacity:.15;
+    }
+    25%{opacity:.65;}
+    50%{
+        transform:translate3d(45px,-70px,0) scale(1.2);
+        opacity:.35;
+    }
+    75%{opacity:.75;}
+    100%{
+        transform:translate3d(-35px,-150px,0) scale(.6);
+        opacity:0;
+    }
+}
+
+
+/* =========================================================
    NAVBAR
-========================= */
+========================================================= */
 
 nav{
     position:fixed;
@@ -97,9 +422,10 @@ nav{
     color:#fff;
 }
 
-/* =========================
+
+/* =========================================================
    GENERAL BACKGROUND
-========================= */
+========================================================= */
 
 .bg-image{
     position:absolute;
@@ -135,9 +461,10 @@ nav{
         );
 }
 
-/* =========================
+
+/* =========================================================
    HERO
-========================= */
+========================================================= */
 
 .hero{
     min-height:100vh;
@@ -227,9 +554,10 @@ nav{
     transform:translateY(-3px);
 }
 
-/* =========================
+
+/* =========================================================
    SECTION HEADERS
-========================= */
+========================================================= */
 
 .section{
     padding:130px 0;
@@ -249,9 +577,10 @@ nav{
     margin-bottom:55px;
 }
 
-/* =========================
+
+/* =========================================================
    WORK
-========================= */
+========================================================= */
 
 .work{
     background:#070707;
@@ -263,11 +592,12 @@ nav{
 }
 
 .work .bg-overlay{
-    background:linear-gradient(
-        180deg,
-        rgba(5,5,5,.95),
-        rgba(5,5,5,.85)
-    );
+    background:
+        linear-gradient(
+            180deg,
+            rgba(5,5,5,.95),
+            rgba(5,5,5,.85)
+        );
 }
 
 .work-grid{
@@ -347,9 +677,10 @@ nav{
     color:#777;
 }
 
-/* =========================
+
+/* =========================================================
    GRAPHIC ARTS
-========================= */
+========================================================= */
 
 .graphic-arts{
     background:#070707;
@@ -403,9 +734,10 @@ nav{
     -webkit-user-drag:none;
 }
 
-/* =========================
+
+/* =========================================================
    GRAPHIC ART ZOOM
-========================= */
+========================================================= */
 
 .graphic-lightbox{
     display:none;
@@ -438,7 +770,6 @@ nav{
         opacity:0;
         transform:scale(.85);
     }
-
     to{
         opacity:1;
         transform:scale(1);
@@ -466,9 +797,10 @@ nav{
     color:#aaa;
 }
 
-/* =========================
+
+/* =========================================================
    SERVICES
-========================= */
+========================================================= */
 
 .services{
     background:#080808;
@@ -521,9 +853,10 @@ nav{
     font-size:14px;
 }
 
-/* =========================
+
+/* =========================================================
    PROCESS
-========================= */
+========================================================= */
 
 .process{
     background:#060606;
@@ -570,9 +903,10 @@ nav{
     line-height:1.7;
 }
 
-/* =========================
+
+/* =========================================================
    TOOLS
-========================= */
+========================================================= */
 
 .tools{
     background:#080808;
@@ -618,9 +952,10 @@ nav{
     font-size:12px;
 }
 
-/* =========================
+
+/* =========================================================
    ABOUT
-========================= */
+========================================================= */
 
 .about{
     background:#070707;
@@ -649,9 +984,10 @@ nav{
     color:#fff;
 }
 
-/* =========================
+
+/* =========================================================
    CONTACT
-========================= */
+========================================================= */
 
 .contact{
     min-height:600px;
@@ -710,14 +1046,17 @@ nav{
     color:#000;
 }
 
-/* =========================
+
+/* =========================================================
    FOOTER
-========================= */
+========================================================= */
 
 footer{
     padding:30px 0;
     border-top:1px solid rgba(255,255,255,.08);
     background:#050505;
+    position:relative;
+    z-index:1;
 }
 
 .footer-inner{
@@ -730,14 +1069,17 @@ footer{
     font-size:11px;
 }
 
-/* =========================
+
+/* =========================================================
    REVEAL ANIMATION
-========================= */
+========================================================= */
 
 .reveal{
     opacity:0;
     transform:translateY(40px);
-    transition:opacity .8s ease, transform .8s ease;
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
 }
 
 .reveal.active{
@@ -750,18 +1092,52 @@ footer{
         opacity:0;
         transform:translateY(30px);
     }
-
     to{
         opacity:1;
         transform:translateY(0);
     }
 }
 
-/* =========================
+
+/* =========================================================
    MOBILE
-========================= */
+========================================================= */
 
 @media(max-width:800px){
+
+    .ambient-bg{
+        opacity:.85;
+    }
+
+    .glow-1{
+        width:350px;
+        height:350px;
+    }
+
+    .glow-2{
+        width:400px;
+        height:400px;
+    }
+
+    .glow-3{
+        width:300px;
+        height:300px;
+    }
+
+    .abstract-1{
+        width:220px;
+        height:220px;
+    }
+
+    .abstract-2{
+        width:180px;
+        height:180px;
+    }
+
+    .abstract-4{
+        width:300px;
+        height:100px;
+    }
 
     nav{
         height:65px;
@@ -851,6 +1227,7 @@ footer{
 
 }
 
+
 @media(max-width:500px){
 
     .nav-links{
@@ -887,6 +1264,11 @@ footer{
         height:270px;
     }
 
+    .particle{
+        width:3px;
+        height:3px;
+    }
+
 }
 
 </style>
@@ -894,9 +1276,48 @@ footer{
 
 <body>
 
-<!-- =========================
+
+<!-- =========================================================
+     CINEMATIC ANIMATED BACKGROUND
+========================================================= -->
+
+<div class="ambient-bg">
+
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="ambient-glow glow-3"></div>
+
+    <div class="abstract abstract-1"></div>
+    <div class="abstract abstract-2"></div>
+    <div class="abstract abstract-3"></div>
+    <div class="abstract abstract-4"></div>
+
+    <div class="abstract-ring ring-1"></div>
+    <div class="abstract-ring ring-2"></div>
+
+    <div class="light-beam"></div>
+
+    <div class="particle p1"></div>
+    <div class="particle p2"></div>
+    <div class="particle p3"></div>
+    <div class="particle p4"></div>
+    <div class="particle p5"></div>
+    <div class="particle p6"></div>
+    <div class="particle p7"></div>
+    <div class="particle p8"></div>
+    <div class="particle p9"></div>
+    <div class="particle p10"></div>
+    <div class="particle p11"></div>
+    <div class="particle p12"></div>
+    <div class="particle p13"></div>
+    <div class="particle p14"></div>
+
+</div>
+
+
+<!-- =========================================================
      NAVIGATION
-========================= -->
+========================================================= -->
 
 <nav>
 
@@ -909,13 +1330,9 @@ footer{
         <div class="nav-links">
 
             <a href="#work">Work</a>
-
             <a href="#services">Services</a>
-
             <a href="#process">Process</a>
-
             <a href="#tools">Tools</a>
-
             <a href="#contact">Contact</a>
 
         </div>
@@ -925,14 +1342,13 @@ footer{
 </nav>
 
 
-<!-- =========================
+<!-- =========================================================
      HERO
-========================= -->
+========================================================= -->
 
 <section class="hero" id="home">
 
     <div class="bg-image"></div>
-
     <div class="bg-overlay"></div>
 
     <div class="container">
@@ -940,7 +1356,7 @@ footer{
         <div class="hero-content">
 
             <div class="eyebrow">
-                Video Editor • Graphic Designer
+                Video Editor • Graphic Designer • Web Development
             </div>
 
             <h1>
@@ -950,7 +1366,8 @@ footer{
 
             <p>
                 I help creators, businesses and brands turn raw footage
-                and ideas into engaging videos and eye-catching graphics.
+                and ideas into engaging videos, eye-catching graphics
+                and modern websites.
             </p>
 
             <div class="hero-buttons">
@@ -972,14 +1389,13 @@ footer{
 </section>
 
 
-<!-- =========================
+<!-- =========================================================
      WORK
-========================= -->
+========================================================= -->
 
 <section class="section work" id="work">
 
     <div class="bg-image"></div>
-
     <div class="bg-overlay"></div>
 
     <div class="container">
@@ -1125,10 +1541,6 @@ footer{
             </a>
 
 
-            <!-- =========================
-                 KRISTA - NEW VIDEO
-            ========================= -->
-
             <a
                 href="https://www.facebook.com/share/r/1KVEDYZEEA/"
                 target="_blank"
@@ -1161,9 +1573,9 @@ footer{
 </section>
 
 
-<!-- =========================
+<!-- =========================================================
      GRAPHIC ARTS
-========================= -->
+========================================================= -->
 
 <section class="section graphic-arts" id="graphic-arts">
 
@@ -1186,160 +1598,47 @@ footer{
 
             <!-- ORIGINAL SET -->
 
-            <div class="graphic-card">
-                <img src="art1.jpeg" alt="Graphic design 1" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art2.jpeg" alt="Graphic design 2" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art3.jpeg" alt="Graphic design 3" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art4.jpeg" alt="Graphic design 4" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art5.jpeg" alt="Graphic design 5" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art6.jpeg" alt="Graphic design 6" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art7.jpeg" alt="Graphic design 7" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art8.jpeg" alt="Graphic design 8" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art9.jpeg" alt="Graphic design 9" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art10.jpeg" alt="Graphic design 10" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art11.jpeg" alt="Graphic design 11" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art12.jpeg" alt="Graphic design 12" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art13.jpeg" alt="Graphic design 13" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art14.jpeg" alt="Graphic design 14" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art15.jpeg" alt="Graphic design 15" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art16.jpeg" alt="Graphic design 16" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art17.jpeg" alt="Graphic design 17" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art18.jpeg" alt="Graphic design 18" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art19.jpeg" alt="Graphic design 19" draggable="false">
-            </div>
-
+            <div class="graphic-card"><img src="art1.jpeg" alt="Graphic design 1" draggable="false"></div>
+            <div class="graphic-card"><img src="art2.jpeg" alt="Graphic design 2" draggable="false"></div>
+            <div class="graphic-card"><img src="art3.jpeg" alt="Graphic design 3" draggable="false"></div>
+            <div class="graphic-card"><img src="art4.jpeg" alt="Graphic design 4" draggable="false"></div>
+            <div class="graphic-card"><img src="art5.jpeg" alt="Graphic design 5" draggable="false"></div>
+            <div class="graphic-card"><img src="art6.jpeg" alt="Graphic design 6" draggable="false"></div>
+            <div class="graphic-card"><img src="art7.jpeg" alt="Graphic design 7" draggable="false"></div>
+            <div class="graphic-card"><img src="art8.jpeg" alt="Graphic design 8" draggable="false"></div>
+            <div class="graphic-card"><img src="art9.jpeg" alt="Graphic design 9" draggable="false"></div>
+            <div class="graphic-card"><img src="art10.jpeg" alt="Graphic design 10" draggable="false"></div>
+            <div class="graphic-card"><img src="art11.jpeg" alt="Graphic design 11" draggable="false"></div>
+            <div class="graphic-card"><img src="art12.jpeg" alt="Graphic design 12" draggable="false"></div>
+            <div class="graphic-card"><img src="art13.jpeg" alt="Graphic design 13" draggable="false"></div>
+            <div class="graphic-card"><img src="art14.jpeg" alt="Graphic design 14" draggable="false"></div>
+            <div class="graphic-card"><img src="art15.jpeg" alt="Graphic design 15" draggable="false"></div>
+            <div class="graphic-card"><img src="art16.jpeg" alt="Graphic design 16" draggable="false"></div>
+            <div class="graphic-card"><img src="art17.jpeg" alt="Graphic design 17" draggable="false"></div>
+            <div class="graphic-card"><img src="art18.jpeg" alt="Graphic design 18" draggable="false"></div>
+            <div class="graphic-card"><img src="art19.jpeg" alt="Graphic design 19" draggable="false"></div>
 
             <!-- DUPLICATE SET -->
 
-            <div class="graphic-card">
-                <img src="art1.jpeg" alt="Graphic design 1" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art2.jpeg" alt="Graphic design 2" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art3.jpeg" alt="Graphic design 3" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art4.jpeg" alt="Graphic design 4" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art5.jpeg" alt="Graphic design 5" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art6.jpeg" alt="Graphic design 6" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art7.jpeg" alt="Graphic design 7" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art8.jpeg" alt="Graphic design 8" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art9.jpeg" alt="Graphic design 9" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art10.jpeg" alt="Graphic design 10" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art11.jpeg" alt="Graphic design 11" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art12.jpeg" alt="Graphic design 12" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art13.jpeg" alt="Graphic design 13" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art14.jpeg" alt="Graphic design 14" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art15.jpeg" alt="Graphic design 15" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art16.jpeg" alt="Graphic design 16" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art17.jpeg" alt="Graphic design 17" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art18.jpeg" alt="Graphic design 18" draggable="false">
-            </div>
-
-            <div class="graphic-card">
-                <img src="art19.jpeg" alt="Graphic design 19" draggable="false">
-            </div>
+            <div class="graphic-card"><img src="art1.jpeg" alt="Graphic design 1" draggable="false"></div>
+            <div class="graphic-card"><img src="art2.jpeg" alt="Graphic design 2" draggable="false"></div>
+            <div class="graphic-card"><img src="art3.jpeg" alt="Graphic design 3" draggable="false"></div>
+            <div class="graphic-card"><img src="art4.jpeg" alt="Graphic design 4" draggable="false"></div>
+            <div class="graphic-card"><img src="art5.jpeg" alt="Graphic design 5" draggable="false"></div>
+            <div class="graphic-card"><img src="art6.jpeg" alt="Graphic design 6" draggable="false"></div>
+            <div class="graphic-card"><img src="art7.jpeg" alt="Graphic design 7" draggable="false"></div>
+            <div class="graphic-card"><img src="art8.jpeg" alt="Graphic design 8" draggable="false"></div>
+            <div class="graphic-card"><img src="art9.jpeg" alt="Graphic design 9" draggable="false"></div>
+            <div class="graphic-card"><img src="art10.jpeg" alt="Graphic design 10" draggable="false"></div>
+            <div class="graphic-card"><img src="art11.jpeg" alt="Graphic design 11" draggable="false"></div>
+            <div class="graphic-card"><img src="art12.jpeg" alt="Graphic design 12" draggable="false"></div>
+            <div class="graphic-card"><img src="art13.jpeg" alt="Graphic design 13" draggable="false"></div>
+            <div class="graphic-card"><img src="art14.jpeg" alt="Graphic design 14" draggable="false"></div>
+            <div class="graphic-card"><img src="art15.jpeg" alt="Graphic design 15" draggable="false"></div>
+            <div class="graphic-card"><img src="art16.jpeg" alt="Graphic design 16" draggable="false"></div>
+            <div class="graphic-card"><img src="art17.jpeg" alt="Graphic design 17" draggable="false"></div>
+            <div class="graphic-card"><img src="art18.jpeg" alt="Graphic design 18" draggable="false"></div>
+            <div class="graphic-card"><img src="art19.jpeg" alt="Graphic design 19" draggable="false"></div>
 
         </div>
 
@@ -1348,9 +1647,9 @@ footer{
 </section>
 
 
-<!-- =========================
+<!-- =========================================================
      GRAPHIC ART LIGHTBOX
-========================= -->
+========================================================= -->
 
 <div class="graphic-lightbox" id="graphicLightbox">
 
@@ -1370,14 +1669,13 @@ footer{
 </div>
 
 
-<!-- =========================
+<!-- =========================================================
      SERVICES
-========================= -->
+========================================================= -->
 
 <section class="section services" id="services">
 
     <div class="bg-image"></div>
-
     <div class="bg-overlay"></div>
 
     <div class="container">
@@ -1391,6 +1689,7 @@ footer{
         </h2>
 
         <div class="services-grid">
+
 
             <div class="service reveal">
 
@@ -1466,6 +1765,27 @@ footer{
 
             </div>
 
+
+            <!-- NEW WEB DEVELOPMENT SERVICE -->
+
+            <div class="service reveal">
+
+                <div class="service-number">
+                    05
+                </div>
+
+                <h3>
+                    Web Development
+                </h3>
+
+                <p>
+                    Modern and responsive websites for portfolios,
+                    personal brands and small businesses, built with
+                    clean layouts and user-friendly designs.
+                </p>
+
+            </div>
+
         </div>
 
     </div>
@@ -1473,14 +1793,13 @@ footer{
 </section>
 
 
-<!-- =========================
+<!-- =========================================================
      PROCESS
-========================= -->
+========================================================= -->
 
 <section class="section process" id="process">
 
     <div class="bg-image"></div>
-
     <div class="bg-overlay"></div>
 
     <div class="container">
@@ -1494,6 +1813,7 @@ footer{
         </h2>
 
         <div class="process-grid">
+
 
             <div class="step reveal">
 
@@ -1573,9 +1893,9 @@ footer{
 </section>
 
 
-<!-- =========================
+<!-- =========================================================
      TOOLS
-========================= -->
+========================================================= -->
 
 <section class="section tools" id="tools">
 
@@ -1591,46 +1911,40 @@ footer{
 
         <div class="tools-grid">
 
+
             <div class="tool reveal">
                 <div class="tool-icon">Pr</div>
-                <div class="tool-name">
-                    Premiere Pro
-                </div>
+                <div class="tool-name">Premiere Pro</div>
             </div>
+
 
             <div class="tool reveal">
                 <div class="tool-icon">Ae</div>
-                <div class="tool-name">
-                    After Effects
-                </div>
+                <div class="tool-name">After Effects</div>
             </div>
+
 
             <div class="tool reveal">
                 <div class="tool-icon">C</div>
-                <div class="tool-name">
-                    CapCut
-                </div>
+                <div class="tool-name">CapCut</div>
             </div>
+
 
             <div class="tool reveal">
                 <div class="tool-icon">Da</div>
-                <div class="tool-name">
-                    DaVinci Resolve
-                </div>
+                <div class="tool-name">DaVinci Resolve</div>
             </div>
+
 
             <div class="tool reveal">
                 <div class="tool-icon">Ps</div>
-                <div class="tool-name">
-                    Photoshop
-                </div>
+                <div class="tool-name">Photoshop</div>
             </div>
+
 
             <div class="tool reveal">
                 <div class="tool-icon">Ca</div>
-                <div class="tool-name">
-                    Canva
-                </div>
+                <div class="tool-name">Canva</div>
             </div>
 
         </div>
@@ -1640,14 +1954,13 @@ footer{
 </section>
 
 
-<!-- =========================
+<!-- =========================================================
      ABOUT
-========================= -->
+========================================================= -->
 
 <section class="section about">
 
     <div class="bg-image"></div>
-
     <div class="bg-overlay"></div>
 
     <div class="container">
@@ -1662,8 +1975,9 @@ footer{
                 I'm a
                 <strong>video editor and graphic designer</strong>
                 based in the Philippines. I focus on clean editing,
-                good pacing, engaging captions, music, visual effects
-                and designs that help content stand out.
+                good pacing, engaging captions, music, visual effects,
+                graphic design and I'm also expanding my skills in
+                <strong>web development</strong>.
             </p>
 
         </div>
@@ -1673,14 +1987,13 @@ footer{
 </section>
 
 
-<!-- =========================
+<!-- =========================================================
      CONTACT
-========================= -->
+========================================================= -->
 
 <section class="section contact" id="contact">
 
     <div class="bg-image"></div>
-
     <div class="bg-overlay"></div>
 
     <div class="container">
@@ -1727,9 +2040,9 @@ footer{
 </section>
 
 
-<!-- =========================
+<!-- =========================================================
      FOOTER
-========================= -->
+========================================================= -->
 
 <footer>
 
@@ -1740,7 +2053,7 @@ footer{
         </div>
 
         <div>
-            Video Editor • Graphic Designer
+            Video Editor • Graphic Designer • Web Development
         </div>
 
     </div>
@@ -1748,59 +2061,73 @@ footer{
 </footer>
 
 
-<!-- =========================
+<!-- =========================================================
      SCRIPT
-========================= -->
+========================================================= -->
 
 <script>
 
-/* =========================
+
+/* =========================================================
    REVEAL ANIMATION
-========================= */
+========================================================= */
 
-const reveals = document.querySelectorAll('.reveal');
+const reveals =
+    document.querySelectorAll('.reveal');
 
-const observer = new IntersectionObserver(
-    (entries) => {
+const observer =
+    new IntersectionObserver(
+        (entries) => {
 
-        entries.forEach(entry => {
+            entries.forEach(entry => {
 
-            if(entry.isIntersecting){
+                if(entry.isIntersecting){
 
-                entry.target.classList.add('active');
+                    entry.target.classList.add(
+                        'active'
+                    );
 
-            }
+                }
 
-        });
+            });
 
-    },
-    {
-        threshold:0.12
-    }
-);
+        },
+        {
+            threshold:0.12
+        }
+    );
 
 reveals.forEach(element => {
+
     observer.observe(element);
+
 });
 
 
-/* =========================
+/* =========================================================
    GRAPHIC ART SLIDER
    SLOW AUTO + MANUAL DRAG
-========================= */
+========================================================= */
 
 const graphicSlider =
-    document.getElementById('graphicSlider');
+    document.getElementById(
+        'graphicSlider'
+    );
 
 const graphicTrack =
-    document.getElementById('graphicTrack');
+    document.getElementById(
+        'graphicTrack'
+    );
 
 const graphicCards =
-    document.querySelectorAll('.graphic-card');
+    document.querySelectorAll(
+        '.graphic-card'
+    );
 
 let position = 0;
 
-let lastTime = performance.now();
+let lastTime =
+    performance.now();
 
 let isDragging = false;
 
@@ -1811,16 +2138,12 @@ let startPosition = 0;
 let moved = false;
 
 
-/*
-   SLOW AUTO SCROLL
-*/
+/* SLOW AUTO SCROLL */
 
 const autoSpeed = 0.035;
 
 
-/*
-   GET LOOP WIDTH
-*/
+/* GET LOOP WIDTH */
 
 function getLoopWidth(){
 
@@ -1828,7 +2151,9 @@ function getLoopWidth(){
         graphicCards[0];
 
     if(!firstCard){
+
         return 0;
+
     }
 
     const cardWidth =
@@ -1836,14 +2161,14 @@ function getLoopWidth(){
 
     const gap = 20;
 
-    return (cardWidth + gap) * 19;
+    return (
+        (cardWidth + gap) * 19
+    );
 
 }
 
 
-/*
-   INFINITE LOOP
-*/
+/* INFINITE LOOP */
 
 function normalizePosition(){
 
@@ -1851,16 +2176,22 @@ function normalizePosition(){
         getLoopWidth();
 
     if(loopWidth <= 0){
+
         return;
+
     }
 
-    while(position <= -loopWidth){
+    while(
+        position <= -loopWidth
+    ){
 
         position += loopWidth;
 
     }
 
-    while(position > 0){
+    while(
+        position > 0
+    ){
 
         position -= loopWidth;
 
@@ -1869,9 +2200,7 @@ function normalizePosition(){
 }
 
 
-/*
-   UPDATE POSITION
-*/
+/* UPDATE POSITION */
 
 function updateGraphicPosition(){
 
@@ -1881,16 +2210,17 @@ function updateGraphicPosition(){
 }
 
 
-/*
-   AUTO SCROLL
-*/
+/* AUTO SCROLL */
 
-function animateGraphics(currentTime){
+function animateGraphics(
+    currentTime
+){
 
     const delta =
         currentTime - lastTime;
 
-    lastTime = currentTime;
+    lastTime =
+        currentTime;
 
     if(!isDragging){
 
@@ -1914,9 +2244,9 @@ requestAnimationFrame(
 );
 
 
-/* =========================
+/* =========================================================
    MANUAL DRAG
-========================= */
+========================================================= */
 
 graphicSlider.addEventListener(
     'pointerdown',
@@ -1958,20 +2288,25 @@ graphicSlider.addEventListener(
     function(event){
 
         if(!isDragging){
+
             return;
+
         }
 
         const difference =
             event.clientX - startX;
 
-        if(Math.abs(difference) > 6){
+        if(
+            Math.abs(difference) > 6
+        ){
 
             moved = true;
 
         }
 
         position =
-            startPosition + difference;
+            startPosition +
+            difference;
 
         normalizePosition();
 
@@ -1981,9 +2316,7 @@ graphicSlider.addEventListener(
 );
 
 
-/* =========================
-   FINISH DRAG
-========================= */
+/* FINISH DRAG */
 
 function finishGraphicDrag(){
 
@@ -1996,9 +2329,7 @@ function finishGraphicDrag(){
 }
 
 
-/* =========================
-   POINTER UP
-========================= */
+/* POINTER UP */
 
 graphicSlider.addEventListener(
     'pointerup',
@@ -2010,9 +2341,7 @@ graphicSlider.addEventListener(
 );
 
 
-/* =========================
-   POINTER CANCEL
-========================= */
+/* POINTER CANCEL */
 
 graphicSlider.addEventListener(
     'pointercancel',
@@ -2024,9 +2353,9 @@ graphicSlider.addEventListener(
 );
 
 
-/* =========================
+/* =========================================================
    GRAPHIC ART ZOOM
-========================= */
+========================================================= */
 
 const graphicLightbox =
     document.getElementById(
@@ -2061,7 +2390,9 @@ graphicCards.forEach(card => {
             }
 
             const image =
-                card.querySelector('img');
+                card.querySelector(
+                    'img'
+                );
 
             isDragging = true;
 
@@ -2078,9 +2409,7 @@ graphicCards.forEach(card => {
 });
 
 
-/* =========================
-   CLOSE X
-========================= */
+/* CLOSE X */
 
 graphicLightboxClose.addEventListener(
     'click',
@@ -2092,9 +2421,7 @@ graphicLightboxClose.addEventListener(
 );
 
 
-/* =========================
-   CLOSE OUTSIDE
-========================= */
+/* CLOSE OUTSIDE */
 
 graphicLightbox.addEventListener(
     'click',
@@ -2113,9 +2440,7 @@ graphicLightbox.addEventListener(
 );
 
 
-/* =========================
-   CLOSE FUNCTION
-========================= */
+/* CLOSE FUNCTION */
 
 function closeGraphicLightbox(){
 
@@ -2130,9 +2455,7 @@ function closeGraphicLightbox(){
 }
 
 
-/* =========================
-   ESC KEY
-========================= */
+/* ESC KEY */
 
 document.addEventListener(
     'keydown',
