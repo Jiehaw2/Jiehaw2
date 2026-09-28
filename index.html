@@ -348,6 +348,57 @@ nav{
 }
 
 /* =========================
+   GRAPHIC ARTS
+========================= */
+
+.graphic-arts{
+    background:#070707;
+}
+
+.graphic-arts-slider{
+    width:100%;
+    overflow:hidden;
+    position:relative;
+}
+
+.graphic-arts-track{
+    display:flex;
+    width:max-content;
+    gap:20px;
+    animation:graphicCircular 55s linear infinite;
+}
+
+.graphic-card{
+    flex:0 0 320px;
+    height:400px;
+    border-radius:10px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.08);
+    background:#111;
+}
+
+.graphic-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.graphic-arts-track:hover{
+    animation-play-state:paused;
+}
+
+@keyframes graphicCircular{
+    from{
+        transform:translateX(0);
+    }
+
+    to{
+        transform:translateX(calc(-50% - 10px));
+    }
+}
+
+/* =========================
    SERVICES
 ========================= */
 
@@ -705,6 +756,11 @@ footer{
         height:120px;
     }
 
+    .graphic-card{
+        flex:0 0 240px;
+        height:300px;
+    }
+
     .footer-inner{
         flex-direction:column;
         gap:10px;
@@ -740,6 +796,11 @@ footer{
 
     .tools-grid{
         grid-template-columns:repeat(2,1fr);
+    }
+
+    .graphic-card{
+        flex:0 0 210px;
+        height:270px;
     }
 
 }
@@ -900,10 +961,10 @@ footer{
             >
 
                 <img
-    src="silent.jpg"
-    alt="Facebook video thumbnail"
-    style="width:100%; height:100%; object-fit:cover;"
->
+                    src="silent.jpg"
+                    alt="Facebook video thumbnail"
+                    style="width:100%; height:100%; object-fit:cover;"
+                >
 
                 <div class="project-overlay">
                     <div class="project-label">
@@ -968,6 +1029,192 @@ footer{
                 </div>
 
             </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     GRAPHIC ARTS
+========================= -->
+
+<section class="section graphic-arts" id="graphic-arts">
+
+    <div class="container">
+
+        <div class="section-label reveal">
+            Graphic Design
+        </div>
+
+        <h2 class="section-title reveal">
+            Selected graphics.
+        </h2>
+
+    </div>
+
+    <div class="graphic-arts-slider">
+
+        <div class="graphic-arts-track">
+
+            <!-- ORIGINAL SET -->
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art1.jpg" alt="Graphic design 1">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art2.jpg" alt="Graphic design 2">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art3.jpg" alt="Graphic design 3">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art4.jpg" alt="Graphic design 4">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art5.jpg" alt="Graphic design 5">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art6.jpg" alt="Graphic design 6">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art7.jpg" alt="Graphic design 7">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art8.jpg" alt="Graphic design 8">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art9.jpg" alt="Graphic design 9">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art10.jpg" alt="Graphic design 10">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art11.jpg" alt="Graphic design 11">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art12.jpg" alt="Graphic design 12">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art13.jpg" alt="Graphic design 13">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art14.jpg" alt="Graphic design 14">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art15.jpg" alt="Graphic design 15">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art16.jpg" alt="Graphic design 16">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art17.jpg" alt="Graphic design 17">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art18.jpg" alt="Graphic design 18">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art19.jpg" alt="Graphic design 19">
+            </div>
+
+
+            <!-- DUPLICATE SET FOR SEAMLESS LOOP -->
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art1.jpg" alt="Graphic design 1">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art2.jpg" alt="Graphic design 2">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art3.jpg" alt="Graphic design 3">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art4.jpg" alt="Graphic design 4">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art5.jpg" alt="Graphic design 5">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art6.jpg" alt="Graphic design 6">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art7.jpg" alt="Graphic design 7">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art8.jpg" alt="Graphic design 8">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art9.jpg" alt="Graphic design 9">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art10.jpg" alt="Graphic design 10">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art11.jpg" alt="Graphic design 11">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art12.jpg" alt="Graphic design 12">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art13.jpg" alt="Graphic design 13">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art14.jpg" alt="Graphic design 14">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art15.jpg" alt="Graphic design 15">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art16.jpg" alt="Graphic design 16">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art17.jpg" alt="Graphic design 17">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art18.jpg" alt="Graphic design 18">
+            </div>
+
+            <div class="graphic-card">
+                <img src="graphic-arts/art19.jpg" alt="Graphic design 19">
+            </div>
 
         </div>
 
