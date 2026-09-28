@@ -359,13 +359,22 @@ nav{
     width:100%;
     overflow:hidden;
     position:relative;
+    cursor:grab;
+    touch-action:pan-y;
+    user-select:none;
+    -webkit-user-select:none;
+}
+
+.graphic-arts-slider.dragging{
+    cursor:grabbing;
 }
 
 .graphic-arts-track{
     display:flex;
     width:max-content;
     gap:20px;
-    animation:graphicCircular 55s linear infinite;
+    transform:translateX(0);
+    will-change:transform;
 }
 
 .graphic-card{
@@ -375,6 +384,13 @@ nav{
     overflow:hidden;
     border:1px solid rgba(255,255,255,.08);
     background:#111;
+    cursor:pointer;
+    transition:transform .3s ease, border-color .3s ease;
+}
+
+.graphic-card:hover{
+    transform:scale(1.03);
+    border-color:rgba(255,255,255,.25);
 }
 
 .graphic-card img{
@@ -382,20 +398,72 @@ nav{
     height:100%;
     object-fit:cover;
     display:block;
+    pointer-events:none;
+    user-select:none;
+    -webkit-user-drag:none;
 }
 
-.graphic-arts-track:hover{
-    animation-play-state:paused;
+/* =========================
+   GRAPHIC ART ZOOM
+========================= */
+
+.graphic-lightbox{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:10000;
+    background:rgba(0,0,0,.94);
+    align-items:center;
+    justify-content:center;
+    padding:30px;
 }
 
-@keyframes graphicCircular{
+.graphic-lightbox.active{
+    display:flex;
+}
+
+.graphic-lightbox img{
+    max-width:90vw;
+    max-height:90vh;
+    width:auto;
+    height:auto;
+    object-fit:contain;
+    border-radius:8px;
+    box-shadow:0 20px 80px rgba(0,0,0,.8);
+    animation:graphicZoom .3s ease;
+}
+
+@keyframes graphicZoom{
     from{
-        transform:translateX(0);
+        opacity:0;
+        transform:scale(.85);
     }
 
     to{
-        transform:translateX(calc(-50% - 10px));
+        opacity:1;
+        transform:scale(1);
     }
+}
+
+.graphic-lightbox-close{
+    position:absolute;
+    top:20px;
+    right:30px;
+    width:45px;
+    height:45px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:38px;
+    color:#fff;
+    cursor:pointer;
+    z-index:10001;
+    transition:.3s;
+}
+
+.graphic-lightbox-close:hover{
+    transform:scale(1.1);
+    color:#aaa;
 }
 
 /* =========================
@@ -682,6 +750,7 @@ footer{
         opacity:0;
         transform:translateY(30px);
     }
+
     to{
         opacity:1;
         transform:translateY(0);
@@ -761,10 +830,25 @@ footer{
         height:300px;
     }
 
+    .graphic-lightbox{
+        padding:20px;
+    }
+
+    .graphic-lightbox img{
+        max-width:94vw;
+        max-height:85vh;
+    }
+
+    .graphic-lightbox-close{
+        top:12px;
+        right:18px;
+    }
+
     .footer-inner{
         flex-direction:column;
         gap:10px;
     }
+
 }
 
 @media(max-width:500px){
@@ -815,6 +899,7 @@ footer{
 ========================= -->
 
 <nav>
+
     <div class="nav-inner">
 
         <a href="#home" class="logo">
@@ -822,14 +907,21 @@ footer{
         </a>
 
         <div class="nav-links">
+
             <a href="#work">Work</a>
+
             <a href="#services">Services</a>
+
             <a href="#process">Process</a>
+
             <a href="#tools">Tools</a>
+
             <a href="#contact">Contact</a>
+
         </div>
 
     </div>
+
 </nav>
 
 
@@ -840,6 +932,7 @@ footer{
 <section class="hero" id="home">
 
     <div class="bg-image"></div>
+
     <div class="bg-overlay"></div>
 
     <div class="container">
@@ -886,6 +979,7 @@ footer{
 <section class="section work" id="work">
 
     <div class="bg-image"></div>
+
     <div class="bg-overlay"></div>
 
     <div class="container">
@@ -900,8 +994,6 @@ footer{
 
         <div class="work-grid">
 
-            <!-- PROJECT 1 -->
-
             <a
                 href="https://youtu.be/q5lP2DyGKbo"
                 target="_blank"
@@ -914,6 +1006,7 @@ footer{
                 >
 
                 <div class="project-overlay">
+
                     <div class="project-label">
                         Karen Reyes
                     </div>
@@ -921,12 +1014,11 @@ footer{
                     <div class="project-title">
                         Travel Vlog Editing→
                     </div>
+
                 </div>
 
             </a>
 
-
-            <!-- PROJECT 2 -->
 
             <a
                 href="https://youtu.be/ki6M1b5R8ys"
@@ -940,6 +1032,7 @@ footer{
                 >
 
                 <div class="project-overlay">
+
                     <div class="project-label">
                         Yolove (Daks or Juts)
                     </div>
@@ -947,12 +1040,11 @@ footer{
                     <div class="project-title">
                         Interview Video Editing→
                     </div>
+
                 </div>
 
             </a>
 
-
-            <!-- PROJECT 3 -->
 
             <a
                 href="https://www.facebook.com/share/v/19YVSMk3F3/"
@@ -967,6 +1059,7 @@ footer{
                 >
 
                 <div class="project-overlay">
+
                     <div class="project-label">
                         Silent Sanctuary
                     </div>
@@ -974,12 +1067,11 @@ footer{
                     <div class="project-title">
                         Music Promotional Video Editing→
                     </div>
+
                 </div>
 
             </a>
 
-
-            <!-- PROJECT 4 -->
 
             <a
                 href="https://youtu.be/PAApdWAYwlY"
@@ -993,6 +1085,7 @@ footer{
                 >
 
                 <div class="project-overlay">
+
                     <div class="project-label">
                         Jasmin Supetran
                     </div>
@@ -1000,12 +1093,11 @@ footer{
                     <div class="project-title">
                         Vlog Editing→
                     </div>
+
                 </div>
 
             </a>
 
-
-            <!-- PROJECT 5 -->
 
             <a
                 href="https://youtu.be/SYHTNp8abIY"
@@ -1019,6 +1111,7 @@ footer{
                 >
 
                 <div class="project-overlay">
+
                     <div class="project-label">
                         Jazzyventure Vlog
                     </div>
@@ -1026,6 +1119,7 @@ footer{
                     <div class="project-title">
                         Long Form Video Editing→
                     </div>
+
                 </div>
 
             </a>
@@ -1055,165 +1149,166 @@ footer{
 
     </div>
 
-    <div class="graphic-arts-slider">
 
-        <div class="graphic-arts-track">
+    <div class="graphic-arts-slider" id="graphicSlider">
+
+        <div class="graphic-arts-track" id="graphicTrack">
 
             <!-- ORIGINAL SET -->
 
             <div class="graphic-card">
-                <img src="art1.jpeg" alt="Graphic design 1">
+                <img src="art1.jpeg" alt="Graphic design 1" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art2.jpeg" alt="Graphic design 2">
+                <img src="art2.jpeg" alt="Graphic design 2" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art3.jpeg" alt="Graphic design 3">
+                <img src="art3.jpeg" alt="Graphic design 3" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art4.jpeg" alt="Graphic design 4">
+                <img src="art4.jpeg" alt="Graphic design 4" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art5.jpeg" alt="Graphic design 5">
+                <img src="art5.jpeg" alt="Graphic design 5" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art6.jpeg" alt="Graphic design 6">
+                <img src="art6.jpeg" alt="Graphic design 6" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art7.jpeg" alt="Graphic design 7">
+                <img src="art7.jpeg" alt="Graphic design 7" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art8.jpeg" alt="Graphic design 8">
+                <img src="art8.jpeg" alt="Graphic design 8" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art9.jpeg" alt="Graphic design 9">
+                <img src="art9.jpeg" alt="Graphic design 9" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art10.jpeg" alt="Graphic design 10">
+                <img src="art10.jpeg" alt="Graphic design 10" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art11.jpeg" alt="Graphic design 11">
+                <img src="art11.jpeg" alt="Graphic design 11" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art12.jpeg" alt="Graphic design 12">
+                <img src="art12.jpeg" alt="Graphic design 12" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art13.jpeg" alt="Graphic design 13">
+                <img src="art13.jpeg" alt="Graphic design 13" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art14.jpeg" alt="Graphic design 14">
+                <img src="art14.jpeg" alt="Graphic design 14" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art15.jpeg" alt="Graphic design 15">
+                <img src="art15.jpeg" alt="Graphic design 15" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art16.jpeg" alt="Graphic design 16">
+                <img src="art16.jpeg" alt="Graphic design 16" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art17.jpeg" alt="Graphic design 17">
+                <img src="art17.jpeg" alt="Graphic design 17" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art18.jpeg" alt="Graphic design 18">
+                <img src="art18.jpeg" alt="Graphic design 18" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art19.jpeg" alt="Graphic design 19">
+                <img src="art19.jpeg" alt="Graphic design 19" draggable="false">
             </div>
 
 
-            <!-- DUPLICATE SET FOR SEAMLESS LOOP -->
+            <!-- DUPLICATE SET -->
 
             <div class="graphic-card">
-                <img src="art1.jpeg" alt="Graphic design 1">
+                <img src="art1.jpeg" alt="Graphic design 1" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art2.jpeg" alt="Graphic design 2">
+                <img src="art2.jpeg" alt="Graphic design 2" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art3.jpeg" alt="Graphic design 3">
+                <img src="art3.jpeg" alt="Graphic design 3" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art4.jpeg" alt="Graphic design 4">
+                <img src="art4.jpeg" alt="Graphic design 4" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art5.jpeg" alt="Graphic design 5">
+                <img src="art5.jpeg" alt="Graphic design 5" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art6.jpeg" alt="Graphic design 6">
+                <img src="art6.jpeg" alt="Graphic design 6" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art7.jpeg" alt="Graphic design 7">
+                <img src="art7.jpeg" alt="Graphic design 7" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art8.jpeg" alt="Graphic design 8">
+                <img src="art8.jpeg" alt="Graphic design 8" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art9.jpeg" alt="Graphic design 9">
+                <img src="art9.jpeg" alt="Graphic design 9" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art10.jpeg" alt="Graphic design 10">
+                <img src="art10.jpeg" alt="Graphic design 10" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art11.jpeg" alt="Graphic design 11">
+                <img src="art11.jpeg" alt="Graphic design 11" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art12.jpeg" alt="Graphic design 12">
+                <img src="art12.jpeg" alt="Graphic design 12" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art13.jpeg" alt="Graphic design 13">
+                <img src="art13.jpeg" alt="Graphic design 13" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art14.jpeg" alt="Graphic design 14">
+                <img src="art14.jpeg" alt="Graphic design 14" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art15.jpeg" alt="Graphic design 15">
+                <img src="art15.jpeg" alt="Graphic design 15" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art16.jpeg" alt="Graphic design 16">
+                <img src="art16.jpeg" alt="Graphic design 16" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art17.jpeg" alt="Graphic design 17">
+                <img src="art17.jpeg" alt="Graphic design 17" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art18.jpeg" alt="Graphic design 18">
+                <img src="art18.jpeg" alt="Graphic design 18" draggable="false">
             </div>
 
             <div class="graphic-card">
-                <img src="art19.jpeg" alt="Graphic design 19">
+                <img src="art19.jpeg" alt="Graphic design 19" draggable="false">
             </div>
 
         </div>
@@ -1224,12 +1319,35 @@ footer{
 
 
 <!-- =========================
+     GRAPHIC ART LIGHTBOX
+========================= -->
+
+<div class="graphic-lightbox" id="graphicLightbox">
+
+    <div
+        class="graphic-lightbox-close"
+        id="graphicLightboxClose"
+    >
+        &times;
+    </div>
+
+    <img
+        id="graphicLightboxImage"
+        src=""
+        alt="Graphic Design Preview"
+    >
+
+</div>
+
+
+<!-- =========================
      SERVICES
 ========================= -->
 
 <section class="section services" id="services">
 
     <div class="bg-image"></div>
+
     <div class="bg-overlay"></div>
 
     <div class="container">
@@ -1332,6 +1450,7 @@ footer{
 <section class="section process" id="process">
 
     <div class="bg-image"></div>
+
     <div class="bg-overlay"></div>
 
     <div class="container">
@@ -1498,6 +1617,7 @@ footer{
 <section class="section about">
 
     <div class="bg-image"></div>
+
     <div class="bg-overlay"></div>
 
     <div class="container">
@@ -1530,6 +1650,7 @@ footer{
 <section class="section contact" id="contact">
 
     <div class="bg-image"></div>
+
     <div class="bg-overlay"></div>
 
     <div class="container">
@@ -1603,6 +1724,10 @@ footer{
 
 <script>
 
+/* =========================
+   REVEAL ANIMATION
+========================= */
+
 const reveals = document.querySelectorAll('.reveal');
 
 const observer = new IntersectionObserver(
@@ -1627,6 +1752,437 @@ const observer = new IntersectionObserver(
 reveals.forEach(element => {
     observer.observe(element);
 });
+
+
+/* =========================
+   GRAPHIC ART SLIDER
+   SLOW AUTO + MANUAL DRAG
+========================= */
+
+const graphicSlider =
+    document.getElementById('graphicSlider');
+
+const graphicTrack =
+    document.getElementById('graphicTrack');
+
+const graphicCards =
+    document.querySelectorAll('.graphic-card');
+
+let position = 0;
+
+let lastTime = performance.now();
+
+let isDragging = false;
+
+let startX = 0;
+
+let startPosition = 0;
+
+let moved = false;
+
+let animationFrame;
+
+
+/*
+   SPEED
+
+   Lower number = slower
+   Higher number = faster
+
+   This is intentionally slow.
+*/
+
+const autoSpeed = 0.035;
+
+
+/*
+   Calculate the width of the
+   first complete set of 19 graphics.
+*/
+
+function getLoopWidth(){
+
+    const firstCard =
+        graphicCards[0];
+
+    if(!firstCard){
+        return 0;
+    }
+
+    const cardWidth =
+        firstCard.getBoundingClientRect().width;
+
+    const gap = 20;
+
+    return (cardWidth + gap) * 19;
+
+}
+
+
+/*
+   Keep the position inside
+   the first/second set.
+
+   This creates the infinite loop.
+*/
+
+function normalizePosition(){
+
+    const loopWidth =
+        getLoopWidth();
+
+    if(loopWidth <= 0){
+        return;
+    }
+
+    while(position <= -loopWidth){
+
+        position += loopWidth;
+
+    }
+
+    while(position > 0){
+
+        position -= loopWidth;
+
+    }
+
+}
+
+
+/*
+   Apply position.
+*/
+
+function updateGraphicPosition(){
+
+    graphicTrack.style.transform =
+        `translate3d(${position}px,0,0)`;
+
+}
+
+
+/*
+   AUTOMATIC MOVEMENT
+
+   This continues even while
+   the user is interacting.
+*/
+
+function animateGraphics(currentTime){
+
+    const delta =
+        currentTime - lastTime;
+
+    lastTime = currentTime;
+
+
+    if(!isDragging){
+
+        position -=
+            autoSpeed * delta;
+
+        normalizePosition();
+
+        updateGraphicPosition();
+
+    }
+
+
+    animationFrame =
+        requestAnimationFrame(
+            animateGraphics
+        );
+
+}
+
+
+animationFrame =
+    requestAnimationFrame(
+        animateGraphics
+    );
+
+
+/* =========================
+   MANUAL DRAG
+========================= */
+
+graphicSlider.addEventListener(
+    'pointerdown',
+    function(event){
+
+        /*
+           Only left mouse button.
+        */
+
+        if(
+            event.pointerType === 'mouse' &&
+            event.button !== 0
+        ){
+
+            return;
+
+        }
+
+
+        isDragging = true;
+
+        moved = false;
+
+        startX =
+            event.clientX;
+
+        startPosition =
+            position;
+
+
+        graphicSlider.classList.add(
+            'dragging'
+        );
+
+
+        graphicSlider.setPointerCapture(
+            event.pointerId
+        );
+
+    }
+);
+
+
+graphicSlider.addEventListener(
+    'pointermove',
+    function(event){
+
+        if(!isDragging){
+            return;
+        }
+
+
+        const difference =
+            event.clientX - startX;
+
+
+        /*
+           If movement is enough,
+           this is a real drag.
+        */
+
+        if(Math.abs(difference) > 6){
+
+            moved = true;
+
+        }
+
+
+        /*
+           Manual movement.
+
+           The automatic animation is
+           temporarily overridden by
+           the user's finger/mouse.
+        */
+
+        position =
+            startPosition + difference;
+
+
+        normalizePosition();
+
+        updateGraphicPosition();
+
+    }
+);
+
+
+function finishGraphicDrag(){
+
+    if(!isDragging){
+        return;
+    }
+
+
+    isDragging = false;
+
+    graphicSlider.classList.remove(
+        'dragging'
+    );
+
+}
+
+
+/* =========================
+   POINTER UP
+========================= */
+
+graphicSlider.addEventListener(
+    'pointerup',
+    function(){
+
+        finishGraphicDrag();
+
+    }
+);
+
+
+/* =========================
+   POINTER CANCEL
+========================= */
+
+graphicSlider.addEventListener(
+    'pointercancel',
+    function(){
+
+        finishGraphicDrag();
+
+    }
+);
+
+
+/* =========================
+   GRAPHIC ART ZOOM
+========================= */
+
+const graphicLightbox =
+    document.getElementById(
+        'graphicLightbox'
+    );
+
+const graphicLightboxImage =
+    document.getElementById(
+        'graphicLightboxImage'
+    );
+
+const graphicLightboxClose =
+    document.getElementById(
+        'graphicLightboxClose'
+    );
+
+
+graphicCards.forEach(card => {
+
+    card.addEventListener(
+        'click',
+        function(event){
+
+            /*
+               Don't zoom when the user
+               actually dragged the slider.
+            */
+
+            if(moved){
+
+                event.preventDefault();
+
+                return;
+
+            }
+
+
+            const image =
+                card.querySelector('img');
+
+
+            /*
+               Stop auto movement
+               while viewing.
+            */
+
+            isDragging = true;
+
+
+            graphicLightboxImage.src =
+                image.src;
+
+
+            graphicLightbox.classList.add(
+                'active'
+            );
+
+        }
+    );
+
+});
+
+
+/* =========================
+   CLOSE X
+========================= */
+
+graphicLightboxClose.addEventListener(
+    'click',
+    function(){
+
+        closeGraphicLightbox();
+
+    }
+);
+
+
+/* =========================
+   CLOSE OUTSIDE
+========================= */
+
+graphicLightbox.addEventListener(
+    'click',
+    function(event){
+
+        if(
+            event.target ===
+            graphicLightbox
+        ){
+
+            closeGraphicLightbox();
+
+        }
+
+    }
+);
+
+
+/* =========================
+   CLOSE FUNCTION
+========================= */
+
+function closeGraphicLightbox(){
+
+    graphicLightbox.classList.remove(
+        'active'
+    );
+
+
+    graphicLightboxImage.src = '';
+
+
+    /*
+       Resume automatic scrolling.
+    */
+
+    isDragging = false;
+
+}
+
+
+/* =========================
+   ESC KEY
+========================= */
+
+document.addEventListener(
+    'keydown',
+    function(event){
+
+        if(
+            event.key === 'Escape' &&
+            graphicLightbox.classList.contains(
+                'active'
+            )
+        ){
+
+            closeGraphicLightbox();
+
+        }
+
+    }
+);
 
 </script>
 
