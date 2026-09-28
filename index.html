@@ -1124,6 +1124,36 @@ footer{
 
             </a>
 
+
+            <!-- =========================
+                 KRISTA - NEW VIDEO
+            ========================= -->
+
+            <a
+                href="https://www.facebook.com/share/r/1KVEDYZEEA/"
+                target="_blank"
+                class="project reveal"
+            >
+
+                <img
+                    src="krista.jpg"
+                    alt="Krista Video Editing Project"
+                >
+
+                <div class="project-overlay">
+
+                    <div class="project-label">
+                        Krista Miller
+                    </div>
+
+                    <div class="project-title">
+                        Short Form/Portrait Editing→
+                    </div>
+
+                </div>
+
+            </a>
+
         </div>
 
     </div>
@@ -1780,24 +1810,16 @@ let startPosition = 0;
 
 let moved = false;
 
-let animationFrame;
-
 
 /*
-   SPEED
-
-   Lower number = slower
-   Higher number = faster
-
-   This is intentionally slow.
+   SLOW AUTO SCROLL
 */
 
 const autoSpeed = 0.035;
 
 
 /*
-   Calculate the width of the
-   first complete set of 19 graphics.
+   GET LOOP WIDTH
 */
 
 function getLoopWidth(){
@@ -1820,10 +1842,7 @@ function getLoopWidth(){
 
 
 /*
-   Keep the position inside
-   the first/second set.
-
-   This creates the infinite loop.
+   INFINITE LOOP
 */
 
 function normalizePosition(){
@@ -1851,7 +1870,7 @@ function normalizePosition(){
 
 
 /*
-   Apply position.
+   UPDATE POSITION
 */
 
 function updateGraphicPosition(){
@@ -1863,10 +1882,7 @@ function updateGraphicPosition(){
 
 
 /*
-   AUTOMATIC MOVEMENT
-
-   This continues even while
-   the user is interacting.
+   AUTO SCROLL
 */
 
 function animateGraphics(currentTime){
@@ -1875,7 +1891,6 @@ function animateGraphics(currentTime){
         currentTime - lastTime;
 
     lastTime = currentTime;
-
 
     if(!isDragging){
 
@@ -1888,19 +1903,15 @@ function animateGraphics(currentTime){
 
     }
 
-
-    animationFrame =
-        requestAnimationFrame(
-            animateGraphics
-        );
-
-}
-
-
-animationFrame =
     requestAnimationFrame(
         animateGraphics
     );
+
+}
+
+requestAnimationFrame(
+    animateGraphics
+);
 
 
 /* =========================
@@ -1911,10 +1922,6 @@ graphicSlider.addEventListener(
     'pointerdown',
     function(event){
 
-        /*
-           Only left mouse button.
-        */
-
         if(
             event.pointerType === 'mouse' &&
             event.button !== 0
@@ -1923,7 +1930,6 @@ graphicSlider.addEventListener(
             return;
 
         }
-
 
         isDragging = true;
 
@@ -1935,11 +1941,9 @@ graphicSlider.addEventListener(
         startPosition =
             position;
 
-
         graphicSlider.classList.add(
             'dragging'
         );
-
 
         graphicSlider.setPointerCapture(
             event.pointerId
@@ -1957,15 +1961,8 @@ graphicSlider.addEventListener(
             return;
         }
 
-
         const difference =
             event.clientX - startX;
-
-
-        /*
-           If movement is enough,
-           this is a real drag.
-        */
 
         if(Math.abs(difference) > 6){
 
@@ -1973,18 +1970,8 @@ graphicSlider.addEventListener(
 
         }
 
-
-        /*
-           Manual movement.
-
-           The automatic animation is
-           temporarily overridden by
-           the user's finger/mouse.
-        */
-
         position =
             startPosition + difference;
-
 
         normalizePosition();
 
@@ -1994,12 +1981,11 @@ graphicSlider.addEventListener(
 );
 
 
+/* =========================
+   FINISH DRAG
+========================= */
+
 function finishGraphicDrag(){
-
-    if(!isDragging){
-        return;
-    }
-
 
     isDragging = false;
 
@@ -2064,35 +2050,23 @@ graphicCards.forEach(card => {
         'click',
         function(event){
 
-            /*
-               Don't zoom when the user
-               actually dragged the slider.
-            */
-
             if(moved){
 
                 event.preventDefault();
+
+                moved = false;
 
                 return;
 
             }
 
-
             const image =
                 card.querySelector('img');
 
-
-            /*
-               Stop auto movement
-               while viewing.
-            */
-
             isDragging = true;
-
 
             graphicLightboxImage.src =
                 image.src;
-
 
             graphicLightbox.classList.add(
                 'active'
@@ -2149,13 +2123,7 @@ function closeGraphicLightbox(){
         'active'
     );
 
-
     graphicLightboxImage.src = '';
-
-
-    /*
-       Resume automatic scrolling.
-    */
 
     isDragging = false;
 
