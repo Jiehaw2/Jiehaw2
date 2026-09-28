@@ -4,111 +4,135 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>JieHaw2 — Video Editor & Graphic Designer</title>
+<title>JieHaw2 | Video Editor</title>
 
-<meta name="description"
-content="JieHaw2 — Video Editor & Graphic Designer. Video editing, thumbnails, posters and social media graphics.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
-/* =========================
-   RESET
-========================= */
-
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 html{
-  scroll-behavior:smooth;
+    scroll-behavior:smooth;
 }
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:#080808;
-  color:#fff;
-  line-height:1.6;
-  overflow-x:hidden;
+    font-family:'Inter',sans-serif;
+    background:#050505;
+    color:#fff;
+    overflow-x:hidden;
 }
 
 a{
-  color:inherit;
-  text-decoration:none;
+    color:inherit;
+    text-decoration:none;
+}
+
+section{
+    position:relative;
+    overflow:hidden;
+}
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
 }
 
 /* =========================
-   NAVIGATION
+   NAVBAR
 ========================= */
 
 nav{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  z-index:1000;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:76px;
+    display:flex;
+    align-items:center;
+    z-index:999;
+    background:rgba(5,5,5,.72);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(255,255,255,.07);
+}
 
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-
-  padding:20px 7%;
-
-  background:rgba(8,8,8,.78);
-  backdrop-filter:blur(16px);
-
-  border-bottom:1px solid rgba(255,255,255,.06);
+.nav-inner{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
 .logo{
-  font-size:22px;
-  font-weight:800;
-  letter-spacing:-1px;
+    font-size:22px;
+    font-weight:800;
+    letter-spacing:-1px;
 }
 
 .logo span{
-  color:#777;
+    opacity:.45;
 }
 
 .nav-links{
-  display:flex;
-  gap:28px;
-  list-style:none;
+    display:flex;
+    gap:28px;
+    font-size:13px;
+    color:#aaa;
 }
 
 .nav-links a{
-  position:relative;
-
-  color:#999;
-
-  font-size:14px;
-
-  transition:.3s ease;
+    transition:.3s;
 }
 
 .nav-links a:hover{
-  color:#fff;
+    color:#fff;
 }
 
-.nav-links a::after{
-  content:"";
+/* =========================
+   GENERAL BACKGROUND
+========================= */
 
-  position:absolute;
-
-  left:0;
-  bottom:-6px;
-
-  width:0;
-  height:1px;
-
-  background:#fff;
-
-  transition:.3s ease;
+.bg-image{
+    position:absolute;
+    inset:0;
+    background-size:cover;
+    background-position:center;
+    z-index:-3;
+    transform:scale(1.04);
 }
 
-.nav-links a:hover::after{
-  width:100%;
+.bg-overlay{
+    position:absolute;
+    inset:0;
+    z-index:-2;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(5,5,5,.62),
+            rgba(5,5,5,.88)
+        );
+}
+
+.bg-overlay-heavy{
+    position:absolute;
+    inset:0;
+    z-index:-2;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(5,5,5,.94),
+            rgba(5,5,5,.65),
+            rgba(5,5,5,.9)
+        );
 }
 
 /* =========================
@@ -116,246 +140,211 @@ nav{
 ========================= */
 
 .hero{
-  min-height:100vh;
-
-  display:flex;
-  align-items:center;
-
-  padding:140px 7% 100px;
-
-  position:relative;
-
-  overflow:hidden;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding-top:76px;
 }
 
-.hero::before{
-  content:"";
+.hero .bg-image{
+    background-image:url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=2200&q=85");
+}
 
-  position:absolute;
-
-  width:650px;
-  height:650px;
-
-  right:-250px;
-  top:-250px;
-
-  background:radial-gradient(
-    circle,
-    rgba(255,255,255,.09),
-    transparent 70%
-  );
-
-  animation:glowMove 8s ease-in-out infinite;
+.hero .bg-overlay{
+    background:
+        linear-gradient(
+            90deg,
+            rgba(5,5,5,.94) 0%,
+            rgba(5,5,5,.78) 45%,
+            rgba(5,5,5,.55) 100%
+        );
 }
 
 .hero-content{
-  max-width:900px;
-
-  position:relative;
-
-  z-index:2;
-
-  animation:heroIn 1s ease forwards;
+    max-width:850px;
+    animation:heroIn 1.1s ease forwards;
 }
 
 .eyebrow{
-  color:#777;
-
-  text-transform:uppercase;
-
-  font-size:12px;
-
-  letter-spacing:4px;
-
-  margin-bottom:22px;
+    color:#aaa;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:3px;
+    margin-bottom:25px;
 }
 
 .hero h1{
-  font-size:clamp(55px,9vw,120px);
-
-  line-height:.95;
-
-  letter-spacing:-7px;
-
-  margin-bottom:30px;
+    font-size:clamp(50px,8vw,100px);
+    line-height:.95;
+    letter-spacing:-5px;
+    max-width:900px;
 }
 
 .hero h1 span{
-  color:#666;
+    color:#777;
 }
 
 .hero p{
-  max-width:650px;
-
-  color:#999;
-
-  font-size:18px;
-
-  margin-bottom:40px;
+    max-width:650px;
+    margin-top:30px;
+    color:#aaa;
+    font-size:18px;
+    line-height:1.7;
 }
 
 .hero-buttons{
-  display:flex;
-
-  gap:14px;
-
-  flex-wrap:wrap;
+    display:flex;
+    gap:15px;
+    margin-top:35px;
+    flex-wrap:wrap;
 }
 
-.hero-button{
-  display:inline-flex;
-
-  align-items:center;
-
-  gap:12px;
-
-  padding:15px 25px;
-
-  border:1px solid #444;
-
-  border-radius:100px;
-
-  background:rgba(255,255,255,.03);
-
-  transition:.35s ease;
+.btn{
+    padding:15px 24px;
+    border-radius:5px;
+    font-size:13px;
+    font-weight:600;
+    transition:.3s;
 }
 
-.hero-button:hover{
-  background:#fff;
-
-  color:#000;
-
-  transform:translateY(-5px);
-
-  box-shadow:
-    0 20px 50px rgba(255,255,255,.1);
+.btn-primary{
+    background:#fff;
+    color:#000;
 }
 
-.hero-button.secondary{
-  color:#aaa;
-
-  background:transparent;
+.btn-primary:hover{
+    transform:translateY(-3px);
+    background:#ddd;
 }
 
-.hero-button.secondary:hover{
-  color:#000;
+.btn-outline{
+    border:1px solid rgba(255,255,255,.25);
+    color:#fff;
+}
+
+.btn-outline:hover{
+    background:rgba(255,255,255,.08);
+    transform:translateY(-3px);
 }
 
 /* =========================
-   SECTIONS
+   SECTION HEADERS
 ========================= */
 
-section{
-  padding:120px 7%;
+.section{
+    padding:130px 0;
+}
 
-  border-top:
-    1px solid rgba(255,255,255,.06);
+.section-label{
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:3px;
+    color:#777;
+    margin-bottom:15px;
 }
 
 .section-title{
-  font-size:clamp(35px,5vw,65px);
-
-  letter-spacing:-3px;
-
-  margin-bottom:60px;
-}
-
-.section-title span{
-  color:#555;
+    font-size:clamp(35px,5vw,60px);
+    letter-spacing:-3px;
+    margin-bottom:55px;
 }
 
 /* =========================
    WORK
 ========================= */
 
-.projects{
-  display:grid;
+.work{
+    background:#070707;
+}
 
-  grid-template-columns:
-    repeat(2,1fr);
+.work .bg-image{
+    background-image:url("https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=2200&q=80");
+    opacity:.16;
+}
 
-  gap:25px;
+.work .bg-overlay{
+    background:linear-gradient(
+        180deg,
+        rgba(5,5,5,.95),
+        rgba(5,5,5,.85)
+    );
+}
+
+.work-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:25px;
 }
 
 .project{
-  position:relative;
-
-  overflow:hidden;
-
-  aspect-ratio:16/9;
-
-  border-radius:18px;
-
-  background:#111;
-
-  border:
-    1px solid rgba(255,255,255,.07);
-
-  transition:.5s ease;
+    position:relative;
+    aspect-ratio:16/10;
+    border-radius:10px;
+    overflow:hidden;
+    background:#111;
+    border:1px solid rgba(255,255,255,.08);
+    transition:.5s;
 }
 
 .project:hover{
-  transform:translateY(-10px);
-
-  border-color:#444;
-
-  box-shadow:
-    0 25px 70px rgba(0,0,0,.5);
+    transform:translateY(-8px);
+    border-color:rgba(255,255,255,.25);
 }
 
 .project img{
-  width:100%;
-  height:100%;
-
-  object-fit:cover;
-
-  display:block;
-
-  transition:.7s ease;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.6s;
 }
 
 .project:hover img{
-  transform:scale(1.07);
+    transform:scale(1.06);
 }
 
 .project-overlay{
-  position:absolute;
-
-  inset:0;
-
-  display:flex;
-
-  flex-direction:column;
-
-  justify-content:flex-end;
-
-  padding:30px;
-
-  background:
-    linear-gradient(
-      transparent 30%,
-      rgba(0,0,0,.92)
-    );
-
-  opacity:0;
-
-  transition:.4s ease;
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    padding:30px;
+    background:
+        linear-gradient(
+            transparent 35%,
+            rgba(0,0,0,.92)
+        );
 }
 
-.project:hover .project-overlay{
-  opacity:1;
+.project-label{
+    font-size:11px;
+    color:#aaa;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    margin-bottom:8px;
 }
 
-.project-overlay h3{
-  font-size:23px;
-
-  margin-bottom:5px;
+.project-title{
+    font-size:22px;
+    font-weight:600;
 }
 
-.project-overlay p{
-  color:#aaa;
+.facebook-project{
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+        radial-gradient(
+            circle at center,
+            #202020,
+            #090909 70%
+        );
+}
 
-  font-size:14px;
+.facebook-project span{
+    font-size:13px;
+    color:#777;
 }
 
 /* =========================
@@ -363,226 +352,103 @@ section{
 ========================= */
 
 .services{
-  display:grid;
+    background:#080808;
+}
 
-  grid-template-columns:
-    repeat(2,1fr);
+.services .bg-image{
+    background-image:url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2200&q=85");
+    opacity:.18;
+}
 
-  gap:18px;
+.services .bg-overlay{
+    background:rgba(5,5,5,.88);
+}
+
+.services-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
 }
 
 .service{
-  min-height:240px;
-
-  padding:35px;
-
-  border:
-    1px solid rgba(255,255,255,.08);
-
-  border-radius:18px;
-
-  background:#0d0d0d;
-
-  transition:.4s ease;
+    padding:40px;
+    min-height:230px;
+    border:1px solid rgba(255,255,255,.08);
+    background:rgba(10,10,10,.7);
+    backdrop-filter:blur(8px);
+    transition:.4s;
 }
 
 .service:hover{
-  transform:translateY(-8px);
-
-  background:#121212;
-
-  border-color:#444;
+    transform:translateY(-6px);
+    border-color:rgba(255,255,255,.22);
+    background:rgba(20,20,20,.8);
 }
 
 .service-number{
-  color:#555;
-
-  font-size:13px;
-
-  margin-bottom:45px;
+    font-size:12px;
+    color:#666;
+    margin-bottom:35px;
 }
 
 .service h3{
-  font-size:25px;
-
-  margin-bottom:12px;
+    font-size:25px;
+    margin-bottom:15px;
 }
 
 .service p{
-  color:#777;
-
-  font-size:15px;
-
-  max-width:500px;
+    color:#888;
+    line-height:1.7;
+    font-size:14px;
 }
 
 /* =========================
-   PRICING
-========================= */
-
-.pricing-wrapper{
-  display:grid;
-
-  grid-template-columns:
-    1.2fr .8fr;
-
-  gap:20px;
-
-  align-items:stretch;
-}
-
-.price-card{
-  padding:55px;
-
-  border:
-    1px solid rgba(255,255,255,.1);
-
-  border-radius:22px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #121212,
-      #0b0b0b
-    );
-
-  transition:.4s ease;
-}
-
-.price-card:hover{
-  transform:translateY(-8px);
-
-  border-color:#555;
-}
-
-.price-label{
-  color:#777;
-
-  text-transform:uppercase;
-
-  letter-spacing:3px;
-
-  font-size:12px;
-
-  margin-bottom:25px;
-}
-
-.price{
-  font-size:clamp(60px,8vw,100px);
-
-  line-height:1;
-
-  letter-spacing:-5px;
-
-  font-weight:800;
-}
-
-.price small{
-  font-size:20px;
-
-  letter-spacing:0;
-
-  color:#777;
-}
-
-.price-description{
-  color:#888;
-
-  margin-top:20px;
-
-  max-width:500px;
-}
-
-.examples{
-  padding:35px;
-
-  border:
-    1px solid rgba(255,255,255,.08);
-
-  border-radius:22px;
-
-  background:#0d0d0d;
-}
-
-.examples h3{
-  margin-bottom:25px;
-
-  font-size:18px;
-}
-
-.example-row{
-  display:flex;
-
-  justify-content:space-between;
-
-  padding:16px 0;
-
-  border-bottom:
-    1px solid rgba(255,255,255,.06);
-
-  color:#aaa;
-}
-
-.example-row:last-child{
-  border-bottom:0;
-}
-
-.example-row strong{
-  color:#fff;
-}
-
-/* =========================
-   HOW IT WORKS
+   PROCESS
 ========================= */
 
 .process{
-  display:grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
-  gap:18px;
+    background:#060606;
 }
 
-.process-card{
-  padding:30px 25px;
-
-  min-height:240px;
-
-  border:
-    1px solid rgba(255,255,255,.08);
-
-  border-radius:18px;
-
-  background:#0d0d0d;
-
-  transition:.4s ease;
+.process .bg-image{
+    background-image:url("https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=2200&q=85");
+    opacity:.14;
 }
 
-.process-card:hover{
-  transform:translateY(-8px);
-
-  border-color:#444;
+.process .bg-overlay{
+    background:rgba(5,5,5,.9);
 }
 
-.process-number{
-  font-size:12px;
-
-  color:#555;
-
-  margin-bottom:45px;
+.process-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    border-top:1px solid rgba(255,255,255,.1);
 }
 
-.process-card h3{
-  font-size:19px;
-
-  margin-bottom:12px;
+.step{
+    padding:35px 25px;
+    border-right:1px solid rgba(255,255,255,.1);
 }
 
-.process-card p{
-  color:#777;
+.step:last-child{
+    border-right:none;
+}
 
-  font-size:14px;
+.step-number{
+    color:#555;
+    font-size:12px;
+    margin-bottom:50px;
+}
+
+.step h3{
+    font-size:18px;
+    margin-bottom:12px;
+}
+
+.step p{
+    color:#777;
+    font-size:13px;
+    line-height:1.7;
 }
 
 /* =========================
@@ -590,91 +456,47 @@ section{
 ========================= */
 
 .tools{
-  display:grid;
+    background:#080808;
+}
 
-  grid-template-columns:
-    repeat(3,1fr);
-
-  gap:18px;
+.tools-grid{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:15px;
 }
 
 .tool{
-  min-height:190px;
-
-  display:flex;
-
-  flex-direction:column;
-
-  align-items:center;
-
-  justify-content:center;
-
-  gap:20px;
-
-  background:#0d0d0d;
-
-  border:
-    1px solid rgba(255,255,255,.08);
-
-  border-radius:18px;
-
-  transition:.4s ease;
+    height:150px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:15px;
+    border:1px solid rgba(255,255,255,.08);
+    background:#0c0c0c;
+    transition:.35s;
 }
 
 .tool:hover{
-  transform:
-    translateY(-8px)
-    scale(1.02);
-
-  background:#111;
-
-  border-color:#444;
-
-  box-shadow:
-    0 20px 50px rgba(0,0,0,.4);
+    transform:translateY(-6px);
+    background:#111;
+    border-color:rgba(255,255,255,.2);
 }
 
 .tool-icon{
-  width:68px;
-  height:68px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  border-radius:15px;
-
-  background:#171717;
-
-  border:
-    1px solid rgba(255,255,255,.08);
-
-  font-size:30px;
-
-  font-weight:900;
-
-  color:#fff;
-
-  transition:.4s ease;
-}
-
-.tool:hover .tool-icon{
-  transform:scale(1.12);
-
-  background:#222;
-
-  box-shadow:
-    0 10px 30px rgba(255,255,255,.08);
+    width:50px;
+    height:50px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid rgba(255,255,255,.18);
+    font-weight:800;
+    font-size:16px;
 }
 
 .tool-name{
-  font-size:15px;
-
-  font-weight:600;
-
-  color:#ddd;
+    color:#888;
+    font-size:12px;
 }
 
 /* =========================
@@ -682,20 +504,30 @@ section{
 ========================= */
 
 .about{
-  max-width:900px;
+    background:#070707;
 }
 
-.about p{
-  font-size:
-    clamp(22px,3vw,36px);
-
-  line-height:1.35;
-
-  color:#999;
+.about .bg-image{
+    background-image:url("https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=2200&q=85");
+    opacity:.14;
 }
 
-.about strong{
-  color:#fff;
+.about .bg-overlay{
+    background:rgba(5,5,5,.91);
+}
+
+.about-content{
+    max-width:850px;
+}
+
+.about-content p{
+    font-size:clamp(20px,3vw,32px);
+    line-height:1.55;
+    color:#bbb;
+}
+
+.about-content strong{
+    color:#fff;
 }
 
 /* =========================
@@ -703,64 +535,57 @@ section{
 ========================= */
 
 .contact{
-  max-width:850px;
+    min-height:600px;
+    display:flex;
+    align-items:center;
+}
 
-  margin:auto;
+.contact .bg-image{
+    background-image:url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2200&q=85");
+}
 
-  text-align:center;
+.contact .bg-overlay{
+    background:
+        linear-gradient(
+            90deg,
+            rgba(5,5,5,.96),
+            rgba(5,5,5,.78),
+            rgba(5,5,5,.92)
+        );
+}
+
+.contact-content{
+    max-width:700px;
 }
 
 .contact h2{
-  font-size:
-    clamp(45px,7vw,90px);
-
-  letter-spacing:-4px;
-
-  line-height:.95;
-
-  margin-bottom:25px;
-}
-
-.contact h2 span{
-  color:#555;
+    font-size:clamp(45px,7vw,85px);
+    letter-spacing:-4px;
+    line-height:1;
 }
 
 .contact p{
-  color:#777;
-
-  font-size:17px;
-
-  margin-bottom:40px;
+    color:#999;
+    margin:25px 0 35px;
+    line-height:1.7;
 }
 
-.contact-buttons{
-  display:flex;
-
-  justify-content:center;
-
-  gap:15px;
-
-  flex-wrap:wrap;
+.contact-links{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
 }
 
-.contact-button{
-  padding:15px 25px;
-
-  border:1px solid #444;
-
-  border-radius:100px;
-
-  background:#0d0d0d;
-
-  transition:.35s ease;
+.contact-link{
+    padding:14px 22px;
+    border:1px solid rgba(255,255,255,.18);
+    transition:.3s;
+    font-size:13px;
 }
 
-.contact-button:hover{
-  background:#fff;
-
-  color:#000;
-
-  transform:translateY(-5px);
+.contact-link:hover{
+    background:#fff;
+    color:#000;
 }
 
 /* =========================
@@ -768,215 +593,179 @@ section{
 ========================= */
 
 footer{
-  padding:35px 7%;
+    padding:30px 0;
+    border-top:1px solid rgba(255,255,255,.08);
+    background:#050505;
+}
 
-  border-top:
-    1px solid rgba(255,255,255,.06);
-
-  display:flex;
-
-  justify-content:space-between;
-
-  color:#555;
-
-  font-size:13px;
+.footer-inner{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    color:#555;
+    font-size:11px;
 }
 
 /* =========================
-   SCROLL REVEAL
+   REVEAL ANIMATION
 ========================= */
 
 .reveal{
-  opacity:0;
-
-  transform:translateY(50px);
-
-  transition:
-    opacity .8s ease,
-    transform .8s ease;
+    opacity:0;
+    transform:translateY(40px);
+    transition:opacity .8s ease, transform .8s ease;
 }
 
 .reveal.active{
-  opacity:1;
-
-  transform:translateY(0);
+    opacity:1;
+    transform:translateY(0);
 }
-
-/* =========================
-   ANIMATIONS
-========================= */
 
 @keyframes heroIn{
-
-  from{
-    opacity:0;
-
-    transform:translateY(35px);
-  }
-
-  to{
-    opacity:1;
-
-    transform:translateY(0);
-  }
-
-}
-
-@keyframes glowMove{
-
-  0%,100%{
-    transform:translate(0,0);
-  }
-
-  50%{
-    transform:translate(-30px,30px);
-  }
-
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
 /* =========================
    MOBILE
 ========================= */
 
-@media(max-width:900px){
+@media(max-width:800px){
 
-  .nav-links{
-    gap:15px;
-  }
+    nav{
+        height:65px;
+    }
 
-  .nav-links a{
-    font-size:12px;
-  }
+    .nav-links{
+        gap:14px;
+        font-size:10px;
+    }
 
-  .projects{
-    grid-template-columns:1fr;
-  }
+    .logo{
+        font-size:18px;
+    }
 
-  .services{
-    grid-template-columns:
-      repeat(2,1fr);
-  }
+    .hero{
+        padding-top:65px;
+        min-height:90vh;
+    }
 
-  .pricing-wrapper{
-    grid-template-columns:1fr;
-  }
+    .hero h1{
+        letter-spacing:-3px;
+    }
 
-  .process{
-    grid-template-columns:
-      repeat(2,1fr);
-  }
+    .hero p{
+        font-size:15px;
+    }
 
-  .tools{
-    grid-template-columns:
-      repeat(2,1fr);
-  }
+    .section{
+        padding:90px 0;
+    }
 
+    .section-title{
+        margin-bottom:35px;
+    }
+
+    .work-grid{
+        grid-template-columns:1fr;
+    }
+
+    .services-grid{
+        grid-template-columns:1fr;
+    }
+
+    .process-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .step{
+        border-bottom:1px solid rgba(255,255,255,.1);
+    }
+
+    .step:nth-child(2){
+        border-right:none;
+    }
+
+    .tools-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .tool{
+        height:120px;
+    }
+
+    .footer-inner{
+        flex-direction:column;
+        gap:10px;
+    }
 }
 
-@media(max-width:600px){
+@media(max-width:500px){
 
-  nav{
-    padding:18px 5%;
-  }
+    .nav-links{
+        gap:9px;
+    }
 
-  .nav-links{
-    display:none;
-  }
+    .nav-links a:nth-child(4){
+        display:none;
+    }
 
-  .hero{
-    padding:
-      130px 5%
-      80px;
-  }
+    .hero h1{
+        font-size:52px;
+    }
 
-  .hero h1{
-    font-size:58px;
+    .hero-buttons{
+        flex-direction:column;
+        align-items:flex-start;
+    }
 
-    letter-spacing:-4px;
-  }
+    .process-grid{
+        grid-template-columns:1fr;
+    }
 
-  .hero p{
-    font-size:16px;
-  }
+    .step{
+        border-right:none;
+    }
 
-  section{
-    padding:85px 5%;
-  }
-
-  .services{
-    grid-template-columns:1fr;
-  }
-
-  .process{
-    grid-template-columns:1fr;
-  }
-
-  .tools{
-    grid-template-columns:
-      repeat(2,1fr);
-  }
-
-  .price-card{
-    padding:35px;
-  }
-
-  .price{
-    font-size:70px;
-  }
-
-  footer{
-    flex-direction:column;
-
-    gap:10px;
-  }
+    .tools-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
 
 }
 
 </style>
 </head>
 
-
 <body>
-
 
 <!-- =========================
      NAVIGATION
 ========================= -->
 
 <nav>
+    <div class="nav-inner">
 
-  <a href="#home" class="logo">
-    JieHaw<span>2</span>
-  </a>
+        <a href="#home" class="logo">
+            JieHaw<span>2</span>
+        </a>
 
-  <ul class="nav-links">
+        <div class="nav-links">
+            <a href="#work">Work</a>
+            <a href="#services">Services</a>
+            <a href="#process">Process</a>
+            <a href="#tools">Tools</a>
+            <a href="#contact">Contact</a>
+        </div>
 
-    <li>
-      <a href="#work">Work</a>
-    </li>
-
-    <li>
-      <a href="#services">Services</a>
-    </li>
-
-    <li>
-      <a href="#pricing">Pricing</a>
-    </li>
-
-    <li>
-      <a href="#process">Process</a>
-    </li>
-
-    <li>
-      <a href="#tools">Tools</a>
-    </li>
-
-    <li>
-      <a href="#contact">Contact</a>
-    </li>
-
-  </ul>
-
+    </div>
 </nav>
 
 
@@ -984,205 +773,202 @@ footer{
      HERO
 ========================= -->
 
-<header class="hero" id="home">
+<section class="hero" id="home">
 
-  <div class="hero-content">
+    <div class="bg-image"></div>
+    <div class="bg-overlay"></div>
 
-    <div class="eyebrow">
-      Video Editor & Graphic Designer
+    <div class="container">
+
+        <div class="hero-content">
+
+            <div class="eyebrow">
+                Video Editor • Graphic Designer
+            </div>
+
+            <h1>
+                I make content
+                <span>worth watching.</span>
+            </h1>
+
+            <p>
+                I help creators, businesses and brands turn raw footage
+                and ideas into engaging videos and eye-catching graphics.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#work" class="btn btn-primary">
+                    See My Work →
+                </a>
+
+                <a href="#contact" class="btn btn-outline">
+                    Work With Me
+                </a>
+
+            </div>
+
+        </div>
+
     </div>
 
-    <h1>
-      I make content<br>
-      <span>worth watching.</span>
-    </h1>
-
-    <p>
-      I help creators, businesses and brands turn raw footage
-      and ideas into engaging videos and eye-catching graphics.
-    </p>
-
-    <div class="hero-buttons">
-
-      <a
-        href="#work"
-        class="hero-button"
-      >
-        See My Work →
-      </a>
-
-      <a
-        href="#contact"
-        class="hero-button secondary"
-      >
-        Work With Me
-      </a>
-
-    </div>
-
-  </div>
-
-</header>
+</section>
 
 
 <!-- =========================
      WORK
 ========================= -->
 
-<section id="work">
+<section class="section work" id="work">
 
-  <h2 class="section-title reveal">
-    Selected <span>Work.</span>
-  </h2>
+    <div class="bg-image"></div>
+    <div class="bg-overlay"></div>
 
-  <div class="projects">
+    <div class="container">
 
+        <div class="section-label reveal">
+            Selected Work
+        </div>
 
-    <a
-      class="project reveal"
-      href="https://youtu.be/q5lP2DyGKbo?si=pjqFMdO0-IL886xq"
-      target="_blank"
-      rel="noopener"
-    >
+        <h2 class="section-title reveal">
+            Recent edits.
+        </h2>
 
-      <img
-        src="https://img.youtube.com/vi/q5lP2DyGKbo/maxresdefault.jpg"
-        alt="Video editing project"
-      >
+        <div class="work-grid">
 
-      <div class="project-overlay">
+            <!-- PROJECT 1 -->
 
-        <h3>
-          Featured Edit
-        </h3>
+            <a
+                href="https://youtu.be/q5lP2DyGKbo"
+                target="_blank"
+                class="project reveal"
+            >
 
-        <p>
-          Watch project →
-        </p>
+                <img
+                    src="https://img.youtube.com/vi/q5lP2DyGKbo/maxresdefault.jpg"
+                    alt="Video editing project"
+                >
 
-      </div>
+                <div class="project-overlay">
+                    <div class="project-label">
+                        Featured Edit
+                    </div>
 
-    </a>
+                    <div class="project-title">
+                        Watch Project →
+                    </div>
+                </div>
 
-
-    <a
-      class="project reveal"
-      href="https://youtu.be/ki6M1b5R8ys?si=evXCpGZbkscWydU1"
-      target="_blank"
-      rel="noopener"
-    >
-
-      <img
-        src="https://img.youtube.com/vi/ki6M1b5R8ys/maxresdefault.jpg"
-        alt="Video editing project"
-      >
-
-      <div class="project-overlay">
-
-        <h3>
-          Featured Edit
-        </h3>
-
-        <p>
-          Watch project →
-        </p>
-
-      </div>
-
-    </a>
+            </a>
 
 
-    <a
-      class="project reveal"
-      href="https://www.facebook.com/share/v/19YVSMk3F3/"
-      target="_blank"
-      rel="noopener"
-    >
+            <!-- PROJECT 2 -->
 
-      <div style="
-        width:100%;
-        height:100%;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        background:
-          radial-gradient(circle at center,#222,#080808);
-        font-size:50px;
-        color:#555;
-      ">
-        ▶
-      </div>
+            <a
+                href="https://youtu.be/ki6M1b5R8ys"
+                target="_blank"
+                class="project reveal"
+            >
 
-      <div class="project-overlay">
+                <img
+                    src="https://img.youtube.com/vi/ki6M1b5R8ys/maxresdefault.jpg"
+                    alt="Video editing project"
+                >
 
-        <h3>
-          Featured Edit
-        </h3>
+                <div class="project-overlay">
+                    <div class="project-label">
+                        Featured Edit
+                    </div>
 
-        <p>
-          Watch project →
-        </p>
+                    <div class="project-title">
+                        Watch Project →
+                    </div>
+                </div>
 
-      </div>
-
-    </a>
+            </a>
 
 
-    <a
-      class="project reveal"
-      href="https://youtu.be/PAApdWAYwlY?si=hpbBImz6ZTmf0sS4"
-      target="_blank"
-      rel="noopener"
-    >
+            <!-- PROJECT 3 -->
 
-      <img
-        src="https://img.youtube.com/vi/PAApdWAYwlY/maxresdefault.jpg"
-        alt="Video editing project"
-      >
+            <a
+                href="https://www.facebook.com/share/v/19YVSMk3F3/"
+                target="_blank"
+                class="project reveal"
+            >
 
-      <div class="project-overlay">
+                <div class="facebook-project">
+                    <span>
+                        Facebook Video Project
+                    </span>
+                </div>
 
-        <h3>
-          Featured Edit
-        </h3>
+                <div class="project-overlay">
+                    <div class="project-label">
+                        Featured Edit
+                    </div>
 
-        <p>
-          Watch project →
-        </p>
+                    <div class="project-title">
+                        Watch Project →
+                    </div>
+                </div>
 
-      </div>
-
-    </a>
-
-
-    <a
-      class="project reveal"
-      href="https://youtu.be/SYHTNp8abIY?si=HPRVbBOo1nhiEAXP"
-      target="_blank"
-      rel="noopener"
-    >
-
-      <img
-        src="https://img.youtube.com/vi/SYHTNp8abIY/maxresdefault.jpg"
-        alt="Video editing project"
-      >
-
-      <div class="project-overlay">
-
-        <h3>
-          Featured Edit
-        </h3>
-
-        <p>
-          Watch project →
-        </p>
-
-      </div>
-
-    </a>
+            </a>
 
 
-  </div>
+            <!-- PROJECT 4 -->
+
+            <a
+                href="https://youtu.be/PAApdWAYwlY"
+                target="_blank"
+                class="project reveal"
+            >
+
+                <img
+                    src="https://img.youtube.com/vi/PAApdWAYwlY/maxresdefault.jpg"
+                    alt="Video editing project"
+                >
+
+                <div class="project-overlay">
+                    <div class="project-label">
+                        Featured Edit
+                    </div>
+
+                    <div class="project-title">
+                        Watch Project →
+                    </div>
+                </div>
+
+            </a>
+
+
+            <!-- PROJECT 5 -->
+
+            <a
+                href="https://youtu.be/SYHTNp8abIY"
+                target="_blank"
+                class="project reveal"
+            >
+
+                <img
+                    src="https://img.youtube.com/vi/SYHTNp8abIY/maxresdefault.jpg"
+                    alt="Video editing project"
+                >
+
+                <div class="project-overlay">
+                    <div class="project-label">
+                        Featured Edit
+                    </div>
+
+                    <div class="project-title">
+                        Watch Project →
+                    </div>
+                </div>
+
+            </a>
+
+        </div>
+
+    </div>
 
 </section>
 
@@ -1191,157 +977,100 @@ footer{
      SERVICES
 ========================= -->
 
-<section id="services">
+<section class="section services" id="services">
 
-  <h2 class="section-title reveal">
-    What I <span>Do.</span>
-  </h2>
+    <div class="bg-image"></div>
+    <div class="bg-overlay"></div>
 
+    <div class="container">
 
-  <div class="services">
+        <div class="section-label reveal">
+            What I Do
+        </div>
 
+        <h2 class="section-title reveal">
+            Services.
+        </h2>
 
-    <div class="service reveal">
+        <div class="services-grid">
 
-      <div class="service-number">
-        01
-      </div>
+            <div class="service reveal">
 
-      <h3>
-        Video Editing
-      </h3>
+                <div class="service-number">
+                    01
+                </div>
 
-      <p>
-        Clean cuts, pacing, storytelling, captions,
-        music, sound effects, transitions and visual effects.
-      </p>
+                <h3>
+                    Video Editing
+                </h3>
 
-    </div>
+                <p>
+                    Clean cuts, smooth pacing, music, sound effects,
+                    transitions, color adjustments and storytelling
+                    that keeps viewers watching.
+                </p>
 
-
-    <div class="service reveal">
-
-      <div class="service-number">
-        02
-      </div>
-
-      <h3>
-        Graphic Design
-      </h3>
-
-      <p>
-        YouTube thumbnails, posters, social media graphics
-        and promotional materials designed to grab attention.
-      </p>
-
-    </div>
+            </div>
 
 
-    <div class="service reveal">
+            <div class="service reveal">
 
-      <div class="service-number">
-        03
-      </div>
+                <div class="service-number">
+                    02
+                </div>
 
-      <h3>
-        Social Media Content
-      </h3>
+                <h3>
+                    Graphic Design
+                </h3>
 
-      <p>
-        Content created for YouTube, TikTok, Facebook,
-        Instagram and other social platforms.
-      </p>
+                <p>
+                    Thumbnails, posters, social media graphics
+                    and other visual materials designed to match
+                    your content and brand.
+                </p>
 
-    </div>
-
-
-    <div class="service reveal">
-
-      <div class="service-number">
-        04
-      </div>
-
-      <h3>
-        Captions & Effects
-      </h3>
-
-      <p>
-        Engaging captions, motion elements, transitions,
-        sound effects and visual enhancements.
-      </p>
-
-    </div>
+            </div>
 
 
-  </div>
+            <div class="service reveal">
 
-</section>
+                <div class="service-number">
+                    03
+                </div>
+
+                <h3>
+                    Social Media Content
+                </h3>
+
+                <p>
+                    Short-form and long-form content optimized
+                    for platforms like YouTube, Facebook and TikTok.
+                </p>
+
+            </div>
 
 
-<!-- =========================
-     PRICING
-========================= -->
+            <div class="service reveal">
 
-<section id="pricing">
+                <div class="service-number">
+                    04
+                </div>
 
-  <h2 class="section-title reveal">
-    Simple <span>Pricing.</span>
-  </h2>
+                <h3>
+                    Captions & Effects
+                </h3>
 
+                <p>
+                    Engaging captions, pop-up elements, motion effects,
+                    visual effects and other details that make content
+                    more dynamic.
+                </p>
 
-  <div class="pricing-wrapper">
+            </div>
 
-
-    <div class="price-card reveal">
-
-      <div class="price-label">
-        Video Editing
-      </div>
-
-      <div class="price">
-        ₱300
-        <small>/ finished minute</small>
-      </div>
-
-      <p class="price-description">
-        One simple rate for video editing.
-        The price is based on the final duration
-        of the completed video.
-      </p>
+        </div>
 
     </div>
-
-
-    <div class="examples reveal">
-
-      <h3>
-        Example
-      </h3>
-
-      <div class="example-row">
-        <span>5 minute video</span>
-        <strong>₱1,500</strong>
-      </div>
-
-      <div class="example-row">
-        <span>10 minute video</span>
-        <strong>₱3,000</strong>
-      </div>
-
-      <div class="example-row">
-        <span>20 minute video</span>
-        <strong>₱6,000</strong>
-      </div>
-
-      <div class="example-row">
-        <span>Graphic Design</span>
-        <strong>Custom Quote</strong>
-      </div>
-
-    </div>
-
-
-  </div>
 
 </section>
 
@@ -1350,89 +1079,97 @@ footer{
      PROCESS
 ========================= -->
 
-<section id="process">
+<section class="section process" id="process">
 
-  <h2 class="section-title reveal">
-    How It <span>Works.</span>
-  </h2>
+    <div class="bg-image"></div>
+    <div class="bg-overlay"></div>
+
+    <div class="container">
+
+        <div class="section-label reveal">
+            How It Works
+        </div>
+
+        <h2 class="section-title reveal">
+            Simple process.
+        </h2>
+
+        <div class="process-grid">
+
+            <div class="step reveal">
+
+                <div class="step-number">
+                    01
+                </div>
+
+                <h3>
+                    Send Your Footage
+                </h3>
+
+                <p>
+                    Send your raw videos through Google Drive
+                    or a physical hard drive for larger projects.
+                </p>
+
+            </div>
 
 
-  <div class="process">
+            <div class="step reveal">
+
+                <div class="step-number">
+                    02
+                </div>
+
+                <h3>
+                    Tell Me What You Need
+                </h3>
+
+                <p>
+                    Share your instructions, references,
+                    preferred style and other requirements.
+                </p>
+
+            </div>
 
 
-    <div class="process-card reveal">
+            <div class="step reveal">
 
-      <div class="process-number">
-        01
-      </div>
+                <div class="step-number">
+                    03
+                </div>
 
-      <h3>
-        Send Your Footage
-      </h3>
+                <h3>
+                    I Edit
+                </h3>
 
-      <p>
-        Upload your raw footage through Google Drive,
-        or arrange physical drive delivery for larger projects.
-      </p>
+                <p>
+                    I'll turn your raw footage into a polished
+                    and engaging final video.
+                </p>
+
+            </div>
+
+
+            <div class="step reveal">
+
+                <div class="step-number">
+                    04
+                </div>
+
+                <h3>
+                    Review & Delivery
+                </h3>
+
+                <p>
+                    Review the finished edit and receive the
+                    final files once everything is ready.
+                </p>
+
+            </div>
+
+        </div>
 
     </div>
-
-
-    <div class="process-card reveal">
-
-      <div class="process-number">
-        02
-      </div>
-
-      <h3>
-        Tell Me What You Need
-      </h3>
-
-      <p>
-        Send your instructions, references, preferred style
-        and deadline.
-      </p>
-
-    </div>
-
-
-    <div class="process-card reveal">
-
-      <div class="process-number">
-        03
-      </div>
-
-      <h3>
-        I Edit
-      </h3>
-
-      <p>
-        I'll turn your raw footage into a polished,
-        engaging final video.
-      </p>
-
-    </div>
-
-
-    <div class="process-card reveal">
-
-      <div class="process-number">
-        04
-      </div>
-
-      <h3>
-        Review & Delivery
-      </h3>
-
-      <p>
-        Review the finished video, request revisions if needed,
-        and receive the final file.
-      </p>
-
-    </div>
-
-
-  </div>
 
 </section>
 
@@ -1441,95 +1178,65 @@ footer{
      TOOLS
 ========================= -->
 
-<section id="tools">
+<section class="section tools" id="tools">
 
-  <h2 class="section-title reveal">
-    Tools I <span>Use.</span>
-  </h2>
+    <div class="container">
 
+        <div class="section-label reveal">
+            Tools I Use
+        </div>
 
-  <div class="tools">
+        <h2 class="section-title reveal">
+            My toolkit.
+        </h2>
 
+        <div class="tools-grid">
 
-    <div class="tool reveal">
+            <div class="tool reveal">
+                <div class="tool-icon">Pr</div>
+                <div class="tool-name">
+                    Premiere Pro
+                </div>
+            </div>
 
-      <div class="tool-icon">
-        Pr
-      </div>
+            <div class="tool reveal">
+                <div class="tool-icon">Ae</div>
+                <div class="tool-name">
+                    After Effects
+                </div>
+            </div>
 
-      <div class="tool-name">
-        Adobe Premiere Pro
-      </div>
+            <div class="tool reveal">
+                <div class="tool-icon">C</div>
+                <div class="tool-name">
+                    CapCut
+                </div>
+            </div>
 
-    </div>
+            <div class="tool reveal">
+                <div class="tool-icon">Da</div>
+                <div class="tool-name">
+                    DaVinci Resolve
+                </div>
+            </div>
 
+            <div class="tool reveal">
+                <div class="tool-icon">Ps</div>
+                <div class="tool-name">
+                    Photoshop
+                </div>
+            </div>
 
-    <div class="tool reveal">
+            <div class="tool reveal">
+                <div class="tool-icon">Ca</div>
+                <div class="tool-name">
+                    Canva
+                </div>
+            </div>
 
-      <div class="tool-icon">
-        Ae
-      </div>
-
-      <div class="tool-name">
-        Adobe After Effects
-      </div>
-
-    </div>
-
-
-    <div class="tool reveal">
-
-      <div class="tool-icon">
-        C
-      </div>
-
-      <div class="tool-name">
-        CapCut
-      </div>
-
-    </div>
-
-
-    <div class="tool reveal">
-
-      <div class="tool-icon">
-        Da
-      </div>
-
-      <div class="tool-name">
-        DaVinci Resolve
-      </div>
-
-    </div>
-
-
-    <div class="tool reveal">
-
-      <div class="tool-icon">
-        Ps
-      </div>
-
-      <div class="tool-name">
-        Adobe Photoshop
-      </div>
+        </div>
 
     </div>
-
-
-    <div class="tool reveal">
-
-      <div class="tool-icon">
-        Ca
-      </div>
-
-      <div class="tool-name">
-        Canva
-      </div>
-
-    </div>
-
-
-  </div>
 
 </section>
 
@@ -1538,23 +1245,30 @@ footer{
      ABOUT
 ========================= -->
 
-<section id="about">
+<section class="section about">
 
-  <div class="about reveal">
+    <div class="bg-image"></div>
+    <div class="bg-overlay"></div>
 
-    <h2 class="section-title">
-      About <span>JieHaw2.</span>
-    </h2>
+    <div class="container">
 
-    <p>
-      I'm a <strong>video editor and graphic designer</strong>
-      who enjoys turning raw footage and ideas into content
-      people actually want to watch.
-      I focus on <strong>clean editing, good pacing,
-      captions, music, visual effects and design.</strong>
-    </p>
+        <div class="section-label reveal">
+            About Me
+        </div>
 
-  </div>
+        <div class="about-content reveal">
+
+            <p>
+                I'm a
+                <strong>video editor and graphic designer</strong>
+                based in the Philippines. I focus on clean editing,
+                good pacing, engaging captions, music, visual effects
+                and designs that help content stand out.
+            </p>
+
+        </div>
+
+    </div>
 
 </section>
 
@@ -1563,45 +1277,51 @@ footer{
      CONTACT
 ========================= -->
 
-<section id="contact">
+<section class="section contact" id="contact">
 
-  <div class="contact reveal">
+    <div class="bg-image"></div>
+    <div class="bg-overlay"></div>
 
-    <h2>
-      Let's work<br>
-      <span>together.</span>
-    </h2>
+    <div class="container">
 
-    <p>
-      Have a project in mind?
-      Send me your requirements and let's talk.
-    </p>
+        <div class="contact-content reveal">
 
+            <div class="section-label">
+                Let's Work Together
+            </div>
 
-    <div class="contact-buttons">
+            <h2>
+                Have a project<br>
+                in mind?
+            </h2>
 
+            <p>
+                Send me your project details and let's talk
+                about how I can help bring your content to life.
+            </p>
 
-      <a
-        class="contact-button"
-        href="mailto:jiehawtu@gmail.com"
-      >
-        📧 Email Me
-      </a>
+            <div class="contact-links">
 
+                <a
+                    href="mailto:jiehawtu@gmail.com"
+                    class="contact-link"
+                >
+                    Email Me →
+                </a>
 
-      <a
-        class="contact-button"
-        href="https://www.facebook.com/jiehawtu13"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        💬 Message on Facebook
-      </a>
+                <a
+                    href="https://www.facebook.com/jiehawtu13"
+                    target="_blank"
+                    class="contact-link"
+                >
+                    Facebook →
+                </a>
 
+            </div>
+
+        </div>
 
     </div>
-
-  </div>
 
 </section>
 
@@ -1612,67 +1332,53 @@ footer{
 
 <footer>
 
-  <div>
-    © 2026 JieHaw2
-  </div>
+    <div class="footer-inner">
 
-  <div>
-    Video Editor • Graphic Designer
-  </div>
+        <div>
+            © 2026 JieHaw2
+        </div>
+
+        <div>
+            Video Editor • Graphic Designer
+        </div>
+
+    </div>
 
 </footer>
 
 
 <!-- =========================
-     SCROLL SCRIPT
+     SCRIPT
 ========================= -->
 
 <script>
 
-const revealElements =
-  document.querySelectorAll(".reveal");
+const reveals = document.querySelectorAll('.reveal');
 
-
-const observer =
-  new IntersectionObserver(
-
+const observer = new IntersectionObserver(
     (entries) => {
 
-      entries.forEach(
+        entries.forEach(entry => {
 
-        (entry) => {
+            if(entry.isIntersecting){
 
-          if(entry.isIntersecting){
+                entry.target.classList.add('active');
 
-            entry.target.classList.add("active");
+            }
 
-          }
-
-        }
-
-      );
+        });
 
     },
-
     {
-      threshold:0.12
+        threshold:0.12
     }
-
-  );
-
-
-revealElements.forEach(
-
-  (element) => {
-
-    observer.observe(element);
-
-  }
-
 );
 
-</script>
+reveals.forEach(element => {
+    observer.observe(element);
+});
 
+</script>
 
 </body>
 </html>
