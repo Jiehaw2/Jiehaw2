@@ -21,7 +21,7 @@ section{position:relative;overflow:hidden;z-index:1}
 .glow-1{width:520px;height:520px;left:-180px;top:5%;background:radial-gradient(circle,rgba(255,255,255,.075) 0%,rgba(255,255,255,.035) 25%,rgba(255,255,255,.012) 48%,transparent 72%);animation:glowMove1 20s ease-in-out infinite alternate}
 .glow-2{width:600px;height:600px;right:-220px;top:28%;background:radial-gradient(circle,rgba(255,255,255,.065) 0%,rgba(255,255,255,.025) 30%,rgba(255,255,255,.008) 55%,transparent 75%);animation:glowMove2 24s ease-in-out infinite alternate}
 .glow-3{width:430px;height:430px;left:35%;bottom:-180px;background:radial-gradient(circle,rgba(255,255,255,.055) 0%,rgba(255,255,255,.018) 35%,transparent 72%);animation:glowMove3 18s ease-in-out infinite alternate}
-.abstract{position:absolute;border:1px solid rgba(255,255,255,.08);background:linear-gradient(135deg,rgba(255,255,255,.035),rgba(255,255,255,.005));backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
+.abstract{position:absolute;border:1px solid rgba(255,255,255,.08);background:linear-gradient(135deg,rgba(255,255,255,.035),rgba(255,255,255,.005));}
 .abstract-1{width:320px;height:320px;left:8%;top:18%;border-radius:42% 58% 63% 37% / 40% 36% 64% 60%;transform:rotate(25deg);animation:abstractMove1 25s ease-in-out infinite}
 .abstract-2{width:240px;height:240px;right:14%;top:58%;border-radius:61% 39% 45% 55% / 55% 62% 38% 45%;transform:rotate(-35deg);animation:abstractMove2 21s ease-in-out infinite}
 .abstract-3{width:180px;height:180px;left:55%;top:12%;border-radius:50%;transform:rotate(15deg);animation:abstractMove3 17s ease-in-out infinite}
@@ -236,7 +236,9 @@ nav{height:65px}
 .graphic-lightbox img{max-width:94vw;max-height:85vh}
 .graphic-lightbox-close{top:12px;right:18px}
 .footer-inner{flex-direction:column;gap:10px}
-.contact .bg-overlay{background:rgba(5,5,5,.72)}
+.contact{--pogi-h:100vw;padding-top:calc(var(--pogi-h) + 30px)}
+#contact{background-size:100% auto,100% auto,auto;background-position:center top,center top,0 0}
+.contact .bg-overlay{background:linear-gradient(180deg,rgba(5,5,5,0) 0,rgba(5,5,5,0) calc(var(--pogi-h)*.65),rgba(5,5,5,.96) calc(var(--pogi-h) + 20px))}
 }
 @media(max-width:500px){
 .nav-links{gap:9px}
