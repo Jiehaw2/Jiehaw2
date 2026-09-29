@@ -105,14 +105,22 @@ nav{position:fixed;top:0;left:0;width:100%;height:76px;display:flex;align-items:
 .project-label{font-size:11px;color:#aaa;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px}
 .project-title{font-size:22px;font-weight:600}
 
-/* ===== GRAPHIC ARTS ===== */
+/* ===== GRAPHIC ARTS: 3D carousel (landscape) ===== */
+@property --gc{syntax:"<color>";inherits:true;initial-value:#19f0ff}
 .graphic-arts{background:#070707}
-.graphic-arts-slider{width:100%;overflow:hidden;position:relative;cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none}
-.graphic-arts-slider.dragging{cursor:grabbing}
-.graphic-arts-track{display:flex;width:max-content;gap:20px;transform:translateX(0);will-change:transform}
-.graphic-card{flex:0 0 320px;height:400px;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.08);background:#111;cursor:pointer;transition:transform .3s ease,border-color .3s ease}
-.graphic-card:hover{transform:scale(1.03);border-color:rgba(255,255,255,.25)}
-.graphic-card img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;user-select:none;-webkit-user-drag:none}
+.g3{position:relative;padding:10px 0 0;transition:--gc .7s}
+.g3-glow{position:absolute;left:50%;top:42%;width:min(760px,96vw);height:380px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,var(--gc) 0%,transparent 65%);opacity:.3;filter:blur(46px);pointer-events:none}
+.g3-stage{position:relative;height:clamp(230px,44vw,450px);perspective:1400px;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
+.g3-card{--cc:#19f0ff;position:absolute;left:50%;top:50%;width:clamp(240px,56vw,640px);aspect-ratio:16/10;border-radius:12px;overflow:hidden;background:#111;border:1px solid rgba(255,255,255,.14);box-shadow:0 0 26px -10px var(--cc);cursor:pointer;will-change:transform,opacity;transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .7s,filter .7s,box-shadow .7s,border-color .7s}
+.g3-card img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;-webkit-user-drag:none}
+.g3-card.active{border-color:var(--cc);box-shadow:0 0 0 1px var(--cc),0 0 44px -2px var(--cc),0 30px 70px rgba(0,0,0,.6)}
+.g3-ui{display:flex;align-items:center;justify-content:center;gap:22px;margin-top:30px}
+.g3-nav{width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.04);color:#fff;font-size:22px;line-height:1;cursor:pointer;transition:.3s}
+.g3-nav:hover{border-color:var(--gc);box-shadow:0 0 24px var(--gc);transform:scale(1.08)}
+.g3-count{min-width:82px;text-align:center;font-size:13px;font-weight:600;letter-spacing:3px;font-variant-numeric:tabular-nums}
+.g3-hint{margin-top:16px;text-align:center;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#555}
+.lb-nav{position:absolute;top:50%;z-index:10001;width:48px;height:48px;margin-top:-24px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;font-size:26px;cursor:pointer}
+.lb-prev{left:16px}.lb-next{right:16px}
 
 /* ===== GRAPHIC ART ZOOM ===== */
 .graphic-lightbox{display:none;position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.94);align-items:center;justify-content:center;padding:30px}
@@ -598,57 +606,38 @@ nav{height:65px}
 <div class="section-label reveal">Graphic Design</div>
 <h2 class="section-title reveal">Selected graphics.</h2>
 </div>
-<div class="graphic-arts-slider" id="graphicSlider">
-<div class="graphic-arts-track" id="graphicTrack">
-<!-- ORIGINAL SET -->
-<div class="graphic-card"><img src="art1.jpeg" alt="Graphic design 1" draggable="false"></div>
-<div class="graphic-card"><img src="art2.jpeg" alt="Graphic design 2" draggable="false"></div>
-<div class="graphic-card"><img src="art3.jpeg" alt="Graphic design 3" draggable="false"></div>
-<div class="graphic-card"><img src="art4.jpeg" alt="Graphic design 4" draggable="false"></div>
-<div class="graphic-card"><img src="art5.jpeg" alt="Graphic design 5" draggable="false"></div>
-<div class="graphic-card"><img src="art6.jpeg" alt="Graphic design 6" draggable="false"></div>
-<div class="graphic-card"><img src="art7.jpeg" alt="Graphic design 7" draggable="false"></div>
-<div class="graphic-card"><img src="art8.jpeg" alt="Graphic design 8" draggable="false"></div>
-<div class="graphic-card"><img src="art9.jpeg" alt="Graphic design 9" draggable="false"></div>
-<div class="graphic-card"><img src="art10.jpeg" alt="Graphic design 10" draggable="false"></div>
-<div class="graphic-card"><img src="art11.jpeg" alt="Graphic design 11" draggable="false"></div>
-<div class="graphic-card"><img src="art12.jpeg" alt="Graphic design 12" draggable="false"></div>
-<div class="graphic-card"><img src="art13.jpeg" alt="Graphic design 13" draggable="false"></div>
-<div class="graphic-card"><img src="art14.jpeg" alt="Graphic design 14" draggable="false"></div>
-<div class="graphic-card"><img src="art15.jpeg" alt="Graphic design 15" draggable="false"></div>
-<div class="graphic-card"><img src="art16.jpeg" alt="Graphic design 16" draggable="false"></div>
-<div class="graphic-card"><img src="art17.jpeg" alt="Graphic design 17" draggable="false"></div>
-<div class="graphic-card"><img src="art18.jpeg" alt="Graphic design 18" draggable="false"></div>
-<div class="graphic-card"><img src="art19.jpeg" alt="Graphic design 19" draggable="false"></div>
-
-<!-- DUPLICATE SET -->
-<div class="graphic-card"><img src="art1.jpeg" alt="Graphic design 1" draggable="false"></div>
-<div class="graphic-card"><img src="art2.jpeg" alt="Graphic design 2" draggable="false"></div>
-<div class="graphic-card"><img src="art3.jpeg" alt="Graphic design 3" draggable="false"></div>
-<div class="graphic-card"><img src="art4.jpeg" alt="Graphic design 4" draggable="false"></div>
-<div class="graphic-card"><img src="art5.jpeg" alt="Graphic design 5" draggable="false"></div>
-<div class="graphic-card"><img src="art6.jpeg" alt="Graphic design 6" draggable="false"></div>
-<div class="graphic-card"><img src="art7.jpeg" alt="Graphic design 7" draggable="false"></div>
-<div class="graphic-card"><img src="art8.jpeg" alt="Graphic design 8" draggable="false"></div>
-<div class="graphic-card"><img src="art9.jpeg" alt="Graphic design 9" draggable="false"></div>
-<div class="graphic-card"><img src="art10.jpeg" alt="Graphic design 10" draggable="false"></div>
-<div class="graphic-card"><img src="art11.jpeg" alt="Graphic design 11" draggable="false"></div>
-<div class="graphic-card"><img src="art12.jpeg" alt="Graphic design 12" draggable="false"></div>
-<div class="graphic-card"><img src="art13.jpeg" alt="Graphic design 13" draggable="false"></div>
-<div class="graphic-card"><img src="art14.jpeg" alt="Graphic design 14" draggable="false"></div>
-<div class="graphic-card"><img src="art15.jpeg" alt="Graphic design 15" draggable="false"></div>
-<div class="graphic-card"><img src="art16.jpeg" alt="Graphic design 16" draggable="false"></div>
-<div class="graphic-card"><img src="art17.jpeg" alt="Graphic design 17" draggable="false"></div>
-<div class="graphic-card"><img src="art18.jpeg" alt="Graphic design 18" draggable="false"></div>
-<div class="graphic-card"><img src="art19.jpeg" alt="Graphic design 19" draggable="false"></div>
-
+<div class="container"><div class="g3 reveal" id="g3">
+<div class="g3-glow"></div>
+<div class="g3-stage" id="g3Stage">
+<div class="g3-card"><img src="art1.jpeg" alt="Graphic design 1" draggable="false"></div>
+<div class="g3-card"><img src="art2.jpeg" alt="Graphic design 2" draggable="false"></div>
+<div class="g3-card"><img src="art3.jpeg" alt="Graphic design 3" draggable="false"></div>
+<div class="g3-card"><img src="art4.jpeg" alt="Graphic design 4" draggable="false"></div>
+<div class="g3-card"><img src="art5.jpeg" alt="Graphic design 5" draggable="false"></div>
+<div class="g3-card"><img src="art6.jpeg" alt="Graphic design 6" draggable="false"></div>
+<div class="g3-card"><img src="art7.jpeg" alt="Graphic design 7" draggable="false"></div>
+<div class="g3-card"><img src="art8.jpeg" alt="Graphic design 8" draggable="false"></div>
+<div class="g3-card"><img src="art9.jpeg" alt="Graphic design 9" draggable="false"></div>
+<div class="g3-card"><img src="art10.jpeg" alt="Graphic design 10" draggable="false"></div>
+<div class="g3-card"><img src="art11.jpeg" alt="Graphic design 11" draggable="false"></div>
+<div class="g3-card"><img src="art12.jpeg" alt="Graphic design 12" draggable="false"></div>
+<div class="g3-card"><img src="art13.jpeg" alt="Graphic design 13" draggable="false"></div>
+<div class="g3-card"><img src="art14.jpeg" alt="Graphic design 14" draggable="false"></div>
+<div class="g3-card"><img src="art15.jpeg" alt="Graphic design 15" draggable="false"></div>
+<div class="g3-card"><img src="art16.jpeg" alt="Graphic design 16" draggable="false"></div>
+<div class="g3-card"><img src="art17.jpeg" alt="Graphic design 17" draggable="false"></div>
+<div class="g3-card"><img src="art18.jpeg" alt="Graphic design 18" draggable="false"></div>
+<div class="g3-card"><img src="art19.jpeg" alt="Graphic design 19" draggable="false"></div>
 </div>
-</div>
+<div class="g3-ui"><button type="button" class="g3-nav" id="g3Prev" aria-label="Previous graphic">&#8249;</button><span class="g3-count" id="g3Count">01 / 19</span><button type="button" class="g3-nav" id="g3Next" aria-label="Next graphic">&#8250;</button></div>
+<div class="g3-hint">Tap the middle one to zoom</div>
+</div></div>
 </section>
 
 <!-- LIGHTBOX -->
 <div class="graphic-lightbox" id="graphicLightbox">
 <div class="graphic-lightbox-close" id="graphicLightboxClose">&times;</div>
+<button type="button" class="lb-nav lb-prev" id="lbPrev" aria-label="Previous">&#8249;</button><button type="button" class="lb-nav lb-next" id="lbNext" aria-label="Next">&#8250;</button>
 <img id="graphicLightboxImage" src="" alt="Graphic Design Preview">
 </div>
 
@@ -789,97 +778,97 @@ const observer = new IntersectionObserver((entries)=>{
 },{threshold:0.12});
 reveals.forEach(el=>observer.observe(el));
 
-/* GRAPHIC ART SLIDER: SLOW AUTO + MANUAL DRAG */
-const graphicSlider = document.getElementById('graphicSlider');
-const graphicTrack = document.getElementById('graphicTrack');
-const graphicCards = document.querySelectorAll('.graphic-card');
-let position = 0;
-let lastTime = performance.now();
-let isDragging = false;
-let startX = 0;
-let startPosition = 0;
-let moved = false;
-const autoSpeed = 0.035;
+/* GRAPHICS: 3D CAROUSEL + LIGHTBOX */
+(function(){
+  const stage=document.getElementById('g3Stage'); if(!stage)return;
+  const root=document.getElementById('g3'), count=document.getElementById('g3Count');
+  const cards=[...stage.querySelectorAll('.g3-card')], n=cards.length;
+  const lb=document.getElementById('graphicLightbox'), lbImg=document.getElementById('graphicLightboxImage');
+  const PAL=['#19f0ff','#ff3cc7','#c6ff3d','#ffb02e','#9b6bff'];
+  const reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let cur=0,timer=null,dragging=false,moved=false,sx=0,visible=false,hover=false,lbOpen=false;
 
-function getLoopWidth(){
-  const firstCard = graphicCards[0];
-  if(!firstCard){ return 0; }
-  const cardWidth = firstCard.getBoundingClientRect().width;
-  const gap = 20;
-  return (cardWidth + gap) * 19;
-}
-function normalizePosition(){
-  const loopWidth = getLoopWidth();
-  if(loopWidth <= 0){ return; }
-  while(position <= -loopWidth){ position += loopWidth; }
-  while(position > 0){ position -= loopWidth; }
-}
-function updateGraphicPosition(){
-  graphicTrack.style.transform = `translate3d(${position}px,0,0)`;
-}
-function animateGraphics(currentTime){
-  const delta = currentTime - lastTime;
-  lastTime = currentTime;
-  if(!isDragging){
-    position -= autoSpeed * delta;
-    normalizePosition();
-    updateGraphicPosition();
+  function tint(img,i){
+    try{
+      const c=document.createElement('canvas');c.width=c.height=8;
+      const x=c.getContext('2d');x.drawImage(img,0,0,8,8);
+      const d=x.getImageData(0,0,8,8).data;let r=0,g=0,b=0;
+      for(let k=0;k<d.length;k+=4){r+=d[k];g+=d[k+1];b+=d[k+2]}
+      const m=d.length/4;r/=m*255;g/=m*255;b/=m*255;
+      const mx=Math.max(r,g,b),mn=Math.min(r,g,b),df=mx-mn;
+      if(df<.06)return PAL[i%PAL.length];
+      let h=mx===r?((g-b)/df)%6:mx===g?(b-r)/df+2:(r-g)/df+4;
+      h=Math.round(((h*60)+360)%360);
+      return 'hsl('+h+',90%,60%)';
+    }catch(e){return PAL[i%PAL.length]}
   }
-  requestAnimationFrame(animateGraphics);
-}
-requestAnimationFrame(animateGraphics);
-
-/* MANUAL DRAG */
-graphicSlider.addEventListener('pointerdown', function(event){
-  if(event.pointerType === 'mouse' && event.button !== 0){ return; }
-  isDragging = true;
-  moved = false;
-  startX = event.clientX;
-  startPosition = position;
-  graphicSlider.classList.add('dragging');
-  graphicSlider.setPointerCapture(event.pointerId);
-});
-graphicSlider.addEventListener('pointermove', function(event){
-  if(!isDragging){ return; }
-  const difference = event.clientX - startX;
-  if(Math.abs(difference) > 6){ moved = true; }
-  position = startPosition + difference;
-  normalizePosition();
-  updateGraphicPosition();
-});
-function finishGraphicDrag(){
-  isDragging = false;
-  graphicSlider.classList.remove('dragging');
-}
-graphicSlider.addEventListener('pointerup', finishGraphicDrag);
-graphicSlider.addEventListener('pointercancel', finishGraphicDrag);
-
-/* GRAPHIC ART ZOOM */
-const graphicLightbox = document.getElementById('graphicLightbox');
-const graphicLightboxImage = document.getElementById('graphicLightboxImage');
-const graphicLightboxClose = document.getElementById('graphicLightboxClose');
-
-graphicCards.forEach(card=>{
-  card.addEventListener('click', function(event){
-    if(moved){ event.preventDefault(); moved = false; return; }
-    const image = card.querySelector('img');
-    isDragging = true;
-    graphicLightboxImage.src = image.src;
-    graphicLightbox.classList.add('active');
+  const glow=()=>root.style.setProperty('--gc',cards[cur].style.getPropertyValue('--cc'));
+  cards.forEach((c,i)=>{
+    const img=c.querySelector('img');
+    c.style.setProperty('--cc',PAL[i%PAL.length]);
+    const set=()=>{c.style.setProperty('--cc',tint(img,i));if(i===cur)glow()};
+    if(img.complete&&img.naturalWidth)set();else img.addEventListener('load',set);
   });
-});
-graphicLightboxClose.addEventListener('click', ()=>closeGraphicLightbox());
-graphicLightbox.addEventListener('click', function(event){
-  if(event.target === graphicLightbox){ closeGraphicLightbox(); }
-});
-function closeGraphicLightbox(){
-  graphicLightbox.classList.remove('active');
-  graphicLightboxImage.src = '';
-  isDragging = false;
-}
-document.addEventListener('keydown', function(event){
-  if(event.key === 'Escape' && graphicLightbox.classList.contains('active')){ closeGraphicLightbox(); }
-});
+
+  function layout(){
+    const step=cards[0].offsetWidth*.56;
+    cards.forEach((c,i)=>{
+      let d=((i-cur)%n+n)%n; if(d>n/2)d-=n;
+      const a=Math.abs(d), show=a<=3;
+      c.classList.toggle('active',d===0);
+      c.style.zIndex=100-a;
+      c.style.opacity=show?[1,.9,.6,.3][a]:0;
+      c.style.pointerEvents=show?'auto':'none';
+      c.style.filter='brightness('+(1-.2*Math.min(a,3))+')';
+      c.style.transform='translate(-50%,-50%) translateX('+d*step+'px) translateZ('+(-a*140)+'px) rotateY('+(-d*38)+'deg)';
+    });
+    count.textContent=String(cur+1).padStart(2,'0')+' / '+String(n).padStart(2,'0');
+    glow();
+  }
+  function restart(){
+    clearInterval(timer);
+    if(reduce||!visible||hover||lbOpen)return;
+    timer=setInterval(()=>go(cur+1),3800);
+  }
+  function go(i){
+    cur=((i%n)+n)%n; layout();
+    if(lbOpen)lbImg.src=cards[cur].querySelector('img').src;
+    restart();
+  }
+  document.getElementById('g3Prev').addEventListener('click',()=>go(cur-1));
+  document.getElementById('g3Next').addEventListener('click',()=>go(cur+1));
+
+  stage.addEventListener('pointerdown',e=>{dragging=true;moved=false;sx=e.clientX});
+  window.addEventListener('pointermove',e=>{if(dragging&&Math.abs(e.clientX-sx)>10)moved=true});
+  window.addEventListener('pointerup',e=>{
+    if(!dragging)return; dragging=false;
+    const dx=e.clientX-sx; if(Math.abs(dx)>45)go(cur+(dx<0?1:-1));
+  });
+  window.addEventListener('pointercancel',()=>dragging=false);
+  cards.forEach((c,i)=>c.addEventListener('click',()=>{
+    if(moved){moved=false;return}
+    if(i===cur)openLB();else go(i);
+  }));
+
+  root.addEventListener('mouseenter',()=>{hover=true;restart()});
+  root.addEventListener('mouseleave',()=>{hover=false;restart()});
+  new IntersectionObserver(([e])=>{visible=e.isIntersecting;restart()},{threshold:.35}).observe(root);
+  window.addEventListener('resize',layout);
+
+  function openLB(){lbOpen=true;lbImg.src=cards[cur].querySelector('img').src;lb.classList.add('active');restart()}
+  function closeLB(){lbOpen=false;lb.classList.remove('active');lbImg.src='';restart()}
+  document.getElementById('graphicLightboxClose').addEventListener('click',closeLB);
+  lb.addEventListener('click',e=>{if(e.target===lb)closeLB()});
+  document.getElementById('lbPrev').addEventListener('click',()=>go(cur-1));
+  document.getElementById('lbNext').addEventListener('click',()=>go(cur+1));
+  document.addEventListener('keydown',e=>{
+    if(/INPUT|TEXTAREA/.test(e.target.tagName))return;
+    if(e.key==='Escape'&&lbOpen)closeLB();
+    else if(e.key==='ArrowRight'&&(lbOpen||visible))go(cur+1);
+    else if(e.key==='ArrowLeft'&&(lbOpen||visible))go(cur-1);
+  });
+  layout();
+})();
 
 /* BRIEF BUILDER */
 const picks = {};
