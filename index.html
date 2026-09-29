@@ -183,10 +183,9 @@ nav{position:fixed;top:0;left:0;width:100%;height:76px;display:flex;align-items:
 
 /* ===== CONTACT ===== */
 .contact{min-height:600px;display:flex;align-items:center}
-#contact{background:#050505}
-.contact-grid{display:grid;grid-template-columns:1.3fr .8fr;gap:50px;align-items:center}
-.contact-photo img{width:100%;height:auto;display:block;border-radius:12px;border:1px solid rgba(255,255,255,.12);box-shadow:0 20px 80px rgba(0,0,0,.6),0 0 60px rgba(255,255,255,.06)}
-.contact-photo figcaption{margin-top:14px;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#777}
+#contact{--pogi-pos:right center;background:url("pogi.jpg") var(--pogi-pos)/cover no-repeat,url("POGI.jpg") var(--pogi-pos)/cover no-repeat,#050505}
+.brief-sec{background:#050505}
+.brief-sec .brief{max-width:760px;margin:0}
 .contact .bg-overlay{background:linear-gradient(90deg,rgba(5,5,5,.93) 0%,rgba(5,5,5,.7) 45%,rgba(5,5,5,.2) 100%)}
 .contact-content{max-width:700px}
 .contact h2{font-size:clamp(45px,7vw,85px);letter-spacing:-4px;line-height:1}
@@ -239,8 +238,9 @@ nav{height:65px}
 .graphic-lightbox img{max-width:94vw;max-height:85vh}
 .graphic-lightbox-close{top:12px;right:18px}
 .footer-inner{flex-direction:column;gap:10px}
-.contact-grid{grid-template-columns:1fr;gap:35px}
-.contact-photo{max-width:340px}
+.contact{--pogi-pos:70% center}
+.contact .bg-overlay{background:rgba(5,5,5,.6)}
+.brief-sec{padding:70px 0}
 }
 @media(max-width:500px){
 .nav-links{gap:9px}
@@ -446,12 +446,26 @@ nav{height:65px}
 <!-- CONTACT -->
 <section class="section contact" id="contact">
 <div class="bg-image"></div><div class="bg-overlay"></div>
-<div class="container contact-grid">
+<div class="container">
 <div class="contact-content reveal">
 <div class="section-label">Let's Work Together</div>
 <h2>Have a project<br>in mind?</h2>
 <p>Send me your project details and let's talk about how I can help bring your content to life.</p>
 
+<div class="contact-links">
+<a href="mailto:jiehawtu@gmail.com" class="contact-link">Email Me →</a>
+<a href="https://www.facebook.com/jiehawtu13" target="_blank" rel="noopener" class="contact-link">Facebook →</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- BRIEF -->
+<section class="section brief-sec" id="brief">
+<div class="container">
+<div class="section-label reveal">Quick Brief</div>
+<h2 class="section-title reveal">Build your brief.</h2>
+<div class="reveal">
 <div class="brief">
 <div class="brief-row" data-key="Service"><span>I need</span><button type="button" class="chip">Video Editing</button><button type="button" class="chip">Graphic Design</button><button type="button" class="chip">Website</button></div>
 <div class="brief-row" data-key="Format"><span>Format</span><button type="button" class="chip">Short-form</button><button type="button" class="chip">Long-form</button><button type="button" class="chip">Thumbnails/Posters</button></div>
@@ -459,13 +473,7 @@ nav{height:65px}
 <div class="brief-preview" id="briefPreview">Pick an option above to build your message…</div>
 <a id="briefSend" class="contact-link brief-send" href="mailto:jiehawtu@gmail.com">Send Brief →</a>
 </div>
-
-<div class="contact-links">
-<a href="mailto:jiehawtu@gmail.com" class="contact-link">Email Me →</a>
-<a href="https://www.facebook.com/jiehawtu13" target="_blank" rel="noopener" class="contact-link">Facebook →</a>
 </div>
-</div>
-<figure class="contact-photo reveal"><img src="pogi.jpg" alt="JieHaw" onerror="if(this.dataset.t){this.parentNode.style.display='none'}else{this.dataset.t=1;this.src='POGI.jpg'}"><figcaption>The editor behind the edits</figcaption></figure>
 </div>
 </section>
 
