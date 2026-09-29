@@ -173,6 +173,19 @@ nav{position:fixed;top:0;left:0;width:100%;height:76px;display:flex;align-items:
 #cgRange{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
 .cg-presets{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
 
+/* tools: interactive */
+.tool{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.tool.reveal.active{transition:transform .15s ease-out,background .35s,border-color .35s,box-shadow .35s}
+.tool-icon{transition:.3s}
+.tool:hover .tool-icon,.tool.open .tool-icon{background:var(--c);color:#000;border-color:var(--c);box-shadow:0 0 28px var(--c);transform:scale(1.12)}
+.tool:hover .tool-name{color:#fff}
+.tool.open{border-color:var(--c);box-shadow:0 0 30px -10px var(--c)}
+.tool-use{display:none;font-size:11px;line-height:1.4;color:#ccc;text-align:center;padding:0 10px}
+.tool.open .tool-name{display:none}
+.tool.open .tool-use{display:block}
+.tool.open .tool-icon{animation:toolPop .4s ease}
+@keyframes toolPop{0%{transform:scale(.8)}60%{transform:scale(1.25)}100%{transform:scale(1.12)}}
+
 /* ===== ABOUT ===== */
 .about{background:#070707}
 .about .bg-image{background-image:url("https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=2200&q=85");opacity:.14}
@@ -400,12 +413,12 @@ nav{height:65px}
 <div class="section-label reveal">Tools I Use</div>
 <h2 class="section-title reveal">My toolkit.</h2>
 <div class="tools-grid">
-<div class="tool reveal"><div class="tool-icon">Pr</div><div class="tool-name">Premiere Pro</div></div>
-<div class="tool reveal"><div class="tool-icon">Ae</div><div class="tool-name">After Effects</div></div>
-<div class="tool reveal"><div class="tool-icon">C</div><div class="tool-name">CapCut</div></div>
-<div class="tool reveal"><div class="tool-icon">Da</div><div class="tool-name">DaVinci Resolve</div></div>
-<div class="tool reveal"><div class="tool-icon">Ps</div><div class="tool-name">Photoshop</div></div>
-<div class="tool reveal"><div class="tool-icon">Ca</div><div class="tool-name">Canva</div></div>
+<div class="tool reveal" style="--c:#9999FF"><div class="tool-icon">Pr</div><div class="tool-name">Premiere Pro</div><div class="tool-use">Main editing: cuts, pacing and sound</div></div>
+<div class="tool reveal" style="--c:#CF96FD"><div class="tool-icon">Ae</div><div class="tool-name">After Effects</div><div class="tool-use">Motion graphics and visual effects</div></div>
+<div class="tool reveal" style="--c:#FFFFFF"><div class="tool-icon">C</div><div class="tool-name">CapCut</div><div class="tool-use">Fast short-form edits and captions</div></div>
+<div class="tool reveal" style="--c:#FF6B57"><div class="tool-icon">Da</div><div class="tool-name">DaVinci Resolve</div><div class="tool-use">Color grading and finishing</div></div>
+<div class="tool reveal" style="--c:#31A8FF"><div class="tool-icon">Ps</div><div class="tool-name">Photoshop</div><div class="tool-use">Thumbnails, posters and retouching</div></div>
+<div class="tool reveal" style="--c:#00C4CC"><div class="tool-icon">Ca</div><div class="tool-name">Canva</div><div class="tool-use">Quick social media graphics</div></div>
 
 </div>
 </div>
@@ -627,6 +640,17 @@ document.querySelectorAll('#cgPresets .chip').forEach(b=>b.addEventListener('cli
   document.querySelectorAll('#cgPresets .chip').forEach(c=>c.classList.remove('on'));
   b.classList.add('on'); cgGraded.style.filter=CG[b.textContent]; cgName.textContent=b.textContent;
 }));
+
+/* TOOLS: tilt + click to reveal */
+document.querySelectorAll('.tool').forEach(el=>{
+  el.addEventListener('pointermove',e=>{
+    if(e.pointerType!=='mouse')return;
+    const r=el.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+    el.style.transform=`perspective(600px) rotateX(${-y*14}deg) rotateY(${x*14}deg) translateY(-6px)`;
+  });
+  el.addEventListener('pointerleave',()=>el.style.transform='');
+  el.addEventListener('click',()=>el.classList.toggle('open'));
+});
 
 /* CURSOR GLOW (SERVICES) */
 document.querySelectorAll('.service').forEach(el=>{
