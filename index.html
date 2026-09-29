@@ -332,6 +332,47 @@ section.process .step{padding:24px 0}
 section.process .step-node{left:-36px;top:34px}
 }
 
+/* ===== SHORT-FORM SPOTLIGHT ===== */
+@property --ang{syntax:"<angle>";initial-value:0deg;inherits:false}
+.shorts{background:radial-gradient(ellipse at 75% 50%,#101018 0%,#070707 65%)}
+.short-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
+.hot{display:inline-block;width:8px;height:8px;margin-right:10px;border-radius:50%;background:#ff3b3b;box-shadow:0 0 12px #ff3b3b;animation:hotPulse 1.4s ease-in-out infinite}
+@keyframes hotPulse{50%{transform:scale(1.5);opacity:.5}}
+.short-copy .section-title{margin-bottom:24px}
+.short-lead{color:#aaa;font-size:17px;line-height:1.7;max-width:520px}
+.short-list{list-style:none;margin:26px 0 34px}
+.short-list li{position:relative;padding:12px 0 12px 30px;color:#ccc;font-size:15px;border-bottom:1px solid rgba(255,255,255,.08)}
+.short-list li::before{content:"";position:absolute;left:0;top:50%;width:10px;height:10px;margin-top:-5px;border-radius:50%;background:#fff;box-shadow:0 0 12px #fff}
+.short-cta{border:0;cursor:pointer;font-family:inherit}
+.phone-wrap{position:relative;width:min(300px,72vw);margin:0 auto}
+.phone-wrap::before,.phone-wrap::after{content:"";position:absolute;border-radius:44px;background:conic-gradient(from var(--ang),#19f0ff,#ff3cc7,#c6ff3d,#19f0ff);animation:ringSpin 6s linear infinite}
+.phone-wrap::before{inset:-6px;filter:blur(22px);opacity:.6}
+.phone-wrap::after{inset:-2px}
+@keyframes ringSpin{to{--ang:360deg}}
+.phone{position:relative;z-index:1;aspect-ratio:9/16;overflow:hidden;cursor:pointer;border:7px solid #0d0d0d;border-radius:40px;background:#000;box-shadow:0 30px 80px rgba(0,0,0,.7)}
+.phone::before{content:"";position:absolute;top:9px;left:50%;z-index:4;width:70px;height:20px;margin-left:-35px;border-radius:12px;background:#000}
+.phone video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ph-tag{position:absolute;top:38px;left:14px;z-index:3;padding:5px 10px;border-radius:999px;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);font-size:10px;font-weight:700;letter-spacing:2px}
+.snd{position:absolute;left:0;right:0;bottom:18px;z-index:3;text-align:center;font-size:11px;font-weight:600;letter-spacing:1px;text-shadow:0 1px 8px #000}
+.ph-bar{position:absolute;left:0;right:0;bottom:0;z-index:3;height:3px;background:rgba(255,255,255,.25)}
+.ph-bar u{display:block;height:100%;width:0;background:#fff}
+.ph-empty{display:none;position:absolute;inset:0;z-index:2;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px;text-align:center;background:linear-gradient(160deg,#1b1b22,#08080b)}
+.ph-empty b{font-size:18px}
+.ph-empty span{font-size:11px;line-height:1.6;color:#888}
+.phone.nofile video,.phone.nofile .snd,.phone.nofile .ph-bar{display:none}
+.phone.nofile .ph-empty{display:flex}
+.fchip{position:absolute;z-index:2;padding:8px 14px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(10,10,10,.75);backdrop-filter:blur(8px);font-size:12px;font-weight:600;white-space:nowrap;animation:chipFloat 5s ease-in-out infinite}
+.fchip.c1{left:-54px;top:16%}
+.fchip.c2{right:-46px;top:44%;animation-delay:-1.6s}
+.fchip.c3{left:-40px;bottom:14%;animation-delay:-3.2s}
+@keyframes chipFloat{50%{transform:translateY(-12px)}}
+@media(max-width:800px){
+.short-grid{grid-template-columns:1fr;gap:50px}
+.fchip.c1{left:-12px}.fchip.c2{right:-12px}.fchip.c3{left:-8px}
+}
+@media(max-width:500px){.fchip{display:none}}
+@media(prefers-reduced-motion:reduce){.phone-wrap::before,.phone-wrap::after,.fchip,.hot{animation:none}}
+
 /* ===== ABOUT ===== */
 .about{background:#070707}
 .about .bg-image{background-image:url("https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=2200&q=85");opacity:.14}
@@ -514,6 +555,33 @@ nav{height:65px}
 <a href="https://youtu.be/SYHTNp8abIY" target="_blank" rel="noopener" class="project reveal"><img src="https://img.youtube.com/vi/SYHTNp8abIY/maxresdefault.jpg" alt="Jazzyventure Vlog - Long Form Video Editing"><div class="project-overlay"><div class="project-label">Jazzyventure Vlog</div><div class="project-title">Long Form Video Editing→</div></div></a>
 <a href="https://www.facebook.com/share/r/1KVEDYZEEA/" target="_blank" rel="noopener" class="project reveal"><img src="krista.jpg" alt="Krista Miller - Short Form/Portrait Editing"><div class="project-overlay"><div class="project-label">Krista Miller</div><div class="project-title">Short Form/Portrait Editing→</div></div></a>
 
+</div>
+</div>
+</section>
+
+<!-- SHORT-FORM SPOTLIGHT -->
+<section class="section shorts" id="shorts">
+<div class="container short-grid">
+<div class="short-copy">
+<div class="section-label reveal"><span class="hot"></span>In Demand</div>
+<h2 class="section-title reveal">Short-form that stops the scroll.</h2>
+<p class="short-lead reveal">Short-form is what every brand and creator wants right now. I edit vertical videos built to hold attention from the very first second.</p>
+<ul class="short-list reveal">
+<li>Hooks that grab viewers in the first 3 seconds</li>
+<li>Captions and motion that keep people watching</li>
+<li>Vertical-first pacing for TikTok, Reels and Shorts</li>
+</ul>
+<button type="button" class="btn btn-primary short-cta reveal" id="shortCta">Get a short-form edit →</button>
+</div>
+<div class="phone-wrap reveal">
+<span class="fchip c1">Hook in 3s</span><span class="fchip c2">Captions</span><span class="fchip c3">Sound design</span>
+<div class="phone">
+<video src="short1.mp4" muted loop playsinline preload="metadata"></video>
+<div class="ph-tag">SHORT-FORM</div>
+<div class="snd">♪ Tap for sound</div>
+<div class="ph-bar"><u></u></div>
+<div class="ph-empty"><b>Add your video</b><span>Put short1.mp4 in the same folder as index.html</span></div>
+</div>
 </div>
 </div>
 </section>
@@ -924,6 +992,34 @@ new IntersectionObserver(([e])=>{inContact=e.isIntersecting;hireUpdate()},{thres
   window.addEventListener('scroll',upd,{passive:true});
   window.addEventListener('resize',upd);
   upd();
+})();
+
+/* SHORT-FORM VIDEO */
+(function(){
+  const ph=document.querySelector('.phone'); if(!ph)return;
+  const v=ph.querySelector('short.mp4'), snd=ph.querySelector('.snd'), bar=ph.querySelector('.ph-bar u');
+  const reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const bad=()=>{if(v.error||v.networkState===3)ph.classList.add('nofile')};
+  v.addEventListener('error',bad); setTimeout(bad,2000);
+  if(reduce)v.controls=true;
+  new IntersectionObserver(([e])=>{
+    if(ph.classList.contains('nofile')||reduce)return;
+    if(e.isIntersecting){v.play().catch(()=>{})}else{v.pause()}
+  },{threshold:.55}).observe(ph);
+  ph.addEventListener('click',()=>{
+    if(ph.classList.contains('nofile')||reduce)return;
+    v.muted=!v.muted;
+    snd.textContent=v.muted?'♪ Tap for sound':'♪ Sound on';
+    if(v.paused)v.play().catch(()=>{});
+  });
+  v.addEventListener('timeupdate',()=>{if(v.duration)bar.style.width=(v.currentTime/v.duration*100)+'%'});
+  document.getElementById('shortCta').addEventListener('click',()=>{
+    [['Service','Video Editing'],['Format','Short-form']].forEach(([k,label])=>{
+      const c=[...document.querySelectorAll('.brief-row[data-key="'+k+'"] .chip')].find(x=>x.textContent===label);
+      if(c&&!c.classList.contains('on'))c.click();
+    });
+    document.getElementById('brief').scrollIntoView({behavior:'smooth'});
+  });
 })();
 
 /* CURSOR GLOW (SERVICES) */
