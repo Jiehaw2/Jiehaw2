@@ -225,6 +225,34 @@ nav{position:fixed;top:0;left:0;width:100%;height:76px;display:flex;align-items:
 .hire::after{content:"";position:absolute;inset:0;border-radius:999px;border:1px solid rgba(255,255,255,.7);animation:hirePulse 2.4s ease-out infinite;pointer-events:none}
 @keyframes hirePulse{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.35,1.6);opacity:0}}
 
+/* ===== CINEMATIC INTRO ===== */
+html.intro-lock{overflow:hidden}
+html.intro-hold .hero-content{animation:none;opacity:0}
+#intro{position:fixed;inset:0;z-index:20000;transition:opacity .4s}
+#intro.skip{opacity:0}
+.in-half{position:absolute;left:0;right:0;height:50.3%;background:#000;animation:.9s cubic-bezier(.77,0,.18,1) 2.3s forwards}
+.in-top{top:0;animation-name:inUp}
+.in-bot{bottom:0;animation-name:inDown}
+@keyframes inUp{to{transform:translateY(-101%)}}
+@keyframes inDown{to{transform:translateY(101%)}}
+.in-center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center}
+.in-title{opacity:0;animation:inTitle 1.5s ease .3s forwards}
+.in-name{font-size:clamp(44px,11vw,96px);font-weight:800;letter-spacing:-3px;line-height:1}
+.in-name span{opacity:.45}
+.in-sub{margin-top:16px;font-size:11px;letter-spacing:6px;text-transform:uppercase;color:#888}
+@keyframes inTitle{0%{opacity:0;transform:scale(.94)}30%{opacity:1;transform:scale(1)}75%{opacity:1}100%{opacity:0;transform:scale(1.04)}}
+.in-line{position:absolute;top:50%;left:50%;height:2px;width:0;transform:translate(-50%,-50%);background:#fff;box-shadow:0 0 20px #fff,0 0 60px rgba(255,255,255,.6);animation:inLine .6s ease 1.7s forwards,inLineOut .3s ease 2.3s forwards}
+@keyframes inLine{to{width:100%}}
+@keyframes inLineOut{to{opacity:0}}
+.in-ui{position:absolute;inset:0;animation:inLineOut .3s ease 2.2s forwards}
+.in-ui::before{content:"";position:absolute;inset:14px;border:1px solid rgba(255,255,255,.16);pointer-events:none}
+.in-rec{position:absolute;top:28px;left:30px;display:flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:3px;color:#fff;opacity:.85}
+.in-rec i{width:9px;height:9px;border-radius:50%;background:#f33;animation:inBlink 1s steps(2) infinite}
+@keyframes inBlink{50%{opacity:0}}
+.in-tc{position:absolute;top:28px;right:30px;font-size:12px;letter-spacing:2px;color:#fff;opacity:.85;font-variant-numeric:tabular-nums}
+.in-skip{position:absolute;bottom:30px;right:30px;padding:9px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.3);background:none;color:#fff;font:600 11px Inter,sans-serif;letter-spacing:2px;cursor:pointer}
+.in-skip:hover{background:#fff;color:#000}
+
 /* ===== FOOTER ===== */
 footer{padding:30px 0;border-top:1px solid rgba(255,255,255,.08);background:#050505;position:relative;z-index:1}
 .footer-inner{width:90%;max-width:1200px;margin:auto;display:flex;justify-content:space-between;color:#555;font-size:11px}
@@ -276,6 +304,29 @@ nav{height:65px}
 </style>
 </head>
 <body>
+
+<!-- CINEMATIC INTRO -->
+<div id="intro">
+<div class="in-half in-top"></div><div class="in-half in-bot"></div>
+<div class="in-center"><div class="in-title"><div class="in-name">JieHaw<span>2</span></div><div class="in-sub">Video Editor • Graphic Designer</div></div></div>
+<div class="in-line"></div>
+<div class="in-ui"><div class="in-rec"><i></i>REC</div><div class="in-tc" id="inTc">00:00:00:00</div><button type="button" class="in-skip" id="inSkip">Skip ›</button></div>
+</div>
+<script>
+(function(){
+  var o=document.getElementById('intro'),h=document.documentElement,seen=false;
+  try{seen=sessionStorage.getItem('introSeen')}catch(e){}
+  if(seen||(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)){o.remove();return}
+  try{sessionStorage.setItem('introSeen','1')}catch(e){}
+  h.classList.add('intro-lock','intro-hold');
+  var t0=performance.now(),tc=document.getElementById('inTc'),p=function(n){return String(n).padStart(2,'0')};
+  var iv=setInterval(function(){var ms=performance.now()-t0;tc.textContent='00:00:'+p(Math.floor(ms/1000))+':'+p(Math.floor(ms%1000/1000*24))},40);
+  var holdT=setTimeout(function(){h.classList.remove('intro-hold')},2400),endT=setTimeout(done,3300);
+  function done(){clearInterval(iv);clearTimeout(holdT);clearTimeout(endT);h.classList.remove('intro-lock','intro-hold');o.remove()}
+  document.getElementById('inSkip').onclick=function(){o.classList.add('skip');h.classList.remove('intro-hold');setTimeout(done,400)};
+})();
+</script>
+
 
 <!-- ANIMATED BACKGROUND -->
 <div class="ambient-bg">
