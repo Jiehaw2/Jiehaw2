@@ -361,6 +361,11 @@ section.process .step-node{left:-36px;top:34px}
 .ph-empty span{font-size:11px;line-height:1.6;color:#888}
 .phone.nofile video,.phone.nofile .snd,.phone.nofile .ph-bar{display:none}
 .phone.nofile .ph-empty{display:flex}
+.ph-play{display:none;position:absolute;inset:0;z-index:3;align-items:center;justify-content:center;background:rgba(0,0,0,.25)}
+.ph-play i{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.92);box-shadow:0 0 30px rgba(255,255,255,.5);position:relative}
+.ph-play i::after{content:"";position:absolute;left:25px;top:19px;border-left:19px solid #000;border-top:13px solid transparent;border-bottom:13px solid transparent}
+.phone.paused:not(.nofile) .ph-play{display:flex}
+.ph-empty em{color:#ddd;font-style:normal}
 .fchip{position:absolute;z-index:2;padding:8px 14px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(10,10,10,.75);backdrop-filter:blur(8px);font-size:12px;font-weight:600;white-space:nowrap;animation:chipFloat 5s ease-in-out infinite}
 .fchip.c1{left:-54px;top:16%}
 .fchip.c2{right:-46px;top:44%;animation-delay:-1.6s}
@@ -576,11 +581,12 @@ nav{height:65px}
 <div class="phone-wrap reveal">
 <span class="fchip c1">Hook in 3s</span><span class="fchip c2">Captions</span><span class="fchip c3">Sound design</span>
 <div class="phone">
-<video src="short1.mp4" muted loop playsinline preload="metadata"></video>
+<video src="short.mp4#t=0.1" muted loop playsinline preload="auto"></video>
+<div class="ph-play"><i></i></div>
 <div class="ph-tag">SHORT-FORM</div>
 <div class="snd">♪ Tap for sound</div>
 <div class="ph-bar"><u></u></div>
-<div class="ph-empty"><b>Add your video</b><span>Put short1.mp4 in the same folder as index.html</span></div>
+<div class="ph-empty"><b>Video not loading</b><span>Check that <em>short.mp4</em> is in the same folder as index.html, the name matches exactly, and it is an H.264 MP4.</span></div>
 </div>
 </div>
 </div>
@@ -997,20 +1003,30 @@ new IntersectionObserver(([e])=>{inContact=e.isIntersecting;hireUpdate()},{thres
 /* SHORT-FORM VIDEO */
 (function(){
   const ph=document.querySelector('.phone'); if(!ph)return;
-  const v=ph.querySelector('short.mp4'), snd=ph.querySelector('.snd'), bar=ph.querySelector('.ph-bar u');
+  const v=ph.querySelector('video'), snd=ph.querySelector('.snd'), bar=ph.querySelector('.ph-bar u');
   const reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const bad=()=>{if(v.error||v.networkState===3)ph.classList.add('nofile')};
-  v.addEventListener('error',bad); setTimeout(bad,2000);
+  let inView=false;
+  const ready=()=>v.readyState>=2;
+  const bad=()=>{if(v.error||!ready())ph.classList.add('nofile')};
+  const good=()=>{ph.classList.remove('nofile');if(inView&&!reduce)v.play().catch(()=>{})};
+  v.addEventListener('error',bad);
+  v.addEventListener('loadeddata',good);
+  v.addEventListener('canplay',good);
+  setTimeout(bad,4000);
+  v.addEventListener('play',()=>ph.classList.remove('paused'));
+  v.addEventListener('pause',()=>ph.classList.add('paused'));
+  ph.classList.add('paused');
   if(reduce)v.controls=true;
   new IntersectionObserver(([e])=>{
+    inView=e.isIntersecting;
     if(ph.classList.contains('nofile')||reduce)return;
-    if(e.isIntersecting){v.play().catch(()=>{})}else{v.pause()}
-  },{threshold:.55}).observe(ph);
+    if(inView){v.play().catch(()=>{})}else{v.pause()}
+  },{threshold:.4}).observe(ph);
   ph.addEventListener('click',()=>{
     if(ph.classList.contains('nofile')||reduce)return;
+    if(v.paused){v.play().catch(()=>{});return}
     v.muted=!v.muted;
     snd.textContent=v.muted?'♪ Tap for sound':'♪ Sound on';
-    if(v.paused)v.play().catch(()=>{});
   });
   v.addEventListener('timeupdate',()=>{if(v.duration)bar.style.width=(v.currentTime/v.duration*100)+'%'});
   document.getElementById('shortCta').addEventListener('click',()=>{
