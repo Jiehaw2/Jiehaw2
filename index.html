@@ -186,6 +186,21 @@ nav{position:fixed;top:0;left:0;width:100%;height:76px;display:flex;align-items:
 .tool.open .tool-icon{animation:toolPop .4s ease}
 @keyframes toolPop{0%{transform:scale(.8)}60%{transform:scale(1.25)}100%{transform:scale(1.12)}}
 
+/* tools: idle glow + stronger glow when opened */
+@keyframes toolIdle{0%,100%{box-shadow:0 0 0 0 transparent;border-color:rgba(255,255,255,.18)}50%{box-shadow:0 0 18px -1px var(--c);border-color:var(--c)}}
+@keyframes toolStrong{0%,100%{box-shadow:0 0 32px 2px var(--c),0 0 70px -10px var(--c)}50%{box-shadow:0 0 52px 8px var(--c),0 0 110px var(--c)}}
+@media(prefers-reduced-motion:no-preference){
+.tool-icon{animation:toolIdle 2.8s ease-in-out infinite}
+.tool:nth-child(2) .tool-icon{animation-delay:.45s}
+.tool:nth-child(3) .tool-icon{animation-delay:.9s}
+.tool:nth-child(4) .tool-icon{animation-delay:1.35s}
+.tool:nth-child(5) .tool-icon{animation-delay:1.8s}
+.tool:nth-child(6) .tool-icon{animation-delay:2.25s}
+}
+.tool:hover .tool-icon{animation:none}
+.tool.open{box-shadow:0 0 50px -8px var(--c);background:#121212}
+.tool.open .tool-icon,.tool.open:hover .tool-icon{animation:toolPop .4s ease,toolStrong 1.8s ease-in-out .4s infinite}
+
 /* ===== ABOUT ===== */
 .about{background:#070707}
 .about .bg-image{background-image:url("https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=2200&q=85");opacity:.14}
