@@ -715,8 +715,8 @@ nav{height:65px}
 <div class="cg reveal">
 <div class="tl-top"><span id="cgName" style="font:600 24px Inter,sans-serif;color:#fff">Cinematic</span><span>Drag to compare raw vs graded, then try a look.</span></div>
 <div class="cg-stage" id="cgStage">
-<img id="cgRaw" src="grade.jpg" onerror="gradeNext(this)" alt="Raw footage">
-<img id="cgGraded" src="grade.jpg" onerror="gradeNext(this)" alt="Color graded footage">
+<img id="cgRaw" src="pasko.jpg" onerror="gradeNext(this)" alt="Raw footage">
+<img id="cgGraded" src="pasko.jpg" onerror="gradeNext(this)" alt="Color graded footage">
 <div class="cg-tag l">RAW</div><div class="cg-tag r">GRADED</div>
 <div class="cg-line"></div>
 <input type="range" id="cgRange" min="0" max="100" value="50" aria-label="Compare raw and graded">
@@ -914,7 +914,7 @@ function updateBrief(){
 }
 
 /* COLOR GRADE IMAGE: tries grade.jpg, grade.jpeg, grade.png, then the placeholder */
-const GRADE_TRY=['grade.jpg','grade.jpeg','grade.png','grade.webp','Grade.jpg','Grade.jpeg','Grade.png','https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1400&q=80'];
+const GRADE_TRY=['pasko.jpg','grade.jpg','grade.jpeg','grade.png','grade.webp','Grade.jpg','Grade.jpeg','Grade.png','https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1400&q=80'];
 function gradeNext(img){
   const i=(+img.dataset.i||0)+1; img.dataset.i=i;
   if(i>=GRADE_TRY.length){img.onerror=null;return}
