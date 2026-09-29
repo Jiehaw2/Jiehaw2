@@ -155,22 +155,13 @@ nav{position:fixed;top:0;left:0;width:100%;height:76px;display:flex;align-items:
 .tool-icon{width:50px;height:50px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.18);font-weight:800;font-size:16px}
 .tool-name{color:#888;font-size:12px}
 
-/* ===== TIMELINE PLAYGROUND ===== */
+/* ===== PLAYGROUND ===== */
 .playground{background:#070707}
-.tl{padding:24px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);border-radius:10px}
 .tl-top{display:flex;gap:16px;align-items:center;margin-bottom:22px;font-size:13px;color:#aaa}
-#tlTime{font:600 24px Inter,sans-serif;color:#fff;font-variant-numeric:tabular-nums}
-.tl-track{position:relative;height:90px;cursor:pointer;touch-action:none;margin-bottom:22px}
-#tlClips{display:flex;gap:3px;height:100%}
-.tl-clip{border-radius:6px;padding:10px;font-size:11px;font-weight:600;color:#000;overflow:hidden;white-space:nowrap;min-width:0;transition:flex-grow .35s}
-.tl-clip.sel{outline:2px solid #fff;outline-offset:2px}
-.tl-play{position:absolute;top:-8px;bottom:-8px;width:2px;background:#fff;box-shadow:0 0 12px #fff;pointer-events:none}
-.tl-play::before{content:"";position:absolute;top:0;left:-5px;border:6px solid transparent;border-top-color:#fff;border-bottom:0}
-.tl-btns{display:flex;gap:8px;flex-wrap:wrap}
 @media(max-width:800px){.tl-top{flex-direction:column;align-items:flex-start;gap:6px}}
 
 /* ===== COLOR GRADE ===== */
-.cg{margin-top:28px;padding:24px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);border-radius:10px}
+.cg{margin-top:0;padding:24px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);border-radius:10px}
 .cg-stage{position:relative;aspect-ratio:16/9;overflow:hidden;border-radius:8px;background:#111;user-select:none;--p:50%}
 .cg-stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
 #cgRaw{filter:contrast(.8) saturate(.55) brightness(1.08)}
@@ -419,17 +410,7 @@ nav{height:65px}
 <section class="section playground" id="playground">
 <div class="container">
 <div class="section-label reveal">Playground</div>
-<h2 class="section-title reveal">Cut it yourself.</h2>
-<div class="tl reveal">
-<div class="tl-top"><span id="tlTime">00:00</span><span id="tlMsg">Tap the timeline to move the playhead, then hit Split.</span></div>
-<div class="tl-track" id="tlTrack"><div id="tlClips"></div><div class="tl-play" id="tlPlay"></div></div>
-<div class="tl-btns">
-<button type="button" class="chip" id="tlSplit">✂ Split</button>
-<button type="button" class="chip" id="tlDel">Delete clip</button>
-<button type="button" class="chip" id="tlPlayBtn">▶ Play</button>
-<button type="button" class="chip" id="tlReset">Reset</button>
-</div>
-</div>
+<h2 class="section-title reveal">Color grade it.</h2>
 <div class="cg reveal">
 <div class="tl-top"><span id="cgName" style="font:600 24px Inter,sans-serif;color:#fff">Cinematic</span><span>Drag to compare raw vs graded, then try a look.</span></div>
 <div class="cg-stage" id="cgStage">
@@ -619,51 +600,6 @@ function updateBrief(){
     encodeURIComponent('Project Inquiry – ' + (picks.Service || 'New Project')) +
     '&body=' + encodeURIComponent(body);
 }
-
-/* TIMELINE PLAYGROUND */
-const TL_START=[{n:'Intro',l:6,c:'#f2f2f2'},{n:'B-roll',l:9,c:'#cfcfcf'},{n:'Interview',l:10,c:'#a8a8a8'},{n:'Outro',l:5,c:'#e0e0e0'}];
-let clips=TL_START.map(c=>({...c})), tlT=0, tlRaf=null;
-const tlClips=document.getElementById('tlClips'), tlTrack=document.getElementById('tlTrack'),
-      tlPlay=document.getElementById('tlPlay'), tlTime=document.getElementById('tlTime'), tlMsg=document.getElementById('tlMsg');
-const tlTotal=()=>clips.reduce((s,c)=>s+c.l,0);
-const say=m=>tlMsg.textContent=m;
-function tlFind(){let a=0;for(let i=0;i<clips.length;i++){if(tlT<a+clips[i].l||i===clips.length-1)return{i,off:tlT-a};a+=clips[i].l}}
-function tlRender(){
-  const tot=tlTotal(); if(tlT>tot)tlT=tot;
-  const sel=clips.length?tlFind().i:-1;
-  tlClips.innerHTML=clips.map((c,i)=>`<div class="tl-clip${i===sel?' sel':''}" style="flex-grow:${c.l};background:${c.c}">${c.n}</div>`).join('');
-  tlPlay.style.left=(tot?tlT/tot*100:0)+'%';
-  const s=Math.floor(tlT);tlTime.textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
-}
-function tlSeek(e){const r=tlTrack.getBoundingClientRect();tlT=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width))*tlTotal();tlRender()}
-let tlDrag=false;
-tlTrack.addEventListener('pointerdown',e=>{tlDrag=true;tlStop();tlSeek(e)});
-window.addEventListener('pointermove',e=>{if(tlDrag)tlSeek(e)});
-window.addEventListener('pointerup',()=>tlDrag=false);
-document.getElementById('tlSplit').onclick=()=>{
-  if(!clips.length)return say('Nothing to cut. Hit Reset!');
-  const {i,off}=tlFind(), c=clips[i];
-  if(off<.5||c.l-off<.5)return say('Too close to an edge. Move the playhead a bit.');
-  clips.splice(i,1,{...c,l:off},{...c,l:c.l-off,c:c.c});
-  tlRender(); say(clips.length>=7?'Now that is a fast-paced edit. 🔥':'Nice cut! ✂');
-};
-document.getElementById('tlDel').onclick=()=>{
-  if(clips.length<2)return say('Every edit needs at least one clip.');
-  const {i}=tlFind(); clips.splice(i,1); tlRender(); say('Ripple delete. Tighter pacing already.');
-};
-function tlStop(){if(tlRaf){cancelAnimationFrame(tlRaf);tlRaf=null;document.getElementById('tlPlayBtn').textContent='▶ Play'}}
-document.getElementById('tlPlayBtn').onclick=()=>{
-  if(tlRaf)return tlStop();
-  if(tlT>=tlTotal()-.05)tlT=0;
-  document.getElementById('tlPlayBtn').textContent='❚❚ Pause';
-  let last=performance.now();
-  const step=now=>{tlT+=(now-last)/1000*(tlTotal()/8);last=now;
-    if(tlT>=tlTotal()){tlT=tlTotal();tlRender();tlStop();return say('That is a wrap. 🎬')}
-    tlRender();tlRaf=requestAnimationFrame(step)};
-  tlRaf=requestAnimationFrame(step);
-};
-document.getElementById('tlReset').onclick=()=>{tlStop();clips=TL_START.map(c=>({...c}));tlT=0;tlRender();say('Fresh footage loaded.')};
-tlRender();
 
 /* COLOR GRADE */
 const CG={'Cinematic':'contrast(1.25) saturate(.85) sepia(.25) hue-rotate(-10deg) brightness(.92)',
