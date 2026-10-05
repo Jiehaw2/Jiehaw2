@@ -386,6 +386,17 @@ section.process .step-node{left:-36px;top:34px}
 @media(max-width:500px){.fchip{display:none}}
 @media(prefers-reduced-motion:reduce){.phone-wrap::before,.phone-wrap::after,.fchip,.hot{animation:none}}
 
+/* two phones */
+.phones{display:flex;gap:22px;justify-content:center;align-items:flex-start}
+.phones .phone-wrap{width:min(215px,41vw);margin:0}
+.phones .phone-wrap.ph-two{margin-top:56px}
+.phone-wrap.ph-two::before,.phone-wrap.ph-two::after{animation-delay:-3s}
+.phones .phone-wrap{aspect-ratio:9/16}
+.phones .phone{position:absolute;inset:0;aspect-ratio:auto;border-width:6px;border-radius:34px}
+.phones .phone-wrap::before,.phones .phone-wrap::after{border-radius:38px}
+.phones .ph-empty{padding:14px}
+.phones .ph-empty b{font-size:15px}
+
 /* ===== ABOUT ===== */
 .about{background:#070707}
 .about .bg-image{background-image:url("https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=2200&q=85");opacity:.14}
@@ -620,15 +631,24 @@ nav{height:65px}
 </ul>
 <button type="button" class="btn btn-primary short-cta reveal" id="shortCta">Get a short-form edit →</button>
 </div>
-<div class="phone-wrap reveal">
-<span class="fchip c1">Hook in 3s</span><span class="fchip c2">Captions</span><span class="fchip c3">Sound design</span>
-<div class="phone">
-<video src="short.mp4#t=0.1" muted loop playsinline preload="auto"></video>
+<div class="phones reveal">
+<div class="phone-wrap"><span class="fchip c1">Hook in 3s</span><span class="fchip c3">Sound design</span>
+<div class="phone"><video src="short.mp4#t=0.1" muted loop playsinline preload="auto"></video>
 <div class="ph-play"><i></i></div>
 <div class="ph-tag">SHORT-FORM</div>
 <div class="snd">♪ Tap for sound</div>
 <div class="ph-bar"><u></u></div>
 <div class="ph-empty"><b>Video not loading</b><span>Check that <em>short.mp4</em> is in the same folder as index.html, the name matches exactly, and it is an H.264 MP4.</span></div>
+</div>
+</div>
+<div class="phone-wrap ph-two"><span class="fchip c2">Captions</span>
+<div class="phone"><video src="kape.mp4#t=0.1" muted loop playsinline preload="auto"></video>
+<div class="ph-play"><i></i></div>
+<div class="ph-tag">SHORT-FORM</div>
+<div class="snd">♪ Tap for sound</div>
+<div class="ph-bar"><u></u></div>
+<div class="ph-empty"><b>Video not loading</b><span>Check that <em>kape.mp4</em> is in the same folder as index.html, the name matches exactly, and it is an H.264 MP4.</span></div>
+</div>
 </div>
 </div>
 </div>
@@ -976,35 +996,38 @@ new IntersectionObserver(([e])=>{inContact=e.isIntersecting;hireUpdate()},{thres
   upd();
 })();
 
-/* SHORT-FORM VIDEO */
+/* SHORT-FORM VIDEO (two phones) */
 (function(){
-  const ph=document.querySelector('.phone'); if(!ph)return;
-  const v=ph.querySelector('video'), snd=ph.querySelector('.snd'), bar=ph.querySelector('.ph-bar u');
+  const phones=[...document.querySelectorAll('.phone')]; if(!phones.length)return;
   const reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let inView=false;
-  const ready=()=>v.readyState>=2;
-  const bad=()=>{if(v.error||!ready())ph.classList.add('nofile')};
-  const good=()=>{ph.classList.remove('nofile');if(inView&&!reduce)v.play().catch(()=>{})};
-  v.addEventListener('error',bad);
-  v.addEventListener('loadeddata',good);
-  v.addEventListener('canplay',good);
-  setTimeout(bad,4000);
-  v.addEventListener('play',()=>ph.classList.remove('paused'));
-  v.addEventListener('pause',()=>ph.classList.add('paused'));
-  ph.classList.add('paused');
-  if(reduce)v.controls=true;
-  new IntersectionObserver(([e])=>{
-    inView=e.isIntersecting;
-    if(ph.classList.contains('nofile')||reduce)return;
-    if(inView){v.play().catch(()=>{})}else{v.pause()}
-  },{threshold:.4}).observe(ph);
-  ph.addEventListener('click',()=>{
-    if(ph.classList.contains('nofile')||reduce)return;
-    if(v.paused){v.play().catch(()=>{});return}
-    v.muted=!v.muted;
-    snd.textContent=v.muted?'♪ Tap for sound':'♪ Sound on';
+  phones.forEach(ph=>{
+    const v=ph.querySelector('video'), snd=ph.querySelector('.snd'), bar=ph.querySelector('.ph-bar u');
+    let inView=false;
+    const ready=()=>v.readyState>=2;
+    const bad=()=>{if(v.error||!ready())ph.classList.add('nofile')};
+    const good=()=>{ph.classList.remove('nofile');if(inView&&!reduce)v.play().catch(()=>{})};
+    v.addEventListener('error',bad);
+    v.addEventListener('loadeddata',good);
+    v.addEventListener('canplay',good);
+    setTimeout(bad,4000);
+    v.addEventListener('play',()=>ph.classList.remove('paused'));
+    v.addEventListener('pause',()=>ph.classList.add('paused'));
+    ph.classList.add('paused');
+    if(reduce)v.controls=true;
+    new IntersectionObserver(([e])=>{
+      inView=e.isIntersecting;
+      if(ph.classList.contains('nofile')||reduce)return;
+      if(inView){v.play().catch(()=>{})}else{v.pause()}
+    },{threshold:.4}).observe(ph);
+    ph.addEventListener('click',()=>{
+      if(ph.classList.contains('nofile')||reduce)return;
+      if(v.paused){v.play().catch(()=>{});return}
+      v.muted=!v.muted;
+      snd.textContent=v.muted?'♪ Tap for sound':'♪ Sound on';
+      if(!v.muted){phones.forEach(o=>{if(o!==ph){o.querySelector('video').muted=true;o.querySelector('.snd').textContent='♪ Tap for sound'}})}
+    });
+    v.addEventListener('timeupdate',()=>{if(v.duration)bar.style.width=(v.currentTime/v.duration*100)+'%'});
   });
-  v.addEventListener('timeupdate',()=>{if(v.duration)bar.style.width=(v.currentTime/v.duration*100)+'%'});
   document.getElementById('shortCta').addEventListener('click',()=>document.getElementById('contact').scrollIntoView({behavior:'smooth'}));
 })();
 
