@@ -632,8 +632,8 @@ nav{height:65px}
 <button type="button" class="btn btn-primary short-cta reveal" id="shortCta">Get a short-form edit →</button>
 </div>
 <div class="phones reveal">
-<div class="phone-wrap"><span class="fchip c1">Hook in 3s</span><span class="fchip c3">Sound design</span>
-<div class="phone"><video src="short.mp4#t=0.1" muted loop playsinline preload="auto"></video>
+<div class="phone-wrap"><span class="fchip c1">Hook in 3s</span><span class="fchip c3">Captions</span>
+<div class="phone"><video src="short.mp4#t=0.1" data-try="Short.mp4,short.MP4,SHORT.mp4,short.mov,short.webm" muted loop playsinline preload="auto"></video>
 <div class="ph-play"><i></i></div>
 <div class="ph-tag">SHORT-FORM</div>
 <div class="snd">♪ Tap for sound</div>
@@ -641,8 +641,8 @@ nav{height:65px}
 <div class="ph-empty"><b>Video not loading</b><span>Check that <em>short.mp4</em> is in the same folder as index.html, the name matches exactly, and it is an H.264 MP4.</span></div>
 </div>
 </div>
-<div class="phone-wrap ph-two"><span class="fchip c2">Captions</span>
-<div class="phone"><video src="kape.mp4#t=0.1" muted loop playsinline preload="auto"></video>
+<div class="phone-wrap ph-two"><span class="fchip c2">Sound design</span>
+<div class="phone"><video src="kape.mp4#t=0.1" data-try="Kape.mp4,kape.MP4,KAPE.mp4,kape.mov,kape.webm" muted loop playsinline preload="auto"></video>
 <div class="ph-play"><i></i></div>
 <div class="ph-tag">SHORT-FORM</div>
 <div class="snd">♪ Tap for sound</div>
@@ -1006,10 +1006,11 @@ new IntersectionObserver(([e])=>{inContact=e.isIntersecting;hireUpdate()},{thres
     const ready=()=>v.readyState>=2;
     const bad=()=>{if(v.error||!ready())ph.classList.add('nofile')};
     const good=()=>{ph.classList.remove('nofile');if(inView&&!reduce)v.play().catch(()=>{})};
-    v.addEventListener('error',bad);
+    const tries=(v.dataset.try||'').split(',').filter(Boolean);
+    v.addEventListener('error',()=>{if(tries.length){v.src=tries.shift()+'#t=0.1';v.load();return}bad()});
     v.addEventListener('loadeddata',good);
     v.addEventListener('canplay',good);
-    setTimeout(bad,4000);
+    setTimeout(bad,6000);
     v.addEventListener('play',()=>ph.classList.remove('paused'));
     v.addEventListener('pause',()=>ph.classList.add('paused'));
     ph.classList.add('paused');
