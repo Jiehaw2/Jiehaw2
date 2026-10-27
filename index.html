@@ -499,6 +499,25 @@ html.intro-hold .hero-content{animation:none;opacity:0}
 .pv-flip img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.14);opacity:0;transition:opacity .35s}
 .pv-flip img.on{opacity:1}
 
+/* ===== LATEST PROJECT (tek.mp4) ===== */
+.latest{background:#060606}
+.lv{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#000;border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.lv iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.lv-thumb{width:100%;height:100%;object-fit:cover;display:block}
+.lv-play{position:absolute;inset:0;z-index:2;width:100%;border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.35);transition:opacity .3s}
+.lv-play i{position:relative;width:84px;height:84px;border-radius:50%;background:rgba(255,255,255,.92);box-shadow:0 0 40px rgba(255,255,255,.45);transition:.3s}
+.lv-play i::after{content:"";position:absolute;left:33px;top:24px;border-left:25px solid #000;border-top:18px solid transparent;border-bottom:18px solid transparent}
+.lv-play:hover i{transform:scale(1.1)}
+.lv.playing .lv-play{opacity:0;pointer-events:none}
+.lv-empty{display:none;position:absolute;inset:0;z-index:3;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:24px;text-align:center;background:linear-gradient(160deg,#1b1b22,#08080b)}
+.lv-empty span{font-size:12px;color:#888;line-height:1.6}
+.lv.nofile .lv-empty{display:flex}
+.lv.nofile .lv-play{display:none}
+.lv-meta{display:flex;flex-direction:column;gap:4px;margin-top:18px}
+.lv-meta b{font-size:20px}
+.lv-meta span{font-size:13px;color:#888}
+@media(max-width:800px){.latest.section{padding:70px 0}}
+
 /* ===== FOOTER ===== */
 footer{padding:30px 0;border-top:1px solid rgba(255,255,255,.08);background:#050505;position:relative;z-index:1}
 .footer-inner{width:90%;max-width:1200px;margin:auto;display:flex;justify-content:space-between;color:#555;font-size:11px}
@@ -597,6 +616,19 @@ nav{height:65px}
 <p>I help creators, businesses and brands turn raw footage and ideas into engaging videos, eye-catching graphics and modern websites.</p>
 <div class="hero-buttons"><a href="#work" class="btn btn-primary">See My Work →</a><a href="#contact" class="btn btn-outline">Work With Me</a></div>
 </div></div>
+</section>
+
+<!-- LATEST PROJECT (YouTube) -->
+<section class="section latest" id="latest">
+<div class="container">
+<div class="section-label reveal">Latest Project</div>
+<h2 class="section-title reveal">Newest edit.</h2>
+<div class="lv reveal" id="lv" data-yt="3Ipzr89JQVQ">
+<img class="lv-thumb" src="https://img.youtube.com/vi/3Ipzr89JQVQ/maxresdefault.jpg" alt="Latest project">
+<button type="button" class="lv-play" aria-label="Play video"><i></i></button>
+</div>
+<div class="lv-meta reveal"><b>My most recent video</b><span>Full edit • 11 min</span></div>
+</div>
 </section>
 
 <!-- WORK -->
@@ -815,6 +847,18 @@ const observer = new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add('active'); } });
 },{threshold:0.12});
 reveals.forEach(el=>observer.observe(el));
+
+/* LATEST VIDEO (YouTube): plays inline on tap */
+(function(){
+  const box=document.getElementById('lv'); if(!box)return;
+  box.querySelector('.lv-play').addEventListener('click',()=>{
+    const f=document.createElement('iframe');
+    f.src='https://www.youtube.com/embed/'+box.dataset.yt+'?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+    f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';
+    f.allowFullscreen=true;
+    box.innerHTML='';box.appendChild(f);
+  });
+})();
 
 /* GRAPHICS: 3D CAROUSEL + LIGHTBOX */
 (function(){
