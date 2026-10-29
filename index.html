@@ -1219,3 +1219,28 @@ document.querySelectorAll('.service,.spot-panel').forEach(el=>{
 </script>
 </body>
 </html>
+/* TEK LI: two shorts slide up after clicking play */
+(function(){
+  var st=document.createElement('style');
+  st.textContent='.lv-shorts{max-height:0;opacity:0;overflow:hidden;transition:max-height .9s ease,opacity .7s ease,margin .7s ease}.lv-shorts.show{max-height:800px;opacity:1;margin-top:34px}.lv-shorts-row{display:flex;gap:16px;justify-content:center;margin-top:14px}.lv-shorts-row video{width:min(220px,42vw);aspect-ratio:9/16;object-fit:cover;border-radius:18px;background:#000;border:1px solid rgba(255,255,255,.18);box-shadow:0 20px 50px rgba(0,0,0,.6);cursor:pointer}';
+  document.head.appendChild(st);
+
+  var meta=document.querySelector('.lv-meta'); if(!meta)return;
+  var s=document.createElement('div'); s.className='lv-shorts';
+  s.innerHTML='<div class="section-label" style="text-align:center">Shorts from this video</div><div class="lv-shorts-row"><video src="oneone.mp4" muted loop playsinline preload="metadata"></video><video src="twotwo.mp4" muted loop playsinline preload="metadata"></video></div>';
+  meta.after(s);
+
+  var vids=[].slice.call(s.querySelectorAll('video'));
+  var play=document.querySelector('#lv .lv-play');
+  if(play)play.addEventListener('click',function(){
+    setTimeout(function(){
+      s.classList.add('show');
+      vids.forEach(function(v){v.play().catch(function(){})});
+    },700);
+  });
+  vids.forEach(function(v){v.addEventListener('click',function(){
+    var was=v.muted;
+    vids.forEach(function(o){o.muted=true});
+    v.muted=!was;
+  })});
+})();
