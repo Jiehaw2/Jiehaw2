@@ -1216,28 +1216,48 @@ document.querySelectorAll('.service,.spot-panel').forEach(el=>{
     el.style.setProperty('--y', (e.clientY - r.top) + 'px');
   });
 });
-/* TEK LI: two shorts slide up after clicking play */
+/* TEK LI: shorts (blur until tapped) + pause YouTube */
 (function(){
   var st=document.createElement('style');
-  st.textContent='.lv-shorts{max-height:0;opacity:0;overflow:hidden;transition:max-height .9s ease,opacity .7s ease,margin .7s ease}.lv-shorts.show{max-height:800px;opacity:1;margin-top:34px}.lv-shorts-row{display:flex;gap:16px;justify-content:center;margin-top:14px}.lv-shorts-row video{width:min(220px,42vw);aspect-ratio:9/16;object-fit:cover;border-radius:18px;background:#000;border:1px solid rgba(255,255,255,.18);box-shadow:0 20px 50px rgba(0,0,0,.6);cursor:pointer}';
+  st.textContent='.lv-shorts{max-height:0;opacity:0;overflow:hidden;transition:max-height .9s ease,opacity .7s ease,margin .7s ease}.lv-shorts.show{max-height:800px;opacity:1;margin-top:34px}.lv-shorts-row{display:flex;gap:16px;justify-content:center;margin-top:14px}.lv-shorts-row video{width:min(220px,42vw);aspect-ratio:9/16;object-fit:cover;border-radius:18px;background:#000;border:1px solid rgba(255,255,255,.18);box-shadow:0 20px 50px rgba(0,0,0,.6);cursor:pointer;filter:blur(14px);transition:filter .4s}.lv-shorts-row video.on{filter:none}.lv-hint{text-align:center;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#777;margin-top:14px}';
   document.head.appendChild(st);
-  var meta=document.querySelector('.lv-meta'); if(!meta)return;
+
+  var box=document.getElementById('lv');
+  var meta=document.querySelector('.lv-meta'); if(!box||!meta)return;
   var s=document.createElement('div'); s.className='lv-shorts';
-  s.innerHTML='<div class="section-label" style="text-align:center">Shorts from this video</div><div class="lv-shorts-row"><video src="oneone.mp4" muted loop playsinline preload="metadata"></video><video src="twotwo.mp4" muted loop playsinline preload="metadata"></video></div>';
+  s.innerHTML='<div class="section-label" style="text-align:center">Shorts from this video</div><div class="lv-shorts-row"><video src="oneone.mp4" muted loop playsinline preload="metadata"></video><video src="twotwo.mp4" muted loop playsinline preload="metadata"></video></div><div class="lv-hint">Tap a short to play with sound</div>';
   meta.after(s);
 
   var vids=[].slice.call(s.querySelectorAll('video'));
-  var play=document.querySelector('#lv .lv-play');
+
+  /* allow controlling the YouTube player */
+  new MutationObserver(function(){
+    var f=box.querySelector('iframe');
+    if(f&&f.src.indexOf('enablejsapi')<0)f.src=f.src+'&enablejsapi=1';
+  }).observe(box,{childList:true});
+  function ytPause(){
+    var f=box.querySelector('iframe');
+    if(f&&f.contentWindow)f.contentWindow.postMessage(JSON.stringify({event:'command',func:'pauseVideo',args:[]}),'*');
+  }
+
+  var play=box.querySelector('.lv-play');
   if(play)play.addEventListener('click',function(){
     setTimeout(function(){
       s.classList.add('show');
-      vids.forEach(function(v){v.play().catch(function(){})});
+      vids.forEach(function(v){v.muted=true;v.play().catch(function(){})});
     },700);
   });
+
   vids.forEach(function(v){v.addEventListener('click',function(){
-    var was=v.muted;
-    vids.forEach(function(o){o.muted=true});
-    v.muted=!was;
+    if(v.classList.contains('on')){
+      if(v.paused)v.play().catch(function(){});else v.pause();
+      return;
+    }
+    vids.forEach(function(o){if(o!==v){o.classList.remove('on');o.muted=true}});
+    v.classList.add('on');
+    v.muted=false;
+    v.play().catch(function(){});
+    ytPause();
   })});
 })();
 </script>
